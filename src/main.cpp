@@ -4275,12 +4275,14 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
 
             // Now that this loop if completed. Check if we have zRUPX inputs.
             if(hasZRUPXInputs){
-                for (const CTxIn& zRupxInput : zRUPXInputs) {
+                LogPrintf("It has ZRUPX Inputs!!\n");
+                for (CTxIn zRupxInput : zRUPXInputs) {
                     CoinSpend spend = TxInToZerocoinSpend(zRupxInput);
 
                     // First check if the serials were not already spent on the forked blocks.
                     CBigNum coinSerial = spend.getCoinSerialNumber();
-                    for(const CBigNum& serial : vBlockSerials){
+                    LogPrintf("coinSerial is %s\n", coinSerial.ToString(10));
+                    for(CBigNum serial : vBlockSerials){
                         if(serial == coinSerial){
                             return state.DoS(100, error("%s: serial double spent on fork", __func__));
                         }
@@ -4340,6 +4342,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
                 }
             }
         } else {
+<<<<<<< HEAD
             if(!isBlockFromFork)
                 for (const CTxIn& zRupxInput : zRUPXInputs) {
                         CoinSpend spend = TxInToZerocoinSpend(zRupxInput);
@@ -4348,6 +4351,14 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
                                     stakeTxIn.GetHash().GetHex()), REJECT_INVALID, "bad-txns-invalid-zrupx");
                 }
 
+=======
+            for (CTxIn zPivInput : zPIVInputs) {
+                    CoinSpend spend = TxInToZerocoinSpend(zPivInput);
+                    if (!ContextualCheckZerocoinSpend(stakeTxIn, spend, pindex, 0))
+                        return state.DoS(100,error("%s: ContextualCheckZerocoinSpend failed for tx %s", __func__,
+                                stakeTxIn.GetHash().GetHex()), REJECT_INVALID, "bad-txns-invalid-zpiv");
+            }
+>>>>>>> a9178bc6e... AcceptBlock: contextual zcspend check on main chain
         }
 
     }
