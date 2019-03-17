@@ -4342,23 +4342,12 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
                 }
             }
         } else {
-<<<<<<< HEAD
-            if(!isBlockFromFork)
-                for (const CTxIn& zRupxInput : zRUPXInputs) {
-                        CoinSpend spend = TxInToZerocoinSpend(zRupxInput);
-                        if (!ContextualCheckZerocoinSpend(stakeTxIn, spend, pindex, 0))
-                            return state.DoS(100,error("%s: main chain ContextualCheckZerocoinSpend failed for tx %s", __func__,
-                                    stakeTxIn.GetHash().GetHex()), REJECT_INVALID, "bad-txns-invalid-zrupx");
-                }
-
-=======
-            for (CTxIn zPivInput : zPIVInputs) {
-                    CoinSpend spend = TxInToZerocoinSpend(zPivInput);
+            for (CTxIn zRupxInput : zRUPXInputs) {
+                    CoinSpend spend = TxInToZerocoinSpend(zRupxInput);
                     if (!ContextualCheckZerocoinSpend(stakeTxIn, spend, pindex, 0))
                         return state.DoS(100,error("%s: ContextualCheckZerocoinSpend failed for tx %s", __func__,
-                                stakeTxIn.GetHash().GetHex()), REJECT_INVALID, "bad-txns-invalid-zpiv");
+                                stakeTxIn.GetHash().GetHex()), REJECT_INVALID, "bad-txns-invalid-zrupx");
             }
->>>>>>> a9178bc6e... AcceptBlock: contextual zcspend check on main chain
         }
 
     }
