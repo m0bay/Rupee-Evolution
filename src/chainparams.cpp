@@ -53,18 +53,10 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-    (0, uint256("0x000004a52cbc6eeab60f685b9eced6322f08054fde6e66f84be90f1aaced149a"))
-    (25, uint256("0x000003ae47f0ddb3bc5d5f00b60cec8cb4a7af8eeda56fd2b4f8b69e37654067"))
-    (50, uint256("0x000000290cc059e3d3c359c3f6d22ddc6ffdad30e65f65e5bb0b9f1db4b043bb"))
-    (75, uint256("0x0000003322f39bc94a4bf0cf0fa76a699756d962a241a863d3c759fb8457d75a"))
-    (100, uint256("0x0000000ebc5aca23a5f995941ca518dca50c7d592ebc7ce83b16647816d96c10"))
-    (200, uint256("0x00000000527d3e30820e35c6ff834a00feaa8f59e1a4318d7087154206c7bdd9"))
-    (90686, uint256("0x3d004615ce7548e9ea730c0739dd2839a1b711d251151e43a6170e61b827e7ab"))
-    (167728, uint256("0x9a1ee047f5f0563ca85dda46108fdbd79afa282a8d6535191215621d930e44a8"))
-    (167770, uint256("0xcccdddf22bde232ba81d104e59fd34c07028504512cddb386a8a74e79282c2e9"));
+    (0, uint256("0x000004a52cbc6eeab60f685b9eced6322f08054fde6e66f84be90f1aaced149a"));
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1547480193, // * UNIX timestamp of last checkpoint block
+    1554162042, // * UNIX timestamp of last checkpoint block
     372653,    // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     2000        // * estimated number of transactions per day after checkpoint
@@ -160,9 +152,9 @@ public:
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 4;
         genesis.nAccumulatorCheckpoint = 0;
-        genesis.nTime = 1533927507;
+        genesis.nTime = 1554162042;
         genesis.nBits = 504365040;
-        genesis.nNonce = 1;
+        genesis.nNonce = 0;
 
         hashGenesisBlock = genesis.GetHash();
         if (regenerate) {
@@ -184,8 +176,8 @@ public:
                 std::cout << " merklehash: 0x"  << genesis.hashMerkleRoot.ToString().c_str() <<  "\n";
             }
         } else {
-            assert(hashGenesisBlock == uint256("0x000004a52cbc6eeab60f685b9eced6322f08054fde6e66f84be90f1aaced149a"));
-            assert(genesis.hashMerkleRoot == uint256("0x4dca438430ad9ca73a7b6f5403c4e1ba597501828f3ea5700f23b994facc78b7"));
+            assert(hashGenesisBlock == uint256("0x"));
+            assert(genesis.hashMerkleRoot == uint256("0x"));
         }
 
 
@@ -280,7 +272,7 @@ public:
         //nRejectOldSporkKey = 1522454400; //!> Reject old spork key after Saturday, March 31, 2018 12:00:00 AM GMT
 
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
-        genesis.nTime = 1549065600;
+        genesis.nTime = 1554162042;
         genesis.nNonce = 2390925;
 
         hashGenesisBlock = genesis.GetHash();
@@ -365,7 +357,7 @@ public:
         nTargetTimespan = 24 * 60 * 60; // RUPEEEVOLUTION: 1 day
         nTargetSpacing = 1 * 60;        // RUPEEEVOLUTION: 1 minutes
         bnProofOfWorkLimit = ~uint256(0) >> 1;
-        genesis.nTime = 1533927507;
+        genesis.nTime = 1554162042;
         genesis.nBits = 0x207fffff;
         genesis.nNonce = 0;
         nP2pPort = 51476;
