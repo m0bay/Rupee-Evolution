@@ -1,5 +1,5 @@
 ---
-name: "rupaya-dmg-signer"
+name: "rupeeevolution-dmg-signer"
 suites:
 - "bionic"
 architectures:
@@ -7,10 +7,10 @@ architectures:
 packages:
 - "faketime"
 remotes:
-- "url": "https://github.com/rupaya-project/rupaya-detached-sigs.git"
+- "url": "https://github.com/rupeeevolution-project/rupeeevolution-detached-sigs.git"
   "dir": "signature"
 files:
-- "rupaya-osx-unsigned.tar.gz"
+- "rupeeevolution-osx-unsigned.tar.gz"
 script: |
   WRAP_DIR=$HOME/wrapped
   mkdir -p ${WRAP_DIR}
@@ -27,8 +27,8 @@ script: |
     chmod +x ${WRAP_DIR}/${prog}
   done
 
-  UNSIGNED=rupaya-osx-unsigned.tar.gz
-  SIGNED=rupaya-osx-signed.dmg
+  UNSIGNED=rupeeevolution-osx-unsigned.tar.gz
+  SIGNED=rupeeevolution-osx-signed.dmg
 
   tar -xf ${UNSIGNED}
   OSX_VOLNAME="$(cat osx_volname)"

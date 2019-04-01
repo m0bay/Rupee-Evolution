@@ -29,9 +29,9 @@ SendCoinsEntry::SendCoinsEntry(QWidget* parent) : QStackedWidget(parent),
 #endif
     ui->addAsLabel->setPlaceholderText(tr("Enter a label for this address to add it to your address book"));
 
-    // normal rupaya address field
+    // normal rupeeevolution address field
     GUIUtil::setupAddressWidget(ui->payTo, this);
-    // just a label for displaying rupaya address(es)
+    // just a label for displaying rupeeevolution address(es)
     ui->payTo_is->setFont(GUIUtil::bitcoinAddressFont());
 
     // Connect signals

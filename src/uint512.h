@@ -1,10 +1,10 @@
 // Copyright (c) 2017-2018 The PIVX Developers
-// Copyright (c) 2018 The RUPAYA Developers 
+// Copyright (c) 2018 The RUPEEEVOLUTION Developers 
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RUPAYA_UINT512_H
-#define RUPAYA_UINT512_H
+#ifndef RUPEEEVOLUTION_UINT512_H
+#define RUPEEEVOLUTION_UINT512_H
 
 #include "arith_uint256.h"
 #include "uint256.h"
@@ -43,4 +43,4 @@ inline uint512 uint512S(const char* str)
     return rv;
 }
 
-#endif // RUPAYA_UINT512_H
+#endif // RUPEEEVOLUTION_UINT512_H

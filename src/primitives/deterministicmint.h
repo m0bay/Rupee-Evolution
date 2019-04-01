@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RUPAYA_DETERMINISTICMINT_H
-#define RUPAYA_DETERMINISTICMINT_H
+#ifndef RUPEEEVOLUTION_DETERMINISTICMINT_H
+#define RUPEEEVOLUTION_DETERMINISTICMINT_H
 
 #include <libzerocoin/Denominations.h>
 #include <uint256.h>
@@ -64,4 +64,4 @@ public:
     };
 };
 
-#endif //RUPAYA_DETERMINISTICMINT_H
+#endif //RUPEEEVOLUTION_DETERMINISTICMINT_H

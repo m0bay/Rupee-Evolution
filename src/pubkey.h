@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RUPAYA_PUBKEY_H
-#define RUPAYA_PUBKEY_H
+#ifndef RUPEEEVOLUTION_PUBKEY_H
+#define RUPEEEVOLUTION_PUBKEY_H
 
 #include "hash.h"
 #include "serialize.h"
@@ -263,4 +263,4 @@ public:
     ~ECCVerifyHandle();
 };
 
-#endif // RUPAYA_PUBKEY_H
+#endif // RUPEEEVOLUTION_PUBKEY_H

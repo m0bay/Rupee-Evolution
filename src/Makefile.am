@@ -66,15 +66,15 @@ TESTS =
 BENCHMARKS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += rupayad
+  bin_PROGRAMS += rupeeevolutiond
 endif
 
 if BUILD_BITCOIN_UTILS
-  bin_PROGRAMS += rupaya-cli rupaya-tx
+  bin_PROGRAMS += rupeeevolution-cli rupeeevolution-tx
 endif
 
 .PHONY: FORCE check-symbols check-security
-# rupaya core #
+# rupeeevolution core #
 BITCOIN_CORE_H = \
   activemasternode.h \
   accumulators.h \
@@ -176,12 +176,12 @@ BITCOIN_CORE_H = \
   wallet.h \
   wallet_ismine.h \
   walletdb.h \
-  zrupxchain.h \
-  zrupxtracker.h \
-  zrupxwallet.h \
+  zrupeechain.h \
+  zrupeetracker.h \
+  zrupeewallet.h \
   genwit.h \
   concurrentqueue.h \
-  lightzrupxthread.h \
+  lightzrupeethread.h \
   zmq/zmqabstractnotifier.h \
   zmq/zmqconfig.h \
   zmq/zmqnotificationinterface.h \
@@ -193,7 +193,7 @@ obj/build.h: FORCE
 	  "$(abs_top_srcdir)"
 libbitcoin_util_a-clientversion.$(OBJEXT): obj/build.h
 
-# server: shared between rupayad and rupaya-qt
+# server: shared between rupeeevolutiond and rupeeevolution-qt
 libbitcoin_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
 libbitcoin_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_server_a_SOURCES = \
@@ -229,7 +229,7 @@ libbitcoin_server_a_SOURCES = \
   txdb.cpp \
   txmempool.cpp \
   validationinterface.cpp \
-  zrupxchain.cpp \
+  zrupeechain.cpp \
   $(BITCOIN_CORE_H)
 
 if ENABLE_ZMQ
@@ -241,7 +241,7 @@ libbitcoin_zmq_a_SOURCES = \
   zmq/zmqpublishnotifier.cpp
 endif
 
-# wallet: shared between rupayad and rupaya-qt, but only linked
+# wallet: shared between rupeeevolutiond and rupeeevolution-qt, but only linked
 # when wallet enabled
 libbitcoin_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 libbitcoin_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
@@ -269,11 +269,11 @@ libbitcoin_wallet_a_SOURCES = \
   wallet.cpp \
   wallet_ismine.cpp \
   walletdb.cpp \
-  zrupxwallet.cpp \
-  zrupxtracker.cpp \
+  zrupeewallet.cpp \
+  zrupeetracker.cpp \
   stakeinput.cpp \
   genwit.cpp \
-  lightzrupxthread.cpp \
+  lightzrupeethread.cpp \
   $(BITCOIN_CORE_H)
 
 # crypto primitives library
@@ -338,7 +338,7 @@ libzerocoin_libbitcoin_zerocoin_a_SOURCES = \
   libzerocoin/Params.cpp \
   libzerocoin/SerialNumberSignatureOfKnowledge.cpp
 
-# common: shared between rupayad, and rupaya-qt and non-server tools
+# common: shared between rupeeevolutiond, and rupeeevolution-qt and non-server tools
 libbitcoin_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 libbitcoin_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_common_a_SOURCES = \
@@ -401,7 +401,7 @@ libbitcoin_util_a_SOURCES += compat/glibc_compat.cpp
 AM_LDFLAGS += $(COMPAT_LDFLAGS)
 endif
 
-# cli: shared between rupaya-cli and rupaya-qt
+# cli: shared between rupeeevolution-cli and rupeeevolution-qt
 libbitcoin_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 libbitcoin_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_cli_a_SOURCES = \
@@ -411,16 +411,16 @@ libbitcoin_cli_a_SOURCES = \
 nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
-# rupayad binary #
-rupayad_SOURCES = rupayad.cpp
-rupayad_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-rupayad_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-rupayad_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# rupeeevolutiond binary #
+rupeeevolutiond_SOURCES = rupeeevolutiond.cpp
+rupeeevolutiond_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+rupeeevolutiond_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+rupeeevolutiond_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-rupayad_SOURCES += rupayad-res.rc
+rupeeevolutiond_SOURCES += rupeeevolutiond-res.rc
 endif
-rupayad_LDADD = \
+rupeeevolutiond_LDADD = \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_WALLET) \
   $(LIBBITCOIN_COMMON) \
@@ -434,38 +434,38 @@ rupayad_LDADD = \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
-rupayad_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+rupeeevolutiond_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
-# rupaya-cli binary #
-rupaya_cli_SOURCES = rupaya-cli.cpp
-rupaya_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
-rupaya_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-rupaya_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# rupeeevolution-cli binary #
+rupeeevolution_cli_SOURCES = rupeeevolution-cli.cpp
+rupeeevolution_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
+rupeeevolution_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+rupeeevolution_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-rupaya_cli_SOURCES += rupaya-cli-res.rc
+rupeeevolution_cli_SOURCES += rupeeevolution-cli-res.rc
 endif
 
-rupaya_cli_LDADD = \
+rupeeevolution_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_CRYPTO)
 
-rupaya_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
+rupeeevolution_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
-# rupaya-tx binary #
-rupaya_tx_SOURCES = rupaya-tx.cpp
-rupaya_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-rupaya_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-rupaya_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# rupeeevolution-tx binary #
+rupeeevolution_tx_SOURCES = rupeeevolution-tx.cpp
+rupeeevolution_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+rupeeevolution_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+rupeeevolution_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-rupaya_tx_SOURCES += rupaya-tx-res.rc
+rupeeevolution_tx_SOURCES += rupeeevolution-tx-res.rc
 endif
 
-rupaya_tx_LDADD = \
+rupeeevolution_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_ZEROCOIN) \
@@ -473,7 +473,7 @@ rupaya_tx_LDADD = \
   $(LIBBITCOIN_CRYPTO) \
   $(LIBSECP256K1)
 
-rupaya_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+rupeeevolution_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
 # bitcoinconsensus library #
@@ -522,12 +522,12 @@ CLEANFILES += obj/build.h
 EXTRA_DIST =
 
 
-config/rupaya-config.h: config/stamp-h1
+config/rupeeevolution-config.h: config/stamp-h1
 	@$(MAKE) -C $(top_builddir) $(subdir)/$(@)
-config/stamp-h1: $(top_srcdir)/$(subdir)/config/rupaya-config.h.in $(top_builddir)/config.status
+config/stamp-h1: $(top_srcdir)/$(subdir)/config/rupeeevolution-config.h.in $(top_builddir)/config.status
 	$(AM_V_at)$(MAKE) -C $(top_builddir) $(subdir)/$(@)
-$(top_srcdir)/$(subdir)/config/rupaya-config.h.in:  $(am__configure_deps)
-	$(AM_V_at)$(MAKE) -C $(top_srcdir) $(subdir)/config/rupaya-config.h.in
+$(top_srcdir)/$(subdir)/config/rupeeevolution-config.h.in:  $(am__configure_deps)
+	$(AM_V_at)$(MAKE) -C $(top_srcdir) $(subdir)/config/rupeeevolution-config.h.in
 
 clean-local:
 	-$(MAKE) -C secp256k1 clean

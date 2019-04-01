@@ -3,7 +3,7 @@ Release Process
 
 Before every release candidate:
 
-* Update translations (ping Fuzzbawls on Slack) see [translation_process.md](https://github.com/RUPAYA-Project/RUPAYA/blob/master/doc/translation_process.md#synchronising-translations).
+* Update translations (ping Fuzzbawls on Slack) see [translation_process.md](https://github.com/RUPEEEVOLUTION-Project/RUPEEEVOLUTION/blob/master/doc/translation_process.md#synchronising-translations).
 
 Before every minor and major release:
 
@@ -24,12 +24,12 @@ If you're using the automated script (found in [contrib/gitian-build.sh](/contri
 Check out the source code in the following directory hierarchy.
 
     cd /path/to/your/toplevel/build
-    git clone https://github.com/rupaya-project/gitian.sigs.git
-    git clone https://github.com/rupaya-project/rupaya-detached-sigs.git
+    git clone https://github.com/rupeeevolution-project/gitian.sigs.git
+    git clone https://github.com/rupeeevolution-project/rupeeevolution-detached-sigs.git
     git clone https://github.com/devrandom/gitian-builder.git
-    git clone https://github.com/rupaya-project/rupx/rupx.git
+    git clone https://github.com/rupeeevolution-project/rupee/rupee.git
 
-### RUPAYA maintainers/release engineers, suggestion for writing release notes
+### RUPEEEVOLUTION maintainers/release engineers, suggestion for writing release notes
 
 Write release notes. git shortlog helps a lot, for example:
 
@@ -50,7 +50,7 @@ If you're using the automated script (found in [contrib/gitian-build.sh](/contri
 
 Setup Gitian descriptors:
 
-    pushd ./rupaya
+    pushd ./rupeeevolution
     export SIGNER=(your Gitian key, ie bluematt, sipa, etc)
     export VERSION=(new version, e.g. 0.8.0)
     git fetch
@@ -84,7 +84,7 @@ Create the OS X SDK tarball, see the [OS X readme](README_osx.md) for details, a
 By default, Gitian will fetch source files as needed. To cache them ahead of time:
 
     pushd ./gitian-builder
-    make -C ../rupaya/depends download SOURCES_PATH=`pwd`/cache/common
+    make -C ../rupeeevolution/depends download SOURCES_PATH=`pwd`/cache/common
     popd
 
 Only missing files will be fetched, so this is safe to re-run for each build.
@@ -92,55 +92,55 @@ Only missing files will be fetched, so this is safe to re-run for each build.
 NOTE: Offline builds must use the --url flag to ensure Gitian fetches only from local URLs. For example:
 
     pushd ./gitian-builder
-    ./bin/gbuild --url rupaya=/path/to/rupaya,signature=/path/to/sigs {rest of arguments}
+    ./bin/gbuild --url rupeeevolution=/path/to/rupeeevolution,signature=/path/to/sigs {rest of arguments}
     popd
 
 The gbuild invocations below <b>DO NOT DO THIS</b> by default.
 
-### Build and sign Rupaya Core for Linux, Windows, and OS X:
+### Build and sign Rupee Evolution Core for Linux, Windows, and OS X:
 
     pushd ./gitian-builder
-    ./bin/gbuild --memory 3000 --commit rupaya=v${VERSION} ../rupaya/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../rupaya/contrib/gitian-descriptors/gitian-linux.yml
-    mv build/out/rupaya-*.tar.gz build/out/src/rupaya-*.tar.gz ../
+    ./bin/gbuild --memory 3000 --commit rupeeevolution=v${VERSION} ../rupeeevolution/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../rupeeevolution/contrib/gitian-descriptors/gitian-linux.yml
+    mv build/out/rupeeevolution-*.tar.gz build/out/src/rupeeevolution-*.tar.gz ../
 
-    ./bin/gbuild --memory 3000 --commit rupaya=v${VERSION} ../rupaya/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../rupaya/contrib/gitian-descriptors/gitian-win.yml
-    mv build/out/rupaya-*-win-unsigned.tar.gz inputs/rupaya-win-unsigned.tar.gz
-    mv build/out/rupaya-*.zip build/out/rupaya-*.exe ../
+    ./bin/gbuild --memory 3000 --commit rupeeevolution=v${VERSION} ../rupeeevolution/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../rupeeevolution/contrib/gitian-descriptors/gitian-win.yml
+    mv build/out/rupeeevolution-*-win-unsigned.tar.gz inputs/rupeeevolution-win-unsigned.tar.gz
+    mv build/out/rupeeevolution-*.zip build/out/rupeeevolution-*.exe ../
 
-    ./bin/gbuild --memory 3000 --commit rupaya=v${VERSION} ../rupaya/contrib/gitian-descriptors/gitian-osx.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../rupaya/contrib/gitian-descriptors/gitian-osx.yml
-    mv build/out/rupaya-*-osx-unsigned.tar.gz inputs/rupaya-osx-unsigned.tar.gz
-    mv build/out/rupaya-*.tar.gz build/out/rupaya-*.dmg ../
+    ./bin/gbuild --memory 3000 --commit rupeeevolution=v${VERSION} ../rupeeevolution/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../rupeeevolution/contrib/gitian-descriptors/gitian-osx.yml
+    mv build/out/rupeeevolution-*-osx-unsigned.tar.gz inputs/rupeeevolution-osx-unsigned.tar.gz
+    mv build/out/rupeeevolution-*.tar.gz build/out/rupeeevolution-*.dmg ../
 
-    ./bin/gbuild --memory 3000 --commit rupaya=v${VERSION} ../rupaya/contrib/gitian-descriptors/gitian-aarch64.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-aarch64 --destination ../gitian.sigs/ ../rupaya/contrib/gitian-descriptors/gitian-aarch64.yml
-    mv build/out/rupaya-*.tar.gz build/out/src/rupaya-*.tar.gz ../
+    ./bin/gbuild --memory 3000 --commit rupeeevolution=v${VERSION} ../rupeeevolution/contrib/gitian-descriptors/gitian-aarch64.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-aarch64 --destination ../gitian.sigs/ ../rupeeevolution/contrib/gitian-descriptors/gitian-aarch64.yml
+    mv build/out/rupeeevolution-*.tar.gz build/out/src/rupeeevolution-*.tar.gz ../
     popd
 
 Build output expected:
 
-  1. source tarball (`rupaya-${VERSION}.tar.gz`)
-  2. linux 32-bit and 64-bit dist tarballs (`rupaya-${VERSION}-linux[32|64].tar.gz`)
-  3. windows 32-bit and 64-bit unsigned installers and dist zips (`rupaya-${VERSION}-win[32|64]-setup-unsigned.exe`, `rupaya-${VERSION}-win[32|64].zip`)
-  4. OS X unsigned installer and dist tarball (`rupaya-${VERSION}-osx-unsigned.dmg`, `rupaya-${VERSION}-osx64.tar.gz`)
+  1. source tarball (`rupeeevolution-${VERSION}.tar.gz`)
+  2. linux 32-bit and 64-bit dist tarballs (`rupeeevolution-${VERSION}-linux[32|64].tar.gz`)
+  3. windows 32-bit and 64-bit unsigned installers and dist zips (`rupeeevolution-${VERSION}-win[32|64]-setup-unsigned.exe`, `rupeeevolution-${VERSION}-win[32|64].zip`)
+  4. OS X unsigned installer and dist tarball (`rupeeevolution-${VERSION}-osx-unsigned.dmg`, `rupeeevolution-${VERSION}-osx64.tar.gz`)
   5. Gitian signatures (in `gitian.sigs/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/`)
 
 ### Verify other gitian builders signatures to your own. (Optional)
 
 Add other gitian builders keys to your gpg keyring, and/or refresh keys.
 
-    gpg --import rupaya/contrib/gitian-keys/*.pgp
+    gpg --import rupeeevolution/contrib/gitian-keys/*.pgp
     gpg --refresh-keys
 
 Verify the signatures
 
     pushd ./gitian-builder
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../rupaya/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../rupaya/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../rupaya/contrib/gitian-descriptors/gitian-osx.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-aarch64 ../rupaya/contrib/gitian-descriptors/gitian-aarch64.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../rupeeevolution/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../rupeeevolution/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../rupeeevolution/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-aarch64 ../rupeeevolution/contrib/gitian-descriptors/gitian-aarch64.yml
     popd
 
 ### Next steps:
@@ -162,22 +162,22 @@ Codesigner only: Create Windows/OS X detached signatures:
 
 Codesigner only: Sign the osx binary:
 
-    transfer rupaya-osx-unsigned.tar.gz to osx for signing
-    tar xf rupaya-osx-unsigned.tar.gz
+    transfer rupeeevolution-osx-unsigned.tar.gz to osx for signing
+    tar xf rupeeevolution-osx-unsigned.tar.gz
     ./detached-sig-create.sh -s "Key ID"
     Enter the keychain password and authorize the signature
     Move signature-osx.tar.gz back to the gitian host
 
 Codesigner only: Sign the windows binaries:
 
-    tar xf rupaya-win-unsigned.tar.gz
+    tar xf rupeeevolution-win-unsigned.tar.gz
     ./detached-sig-create.sh -key /path/to/codesign.key
     Enter the passphrase for the key when prompted
     signature-win.tar.gz will be created
 
 Codesigner only: Commit the detached codesign payloads:
 
-    cd ~/rupaya-detached-sigs
+    cd ~/rupeeevolution-detached-sigs
     checkout the appropriate branch for this release series
     rm -rf *
     tar xf signature-osx.tar.gz
@@ -190,25 +190,25 @@ Codesigner only: Commit the detached codesign payloads:
 Non-codesigners: wait for Windows/OS X detached signatures:
 
 - Once the Windows/OS X builds each have 3 matching signatures, they will be signed with their respective release keys.
-- Detached signatures will then be committed to the [rupaya-detached-sigs](https://github.com/RUPAYA-Project/rupaya-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
+- Detached signatures will then be committed to the [rupeeevolution-detached-sigs](https://github.com/RUPEEEVOLUTION-Project/rupeeevolution-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
 
 Create (and optionally verify) the signed OS X binary:
 
     pushd ./gitian-builder
-    ./bin/gbuild -i --commit signature=v${VERSION} ../rupaya/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../rupaya/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../rupaya/contrib/gitian-descriptors/gitian-osx-signer.yml
-    mv build/out/rupaya-osx-signed.dmg ../rupaya-${VERSION}-osx.dmg
+    ./bin/gbuild -i --commit signature=v${VERSION} ../rupeeevolution/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../rupeeevolution/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../rupeeevolution/contrib/gitian-descriptors/gitian-osx-signer.yml
+    mv build/out/rupeeevolution-osx-signed.dmg ../rupeeevolution-${VERSION}-osx.dmg
     popd
 
 Create (and optionally verify) the signed Windows binaries:
 
     pushd ./gitian-builder
-    ./bin/gbuild -i --commit signature=v${VERSION} ../rupaya/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../rupaya/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../rupaya/contrib/gitian-descriptors/gitian-win-signer.yml
-    mv build/out/rupaya-*win64-setup.exe ../rupaya-${VERSION}-win64-setup.exe
-    mv build/out/rupaya-*win32-setup.exe ../rupaya-${VERSION}-win32-setup.exe
+    ./bin/gbuild -i --commit signature=v${VERSION} ../rupeeevolution/contrib/gitian-descriptors/gitian-win-signer.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../rupeeevolution/contrib/gitian-descriptors/gitian-win-signer.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../rupeeevolution/contrib/gitian-descriptors/gitian-win-signer.yml
+    mv build/out/rupeeevolution-*win64-setup.exe ../rupeeevolution-${VERSION}-win64-setup.exe
+    mv build/out/rupeeevolution-*win32-setup.exe ../rupeeevolution-${VERSION}-win32-setup.exe
     popd
 
 Commit your signature for the signed OS X/Windows binaries:
@@ -230,23 +230,23 @@ sha256sum * > SHA256SUMS
 
 The list of files should be:
 ```
-rupaya-${VERSION}-aarch64-linux-gnu.tar.gz
-rupaya-${VERSION}-arm-linux-gnueabihf.tar.gz
-rupaya-${VERSION}-i686-pc-linux-gnu.tar.gz
-rupaya-${VERSION}-x86_64-linux-gnu.tar.gz
-rupaya-${VERSION}-osx64.tar.gz
-rupaya-${VERSION}-osx.dmg
-rupaya-${VERSION}.tar.gz
-rupaya-${VERSION}-win32-setup.exe
-rupaya-${VERSION}-win32.zip
-rupaya-${VERSION}-win64-setup.exe
-rupaya-${VERSION}-win64.zip
+rupeeevolution-${VERSION}-aarch64-linux-gnu.tar.gz
+rupeeevolution-${VERSION}-arm-linux-gnueabihf.tar.gz
+rupeeevolution-${VERSION}-i686-pc-linux-gnu.tar.gz
+rupeeevolution-${VERSION}-x86_64-linux-gnu.tar.gz
+rupeeevolution-${VERSION}-osx64.tar.gz
+rupeeevolution-${VERSION}-osx.dmg
+rupeeevolution-${VERSION}.tar.gz
+rupeeevolution-${VERSION}-win32-setup.exe
+rupeeevolution-${VERSION}-win32.zip
+rupeeevolution-${VERSION}-win64-setup.exe
+rupeeevolution-${VERSION}-win64.zip
 ```
 The `*-debug*` files generated by the gitian build contain debug symbols
 for troubleshooting by developers. It is assumed that anyone that is interested
 in debugging can run gitian to generate the files for themselves. To avoid
 end-user confusion about which file to pick, as well as save storage
-space *do not upload these to the rupx.io server*.
+space *do not upload these to the rupee.io server*.
 
 - GPG-sign it, delete the unsigned file:
 ```
@@ -262,10 +262,10 @@ Note: check that SHA256SUMS itself doesn't end up in SHA256SUMS, which is a spur
 
   - bitcointalk announcement thread
 
-  - Optionally twitter, reddit /r/rupaya, ... but this will usually sort out itself
+  - Optionally twitter, reddit /r/rupeeevolution, ... but this will usually sort out itself
 
   - Archive release notes for the new version to `doc/release-notes/` (branch `master` and branch of the release)
 
-  - Create a [new GitHub release](https://github.com/RUPAYA-Project/RUPAYA/releases/new) with a link to the archived release notes.
+  - Create a [new GitHub release](https://github.com/RUPEEEVOLUTION-Project/RUPEEEVOLUTION/releases/new) with a link to the archived release notes.
 
   - Celebrate

@@ -1,5 +1,5 @@
 // Copyright (c) 2017-2018 The PIVX Developers
-// Copyright (c) 2018 The RUPAYA Developers 
+// Copyright (c) 2018 The RUPEEEVOLUTION Developers 
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -19,7 +19,7 @@ using namespace libzerocoin;
 BOOST_AUTO_TEST_SUITE(zerocoin_denom_tests)
 
 
-//translation from rupaya quantity to zerocoin denomination
+//translation from rupeeevolution quantity to zerocoin denomination
 BOOST_AUTO_TEST_CASE(amount_to_denomination_test)
 {
     cout << "Running amount_to_denomination_test...\n";

@@ -1,10 +1,10 @@
 // Copyright (c) 2017-2018 The PIVX Developers
-// Copyright (c) 2018 The RUPAYA Developers 
+// Copyright (c) 2018 The RUPEEEVOLUTION Developers 
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RUPAYA_ACCUMULATORMAP_H
-#define RUPAYA_ACCUMULATORMAP_H
+#ifndef RUPEEEVOLUTION_ACCUMULATORMAP_H
+#define RUPEEEVOLUTION_ACCUMULATORMAP_H
 
 #include "libzerocoin/Accumulator.h"
 #include "libzerocoin/Coin.h"
@@ -24,4 +24,4 @@ public:
     void Reset();
     void Reset(libzerocoin::ZerocoinParams* params2);
 };
-#endif //RUPAYA_ACCUMULATORMAP_H
+#endif //RUPEEEVOLUTION_ACCUMULATORMAP_H

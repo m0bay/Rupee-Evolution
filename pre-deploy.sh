@@ -32,12 +32,12 @@ elif [[ $HOST = "x86_64-apple-darwin11" ]]; then
 fi
 
 if [[ $HOST = "x86_64-apple-darwin11" ]]; then
-    find $TRAVIS_BUILD_DIR -type f | grep -i rupaya-qt.dmg$ | xargs -i cp {} $OUTDIR/bin
-    find $TRAVIS_BUILD_DIR -type f | grep -i rupaya-core.dmg$ | xargs -i cp {} $OUTDIR/bin
+    find $TRAVIS_BUILD_DIR -type f | grep -i rupeeevolution-qt.dmg$ | xargs -i cp {} $OUTDIR/bin
+    find $TRAVIS_BUILD_DIR -type f | grep -i rupeeevolution-core.dmg$ | xargs -i cp {} $OUTDIR/bin
 else
-    cp $TRAVIS_BUILD_DIR/src/qt/rupaya-qt $OUTDIR/bin/ || cp $TRAVIS_BUILD_DIR/src/qt/rupaya-qt.exe $OUTDIR/bin/ || echo "no QT Wallet"
-    cp $TRAVIS_BUILD_DIR/src/rupayad $OUTDIR/bin/ || cp $TRAVIS_BUILD_DIR/src/rupaya.exe $OUTDIR/bin/
-    cp $TRAVIS_BUILD_DIR/src/rupaya-cli $OUTDIR/bin/ || cp $TRAVIS_BUILD_DIR/src/rupaya-cli.exe $OUTDIR/bin/
+    cp $TRAVIS_BUILD_DIR/src/qt/rupeeevolution-qt $OUTDIR/bin/ || cp $TRAVIS_BUILD_DIR/src/qt/rupeeevolution-qt.exe $OUTDIR/bin/ || echo "no QT Wallet"
+    cp $TRAVIS_BUILD_DIR/src/rupeeevolutiond $OUTDIR/bin/ || cp $TRAVIS_BUILD_DIR/src/rupeeevolution.exe $OUTDIR/bin/
+    cp $TRAVIS_BUILD_DIR/src/rupeeevolution-cli $OUTDIR/bin/ || cp $TRAVIS_BUILD_DIR/src/rupeeevolution-cli.exe $OUTDIR/bin/
     strip "$OUTDIR/bin"/* || echo "nothing to strip"
 fi
 

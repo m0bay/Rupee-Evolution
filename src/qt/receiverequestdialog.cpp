@@ -20,7 +20,7 @@
 #include <QPixmap>
 
 #if defined(HAVE_CONFIG_H)
-#include "config/rupaya-config.h" /* for USE_QRCODE */
+#include "config/rupeeevolution-config.h" /* for USE_QRCODE */
 #endif
 
 #ifdef USE_QRCODE

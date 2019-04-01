@@ -14,7 +14,7 @@
 - (NSString *)__bundleIdentifier
 {
     if (self == [NSBundle mainBundle]) {
-        return @"io.rupaya.Rupaya-Qt";
+        return @"io.rupeeevolution.RupeeEvolution-Qt";
     } else {
         return [self __bundleIdentifier];
     }

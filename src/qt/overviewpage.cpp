@@ -35,7 +35,7 @@ class TxViewDelegate : public QAbstractItemDelegate
 {
     Q_OBJECT
 public:
-    TxViewDelegate() : QAbstractItemDelegate(), unit(BitcoinUnits::RUPX)
+    TxViewDelegate() : QAbstractItemDelegate(), unit(BitcoinUnits::RUPEE)
     {
     }
 
@@ -147,7 +147,7 @@ OverviewPage::~OverviewPage()
     delete ui;
 }
 
-void OverviewPage::getPercentage(CAmount nUnlockedBalance, CAmount nZerocoinBalance, QString& sRUPAYAPercentage, QString& szRUPXPercentage)
+void OverviewPage::getPercentage(CAmount nUnlockedBalance, CAmount nZerocoinBalance, QString& sRUPEEEVOLUTIONPercentage, QString& szRUPEEPercentage)
 {
     int nPrecision = 2;
     double dzPercentage = 0.0;
@@ -166,8 +166,8 @@ void OverviewPage::getPercentage(CAmount nUnlockedBalance, CAmount nZerocoinBala
 
     double dPercentage = 100.0 - dzPercentage;
 
-    szRUPXPercentage = "(" + QLocale(QLocale::system()).toString(dzPercentage, 'f', nPrecision) + " %)";
-    sRUPAYAPercentage = "(" + QLocale(QLocale::system()).toString(dPercentage, 'f', nPrecision) + " %)";
+    szRUPEEPercentage = "(" + QLocale(QLocale::system()).toString(dzPercentage, 'f', nPrecision) + " %)";
+    sRUPEEEVOLUTIONPercentage = "(" + QLocale(QLocale::system()).toString(dPercentage, 'f', nPrecision) + " %)";
 
 }
 
@@ -192,16 +192,16 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
         nWatchOnlyLockedBalance = pwalletMain->GetLockedWatchOnlyBalance();
     }
 
-    // RUPAYA Balance
+    // RUPEEEVOLUTION Balance
     CAmount nTotalBalance = balance + unconfirmedBalance;
-    CAmount rupxAvailableBalance = balance - immatureBalance - nLockedBalance;
+    CAmount rupeeAvailableBalance = balance - immatureBalance - nLockedBalance;
     CAmount nUnlockedBalance = nTotalBalance - nLockedBalance;
 
-    // RUPAYA Watch-Only Balance
+    // RUPEEEVOLUTION Watch-Only Balance
     CAmount nTotalWatchBalance = watchOnlyBalance + watchUnconfBalance;
     CAmount nAvailableWatchBalance = watchOnlyBalance - watchImmatureBalance - nWatchOnlyLockedBalance;
 
-    // zRUPX Balance
+    // zRUPEE Balance
     CAmount matureZerocoinBalance = zerocoinBalance - unconfirmedZerocoinBalance - immatureZerocoinBalance;
 
     // Percentages
@@ -209,11 +209,11 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     QString sPercentage = "";
     getPercentage(nUnlockedBalance, zerocoinBalance, sPercentage, szPercentage);
     // Combined balances
-    CAmount availableTotalBalance = rupxAvailableBalance + matureZerocoinBalance;
+    CAmount availableTotalBalance = rupeeAvailableBalance + matureZerocoinBalance;
     CAmount sumTotalBalance = nTotalBalance + zerocoinBalance;
 
-    // RUPAYA labels
-    ui->labelBalance->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, rupxAvailableBalance, false, BitcoinUnits::separatorAlways));
+    // RUPEEEVOLUTION labels
+    ui->labelBalance->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, rupeeAvailableBalance, false, BitcoinUnits::separatorAlways));
     ui->labelUnconfirmed->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, unconfirmedBalance, false, BitcoinUnits::separatorAlways));
     ui->labelImmature->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, immatureBalance, false, BitcoinUnits::separatorAlways));
     ui->labelLockedBalance->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, nLockedBalance, false, BitcoinUnits::separatorAlways));
@@ -226,7 +226,7 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     ui->labelWatchLocked->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, nWatchOnlyLockedBalance, false, BitcoinUnits::separatorAlways));
     ui->labelWatchTotal->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, nTotalWatchBalance, false, BitcoinUnits::separatorAlways));
 
-    // zRUPX labels
+    // zRUPEE labels
     ui->labelzBalance->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, zerocoinBalance, false, BitcoinUnits::separatorAlways));
     ui->labelzBalanceUnconfirmed->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, unconfirmedZerocoinBalance, false, BitcoinUnits::separatorAlways));
     ui->labelzBalanceMature->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, matureZerocoinBalance, false, BitcoinUnits::separatorAlways));
@@ -237,19 +237,19 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     ui->labelTotalz->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, sumTotalBalance, false, BitcoinUnits::separatorAlways));
 
     // Percentage labels
-    ui->labelRUPXPercent->setText(sPercentage);
-    ui->labelzRUPXPercent->setText(szPercentage);
+    ui->labelRUPEEPercent->setText(sPercentage);
+    ui->labelzRUPEEPercent->setText(szPercentage);
 
     // Adjust bubble-help according to AutoMint settings
-    QString automintHelp = tr("Current percentage of zRUPX.\nIf AutoMint is enabled this percentage will settle around the configured AutoMint percentage (default = 10%).\n");
+    QString automintHelp = tr("Current percentage of zRUPEE.\nIf AutoMint is enabled this percentage will settle around the configured AutoMint percentage (default = 10%).\n");
     bool fEnableZeromint = GetBoolArg("-enablezeromint", true);
     int nZeromintPercentage = GetArg("-zeromintpercentage", 10);
     if (fEnableZeromint) {
         automintHelp += tr("AutoMint is currently enabled and set to ") + QString::number(nZeromintPercentage) + "%.\n";
-        automintHelp += tr("To disable AutoMint add 'enablezeromint=0' in rupaya.conf.");
+        automintHelp += tr("To disable AutoMint add 'enablezeromint=0' in rupeeevolution.conf.");
     }
     else {
-        automintHelp += tr("AutoMint is currently disabled.\nTo enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in rupaya.conf");
+        automintHelp += tr("AutoMint is currently disabled.\nTo enable AutoMint change 'enablezeromint=0' to 'enablezeromint=1' in rupeeevolution.conf");
     }
 
     // Only show most balances if they are non-zero for the sake of simplicity
@@ -262,49 +262,49 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
 
     bool showWatchOnly = nTotalWatchBalance != 0;
 
-    // RUPAYA Available
-    bool showRUPAYAAvailable = settingShowAllBalances || rupxAvailableBalance != nTotalBalance;
-    bool showWatchOnlyRUPAYAAvailable = showRUPAYAAvailable || nAvailableWatchBalance != nTotalWatchBalance;
-    ui->labelBalanceText->setVisible(showRUPAYAAvailable || showWatchOnlyRUPAYAAvailable);
-    ui->labelBalance->setVisible(showRUPAYAAvailable || showWatchOnlyRUPAYAAvailable);
-    ui->labelWatchAvailable->setVisible(showWatchOnlyRUPAYAAvailable && showWatchOnly);
+    // RUPEEEVOLUTION Available
+    bool showRUPEEEVOLUTIONAvailable = settingShowAllBalances || rupeeAvailableBalance != nTotalBalance;
+    bool showWatchOnlyRUPEEEVOLUTIONAvailable = showRUPEEEVOLUTIONAvailable || nAvailableWatchBalance != nTotalWatchBalance;
+    ui->labelBalanceText->setVisible(showRUPEEEVOLUTIONAvailable || showWatchOnlyRUPEEEVOLUTIONAvailable);
+    ui->labelBalance->setVisible(showRUPEEEVOLUTIONAvailable || showWatchOnlyRUPEEEVOLUTIONAvailable);
+    ui->labelWatchAvailable->setVisible(showWatchOnlyRUPEEEVOLUTIONAvailable && showWatchOnly);
 
-    // RUPAYA Pending
-    bool showRUPAYAPending = settingShowAllBalances || unconfirmedBalance != 0;
-    bool showWatchOnlyRUPAYAPending = showRUPAYAPending || watchUnconfBalance != 0;
-    ui->labelPendingText->setVisible(showRUPAYAPending || showWatchOnlyRUPAYAPending);
-    ui->labelUnconfirmed->setVisible(showRUPAYAPending || showWatchOnlyRUPAYAPending);
-    ui->labelWatchPending->setVisible(showWatchOnlyRUPAYAPending && showWatchOnly);
+    // RUPEEEVOLUTION Pending
+    bool showRUPEEEVOLUTIONPending = settingShowAllBalances || unconfirmedBalance != 0;
+    bool showWatchOnlyRUPEEEVOLUTIONPending = showRUPEEEVOLUTIONPending || watchUnconfBalance != 0;
+    ui->labelPendingText->setVisible(showRUPEEEVOLUTIONPending || showWatchOnlyRUPEEEVOLUTIONPending);
+    ui->labelUnconfirmed->setVisible(showRUPEEEVOLUTIONPending || showWatchOnlyRUPEEEVOLUTIONPending);
+    ui->labelWatchPending->setVisible(showWatchOnlyRUPEEEVOLUTIONPending && showWatchOnly);
 
-    // RUPAYA Immature
-    bool showRUPAYAImmature = settingShowAllBalances || immatureBalance != 0;
-    bool showWatchOnlyImmature = showRUPAYAImmature || watchImmatureBalance != 0;
-    ui->labelImmatureText->setVisible(showRUPAYAImmature || showWatchOnlyImmature);
-    ui->labelImmature->setVisible(showRUPAYAImmature || showWatchOnlyImmature); // for symmetry reasons also show immature label when the watch-only one is shown
+    // RUPEEEVOLUTION Immature
+    bool showRUPEEEVOLUTIONImmature = settingShowAllBalances || immatureBalance != 0;
+    bool showWatchOnlyImmature = showRUPEEEVOLUTIONImmature || watchImmatureBalance != 0;
+    ui->labelImmatureText->setVisible(showRUPEEEVOLUTIONImmature || showWatchOnlyImmature);
+    ui->labelImmature->setVisible(showRUPEEEVOLUTIONImmature || showWatchOnlyImmature); // for symmetry reasons also show immature label when the watch-only one is shown
     ui->labelWatchImmature->setVisible(showWatchOnlyImmature && showWatchOnly); // show watch-only immature balance
 
-    // RUPAYA Locked
-    bool showRUPAYALocked = settingShowAllBalances || nLockedBalance != 0;
-    bool showWatchOnlyRUPAYALocked = showRUPAYALocked || nWatchOnlyLockedBalance != 0;
-    ui->labelLockedBalanceText->setVisible(showRUPAYALocked || showWatchOnlyRUPAYALocked);
-    ui->labelLockedBalance->setVisible(showRUPAYALocked || showWatchOnlyRUPAYALocked);
-    ui->labelWatchLocked->setVisible(showWatchOnlyRUPAYALocked && showWatchOnly);
+    // RUPEEEVOLUTION Locked
+    bool showRUPEEEVOLUTIONLocked = settingShowAllBalances || nLockedBalance != 0;
+    bool showWatchOnlyRUPEEEVOLUTIONLocked = showRUPEEEVOLUTIONLocked || nWatchOnlyLockedBalance != 0;
+    ui->labelLockedBalanceText->setVisible(showRUPEEEVOLUTIONLocked || showWatchOnlyRUPEEEVOLUTIONLocked);
+    ui->labelLockedBalance->setVisible(showRUPEEEVOLUTIONLocked || showWatchOnlyRUPEEEVOLUTIONLocked);
+    ui->labelWatchLocked->setVisible(showWatchOnlyRUPEEEVOLUTIONLocked && showWatchOnly);
 
-    // zRUPX
-    bool showzRUPXAvailable = settingShowAllBalances || zerocoinBalance != matureZerocoinBalance;
-    bool showzRUPXUnconfirmed = settingShowAllBalances || unconfirmedZerocoinBalance != 0;
-    bool showzRUPXImmature = settingShowAllBalances || immatureZerocoinBalance != 0;
-    ui->labelzBalanceMature->setVisible(showzRUPXAvailable);
-    ui->labelzBalanceMatureText->setVisible(showzRUPXAvailable);
-    ui->labelzBalanceUnconfirmed->setVisible(showzRUPXUnconfirmed);
-    ui->labelzBalanceUnconfirmedText->setVisible(showzRUPXUnconfirmed);
-    ui->labelzBalanceImmature->setVisible(showzRUPXImmature);
-    ui->labelzBalanceImmatureText->setVisible(showzRUPXImmature);
+    // zRUPEE
+    bool showzRUPEEAvailable = settingShowAllBalances || zerocoinBalance != matureZerocoinBalance;
+    bool showzRUPEEUnconfirmed = settingShowAllBalances || unconfirmedZerocoinBalance != 0;
+    bool showzRUPEEImmature = settingShowAllBalances || immatureZerocoinBalance != 0;
+    ui->labelzBalanceMature->setVisible(showzRUPEEAvailable);
+    ui->labelzBalanceMatureText->setVisible(showzRUPEEAvailable);
+    ui->labelzBalanceUnconfirmed->setVisible(showzRUPEEUnconfirmed);
+    ui->labelzBalanceUnconfirmedText->setVisible(showzRUPEEUnconfirmed);
+    ui->labelzBalanceImmature->setVisible(showzRUPEEImmature);
+    ui->labelzBalanceImmatureText->setVisible(showzRUPEEImmature);
 
     // Percent split
     bool showPercentages = ! (zerocoinBalance == 0 && nTotalBalance == 0);
-    ui->labelRUPXPercent->setVisible(showPercentages);
-    ui->labelzRUPXPercent->setVisible(showPercentages);
+    ui->labelRUPEEPercent->setVisible(showPercentages);
+    ui->labelzRUPEEPercent->setVisible(showPercentages);
 
     static int cachedTxLocks = 0;
 
@@ -376,7 +376,7 @@ void OverviewPage::setWalletModel(WalletModel* model)
         connect(model, SIGNAL(notifyWatchonlyChanged(bool)), this, SLOT(updateWatchOnlyLabels(bool)));
     }
 
-    // update the display unit, to not use the default ("RUPAYA")
+    // update the display unit, to not use the default ("RUPEEEVOLUTION")
     updateDisplayUnit();
 
     // Hide orphans

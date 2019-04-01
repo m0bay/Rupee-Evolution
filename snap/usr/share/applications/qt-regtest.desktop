@@ -4,11 +4,11 @@
 Type=Application
 Version=5.2.00
 Encoding=UTF-8
-Name=Rupaya-Qt Regtest
+Name=RupeeEvolution-Qt Regtest
 Icon=${SNAP}/qt-regtest.ico
-MimeType=x-scheme-handler/rupaya;
-Exec=rupaya.qt-regtest %u
+MimeType=x-scheme-handler/rupeeevolution;
+Exec=rupeeevolution.qt-regtest %u
 Terminal=false
 Categories=Office;Finance;
-Comment=Rupaya Core Regression Test (by RUPAYA-Project)
-Keywords=internet;rupaya;regtest;qt;crypto;currency;snap;snapcraft;RUPAYA-Project;project;daemon;cli;qt;zerocoin;zrupx
+Comment=Rupee Evolution Core Regression Test (by RUPEEEVOLUTION-Project)
+Keywords=internet;rupeeevolution;regtest;qt;crypto;currency;snap;snapcraft;RUPEEEVOLUTION-Project;project;daemon;cli;qt;zerocoin;zrupee

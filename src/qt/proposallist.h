@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RUPAYAQT_PROPOSALLIST_H
-#define RUPAYAQT_PROPOSALLIST_H
+#ifndef RUPEEEVOLUTIONQT_PROPOSALLIST_H
+#define RUPEEEVOLUTIONQT_PROPOSALLIST_H
 
 #include "guiutil.h"
 #include "proposaltablemodel.h"
@@ -114,4 +114,4 @@ public Q_SLOTS:
     void changedAmount(const QString &minAmount);
 };
 
-#endif // RUPAYAQT_PROPOSALLIST_H
+#endif // RUPEEEVOLUTIONQT_PROPOSALLIST_H

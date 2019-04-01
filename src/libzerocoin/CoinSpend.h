@@ -10,7 +10,7 @@
  * @license    This project is released under the MIT license.
  **/
 // Copyright (c) 2017-2018 The PIVX Developers
-// Copyright (c) 2018 The RUPAYA Developers 
+// Copyright (c) 2018 The RUPEEEVOLUTION Developers 
 
 #ifndef COINSPEND_H_
 #define COINSPEND_H_
@@ -39,7 +39,7 @@ class CoinSpend
 {
 public:
 
-    //! \param paramsV2 - params that begin when V2 zerocoins begin on the RUPAYA network
+    //! \param paramsV2 - params that begin when V2 zerocoins begin on the RUPEEEVOLUTION network
     //! \param strm - a serialized CoinSpend
     template <typename Stream>
     CoinSpend(const ZerocoinParams* params, Stream& strm) :

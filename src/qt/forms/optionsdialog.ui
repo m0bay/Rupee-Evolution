@@ -30,10 +30,10 @@
        <item>
         <widget class="QCheckBox" name="bitcoinAtStartup">
          <property name="toolTip">
-          <string>Automatically start RUPAYA after logging in to the system.</string>
+          <string>Automatically start RUPEEEVOLUTION after logging in to the system.</string>
          </property>
          <property name="text">
-          <string>&amp;Start RUPAYA on system login</string>
+          <string>&amp;Start RUPEEEVOLUTION on system login</string>
          </property>
         </widget>
        </item>
@@ -135,20 +135,20 @@
          <item>
           <widget class="QCheckBox" name="checkBoxZeromintEnable">
            <property name="toolTip">
-            <string>Enable automatic minting of RUPX units to zRUPX</string>
+            <string>Enable automatic minting of RUPEE units to zRUPEE</string>
            </property>
            <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="text">
-            <string>Enable zRUPX Automint</string>
+            <string>Enable zRUPEE Automint</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QCheckBox" name="checkBoxZeromintAddresses">
            <property name="toolTip">
-            <string>Enable automatic zRUPX minting from specific addresses</string>
+            <string>Enable automatic zRUPEE minting from specific addresses</string>
            </property>
            <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
@@ -165,10 +165,10 @@
          <item>
           <widget class="QLabel" name="percentage_label">
            <property name="toolTip">
-            <string>Percentage of incoming RUPX which get automatically converted to zRUPX via Zerocoin Protocol (min: 10%)</string>
+            <string>Percentage of incoming RUPEE which get automatically converted to zRUPEE via Zerocoin Protocol (min: 10%)</string>
            </property>
            <property name="text">
-            <string>Percentage of autominted zRUPX</string>
+            <string>Percentage of autominted zRUPEE</string>
            </property>
           </widget>
          </item>
@@ -198,10 +198,10 @@
             </size>
            </property>
            <property name="toolTip">
-            <string>Wait with automatic conversion to Zerocoin until enough RUPX for this denomination is available</string>
+            <string>Wait with automatic conversion to Zerocoin until enough RUPEE for this denomination is available</string>
            </property>
            <property name="text">
-            <string>Preferred Automint zRUPX Denomination</string>
+            <string>Preferred Automint zRUPEE Denomination</string>
            </property>
           </widget>
          </item>
@@ -214,7 +214,7 @@
             </size>
            </property>
            <property name="toolTip">
-            <string>Wait with automatic conversion to Zerocoin until enough RUPX for this denomination is available</string>
+            <string>Wait with automatic conversion to Zerocoin until enough RUPEE for this denomination is available</string>
            </property>
            <property name="maxVisibleItems">
             <number>9</number>
@@ -316,7 +316,7 @@
        <item>
         <widget class="QCheckBox" name="mapPortUpnp">
          <property name="toolTip">
-          <string>Automatically open the RUPAYA client port on the router. This only works when your router supports UPnP and it is enabled.</string>
+          <string>Automatically open the RUPEEEVOLUTION client port on the router. This only works when your router supports UPnP and it is enabled.</string>
          </property>
          <property name="text">
           <string>Map port using &amp;UPnP</string>
@@ -336,7 +336,7 @@
        <item>
         <widget class="QCheckBox" name="connectSocks">
          <property name="toolTip">
-          <string>Connect to the RUPAYA network through a SOCKS5 proxy.</string>
+          <string>Connect to the RUPEEEVOLUTION network through a SOCKS5 proxy.</string>
          </property>
          <property name="text">
           <string>&amp;Connect through SOCKS5 proxy (default proxy):</string>
@@ -502,7 +502,7 @@
          <item>
           <widget class="QValueComboBox" name="lang">
            <property name="toolTip">
-            <string>The user interface language can be set here. This setting will take effect after restarting RUPAYA.</string>
+            <string>The user interface language can be set here. This setting will take effect after restarting RUPEEEVOLUTION.</string>
            </property>
           </widget>
          </item>
@@ -524,7 +524,7 @@
          </property>
          <property name="text">
           <string>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/rupaya-project/rupaya-project-translations</string>
+https://www.transifex.com/rupeeevolution-project/rupeeevolution-project-translations</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>

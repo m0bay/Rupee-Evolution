@@ -1,68 +1,68 @@
-name: rupaya
+name: rupeeevolution
 version: 5.2.00
-summary:   Rupaya (Blockchain & Cryptocurrency Platform for SouthAsia)
+summary:   Rupee Evolution (Blockchain & Cryptocurrency Platform for SouthAsia)
 description: |
-  RUPAYA is an MIT licensed,
+  RUPEEEVOLUTION is an MIT licensed,
   open source, blockchain-based cryptocurrency with 
   ultra fast transactions, low fees, high network decentralization, and
   Zero Knowledge cryptography proofs for industry-leading
   transaction anonymity. 
   
-  Download RUPAYA White Paper PDF:
-    https://rupaya.ams3.digitaloceanspaces.com/docs/Rupaya_Platform_White-Paper-20180524.pdf
+  Download RUPEEEVOLUTION White Paper PDF:
+    https://rupeeevolution.ams3.digitaloceanspaces.com/docs/RupeeEvolution _Platform_White-Paper-20180524.pdf
 
 grade: devel
 confinement: strict
 
 apps:
   daemon:
-    command: rupayad
+    command: rupeeevolutiond
     plugs: [network, network-bind, home, removable-media]
     environment:
       XDG_DATA_DIRS: $SNAP_USER_DATA:$SNAP/usr/share:$XDG_DATA_DIRS
   daemon-testnet:
-    command: rupayad --testnet
+    command: rupeeevolutiond --testnet
     plugs: [network, network-bind, home, removable-media]
     environment:
       XDG_DATA_DIRS: $SNAP_USER_DATA:$SNAP/usr/share:$XDG_DATA_DIRS
   daemon-regtest:
-    command: rupayad --regtest
+    command: rupeeevolutiond --regtest
     plugs: [network, network-bind, home, removable-media]
   qt:
-    command: desktop-launch rupaya-qt
+    command: desktop-launch rupeeevolution-qt
     plugs: [network, network-bind, unity7, unity8-calendar, unity8-contacts, desktop, desktop-legacy, wayland, x11, mir, opengl, home, removable-media]
     desktop: qt.desktop
   qt-testnet:
-    command: desktop-launch rupaya-qt --testnet
+    command: desktop-launch rupeeevolution-qt --testnet
     plugs: [network, network-bind, unity7, unity8-calendar, unity8-contacts, desktop, desktop-legacy, wayland, x11, mir, opengl, home, removable-media]
     desktop: qt-testnet.desktop
   qt-regtest:
-    command: desktop-launch rupaya-qt --regtest
+    command: desktop-launch rupeeevolution-qt --regtest
     plugs: [network, network-bind, unity7, unity8-calendar, unity8-contacts, desktop, desktop-legacy, wayland, x11, mir, opengl, home, removable-media]
     desktop: qt-regtest.desktop
   cli:
-    command: rupaya-cli
+    command: rupeeevolution-cli
     plugs: [network, network-bind, home, removable-media]
   cli-testnet:
-    command: rupaya-cli --testnet
+    command: rupeeevolution-cli --testnet
     plugs: [network, network-bind, home, removable-media]
   cli-regtest:
-    command: rupaya-cli --regtest
+    command: rupeeevolution-cli --regtest
     plugs: [network, network-bind, home, removable-media]
   tx:
-    command: rupaya-tx
+    command: rupeeevolution-tx
     plugs: [home]
 
 parts:
-  rupaya:
-    source: https://github.com/rupaya-project/rupx
+  rupeeevolution:
+    source: https://github.com/rupeeevolution-project/rupee
     source-type: git
     source-tag: master
     plugin: nil
     override-build: |
       # Patch - Default home folder
       ## We don't want to copy the full blockchain every time that the snap is   
-      ## updated, but there's no way to define a default data dir in rupaya-qt.
+      ## updated, but there's no way to define a default data dir in rupeeevolution-qt.
       ## Additionaly we fix funcs.mk
       git apply $SNAPCRAFT_STAGE/default_data_dir.patch
       git apply $SNAPCRAFT_STAGE/fix-bdb-tmp-folder.patch

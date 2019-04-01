@@ -1,5 +1,5 @@
 // Copyright (c) 2017-2018 The PIVX Developers
-// Copyright (c) 2018 The RUPAYA Developers 
+// Copyright (c) 2018 The RUPEEEVOLUTION Developers 
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,7 +10,7 @@
 #include "txdb.h"
 #include "init.h"
 #include "spork.h"
-#include "zrupxchain.h"
+#include "zrupeechain.h"
 
 using namespace libzerocoin;
 
@@ -297,7 +297,7 @@ bool CalculateAccumulatorCheckpoint(int nHeight, uint256& nCheckpoint, Accumulat
 bool ValidateAccumulatorCheckpoint(const CBlock& block, CBlockIndex* pindex, AccumulatorMap& mapAccumulators)
 {
     //V1 accumulators are completely phased out by the time this code hits the public and begins generating new checkpoints
-    //It is VERY IMPORTANT that when this is being run and height < v2_start, then zRUPX need to be disabled at the same time!!
+    //It is VERY IMPORTANT that when this is being run and height < v2_start, then zRUPEE need to be disabled at the same time!!
     if (/*pindex->nHeight < Params().Zerocoin_StartHeight() ||*/ fVerifyingBlocks)
         return true;
 
@@ -501,7 +501,7 @@ std::list<CBlockIndex*> calculateAccumulatedBlocksFor(
         // Add it
         blocksToInclude.push_back(pindex);
 
-        // 10 blocks were accumulated twice when zRUPX v2 was activated
+        // 10 blocks were accumulated twice when zRUPEE v2 was activated
         // if (pindex->nHeight == 1050010 && !fDoubleCounted) {
         //     pindex = chainActive[1050000];
         //     fDoubleCounted = true;

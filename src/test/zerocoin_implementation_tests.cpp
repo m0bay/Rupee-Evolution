@@ -1,5 +1,5 @@
 // Copyright (c) 2017-2018 The PIVX Developers
-// Copyright (c) 2018 The RUPAYA Developers 
+// Copyright (c) 2018 The RUPEEEVOLUTION Developers 
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -15,8 +15,8 @@
 #include <iostream>
 #include <accumulators.h>
 #include "wallet.h"
-#include "zrupxwallet.h"
-#include "zrupxchain.h"
+#include "zrupeewallet.h"
+#include "zrupeechain.h"
 
 using namespace libzerocoin;
 
@@ -504,7 +504,7 @@ BOOST_AUTO_TEST_CASE(deterministic_tests)
     CWalletDB walletdb(strWalletFile, "cr+");
 
     CWallet wallet(strWalletFile);
-    CzRUPXWallet zWallet(wallet.strWalletFile);
+    CzRUPEEWallet zWallet(wallet.strWalletFile);
     zWallet.SetMasterSeed(seedMaster);
     wallet.setZWallet(&zWallet);
 
@@ -516,7 +516,7 @@ BOOST_AUTO_TEST_CASE(deterministic_tests)
     for (int i = 0; i < nTests; i++) {
         PrivateCoin coin(Params().Zerocoin_Params(), denom, false);
         CDeterministicMint dMint;
-        zWallet.GenerateDeterministicZRUPX(denom, coin, dMint);
+        zWallet.GenerateDeterministicZRUPEE(denom, coin, dMint);
         vCoins.emplace_back(coin);
     }
 

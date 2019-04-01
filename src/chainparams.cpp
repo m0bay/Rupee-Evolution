@@ -1,7 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2018 The PIVX Developers 
+// Copyright (c) 2015-2018 The PIVX Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -109,25 +109,25 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 4-byte int at any alignment.
          */
-        pchMessageStart[0] = 0xc1;
-        pchMessageStart[1] = 0xbe;
-        pchMessageStart[2] = 0xc8;
-        pchMessageStart[3] = 0x0b;
+        pchMessageStart[0] = 0xc2;
+        pchMessageStart[1] = 0xa3;
+        pchMessageStart[2] = 0xb4;
+        pchMessageStart[3] = 0x2c;
         vAlertPubKey = ParseHex("0000098d3ba6ba6e7423fa5cbd6a89e0a9a5348f88d332b44a5cb1a8b7ed2c1eaa335fc8dc4f012cb8241cc0bdafd6ca70c5f5448916e4e6f511bcd746ed57dc50");
         nP2pPort = 9050;
         nRpcPort = 7050;
-        bnProofOfWorkLimit = ~uint256(0) >> 20; // RUPAYA starting difficulty is 1 / 2^12
-        nSubsidyHalvingInterval = 210000;
+        bnProofOfWorkLimit = ~uint256(0) >> 20; // RUPEEEVOLUTION starting difficulty is 1 / 2^12
+        nSubsidyHalvingInterval = 525600;
         nMaxReorganizationDepth = 100;
         nEnforceBlockUpgradeMajority = 8100; // 75%
         nRejectBlockOutdatedMajority = 10260; // 95%
         nToCheckBlockUpgradeMajority = 10800; // Approximate expected amount of blocks in 7 days (1440*7.5)
         nMinerThreads = 0;
-        nTargetTimespan = 1 * 60; // RUPAYA: 1 day
-        nTargetSpacing = 1 * 60;  // RUPAYA: 1 minute
+        nTargetTimespan = 1 * 60; // RUPEEEVOLUTION: 1 day
+        nTargetSpacing = 1 * 60;  // RUPEEEVOLUTION: 1 minute
         nMaturity = 10;
         nMasternodeCountDrift = 20;
-        nMaxMoneyOut = 82000000 * COIN;
+        nMaxMoneyOut = 84000000 * COIN;
 
         /** Height or Time Based Activations **/
         nLastPoWBlock = 200;
@@ -148,7 +148,7 @@ public:
          * Build the genesis block. Note that the output of the genesis coinbase cannot
          * be spent as it did not originally exist in the database.
          */
-        const char* pszTimestamp = "Bitcoin Breaks 7500 USD Point After a Week of Solid Growth";
+        const char* pszTimestamp = "Rupee Evolution will forever change the face of Rupee";
         CMutableTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -162,7 +162,7 @@ public:
         genesis.nAccumulatorCheckpoint = 0;
         genesis.nTime = 1533927507;
         genesis.nBits = 504365040;
-        genesis.nNonce = 462387;
+        genesis.nNonce = 1;
 
         hashGenesisBlock = genesis.GetHash();
         if (regenerate) {
@@ -189,21 +189,9 @@ public:
         }
 
 
-        vSeeds.push_back(CDNSSeedData("seeder-1.rupx.io", "seeder-1.rupx.io"));
-        vSeeds.push_back(CDNSSeedData("seeder-2.rupx.io", "seeder-2.rupx.io"));
-        vSeeds.push_back(CDNSSeedData("seeder-2.rupx.io", "seeder-3.rupx.io"));
-        vSeeds.push_back(CDNSSeedData("node-01.rupx.io", "node-01.rupx.io"));
-        vSeeds.push_back(CDNSSeedData("node-02.rupx.io", "node-02.rupx.io"));
-        vSeeds.push_back(CDNSSeedData("node-03.rupx.io", "node-03.rupx.io"));
-        vSeeds.push_back(CDNSSeedData("node-04.rupx.io", "node-04.rupx.io"));
-        vSeeds.push_back(CDNSSeedData("node-05.rupx.io", "node-05.rupx.io"));
-        vSeeds.push_back(CDNSSeedData("node-06.rupx.io", "node-06.rupx.io"));
-        vSeeds.push_back(CDNSSeedData("node-07.rupx.io", "node-07.rupx.io"));
-        vSeeds.push_back(CDNSSeedData("node-08.rupx.io", "node-08.rupx.io"));
-        vSeeds.push_back(CDNSSeedData("node-09.rupx.io", "node-09.rupx.io"));
-        vSeeds.push_back(CDNSSeedData("node-10.rupx.io", "node-10.rupx.io"));
+        vSeeds.push_back(CDNSSeedData("", ""));
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 60); // Rupaya's wallet address starts with a R
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 60); // RupeeEvolution's wallet address starts with a R
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 15); // 7
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 55); // P
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x02)(0x2D)(0x25)(0x33).convert_to_container<std::vector<unsigned char> >();
@@ -239,7 +227,7 @@ public:
         nRequiredAccumulation = 1;
         nDefaultSecurityLevel = 100; //full security level for accumulators
         nZerocoinHeaderVersion = 4; //Block headers must be this version once zerocoin is active
-        nZerocoinRequiredStakeDepth = 200; //The required confirmations for a zrupx to be stakable
+        nZerocoinRequiredStakeDepth = 200; //The required confirmations for a zrupee to be stakable
         nStakeMinAge = 60 * 60; //The number of seconds that a utxo must be old before it can qualify for staking
         nBudget_Fee_Confirmations = 6; // Number of confirmations for the finalization fee
     }
@@ -272,8 +260,8 @@ public:
         nRejectBlockOutdatedMajority = 5472; // 95%
         nToCheckBlockUpgradeMajority = 5760; // 4 days
         nMinerThreads = 0;
-        nTargetTimespan = 1 * 60; // RUPAYA: 1 day
-        nTargetSpacing = 1 * 60;  // RUPAYA: 1 minute
+        nTargetTimespan = 1 * 60; // RUPEEEVOLUTION: 1 day
+        nTargetSpacing = 1 * 60;  // RUPEEEVOLUTION: 1 minute
         nLastPoWBlock = 200;
         nMaturity = 15;
         nMasternodeCountDrift = 4;
@@ -321,20 +309,16 @@ public:
         }
 
         vSeeds.clear();
-         vSeeds.push_back(CDNSSeedData("tnseeder-01.rupaya.io", "tnseeder-01.rupaya.io"));
-         vSeeds.push_back(CDNSSeedData("testnode-01.rupaya.io", "testnode-01.rupaya.io"));
-         vSeeds.push_back(CDNSSeedData("testnode-02.rupaya.io", "testnode-02.rupaya.io"));
-         vSeeds.push_back(CDNSSeedData("testnode-03.rupaya.io", "testnode-03.rupaya.io"));
-         vSeeds.push_back(CDNSSeedData("testnode-04.rupaya.io", "testnode-04.rupaya.io"));
+         vSeeds.push_back(CDNSSeedData("", ""));
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 17); // Testnet rupaya addresses start with '7'
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 18);  // Testnet rupaya script addresses start with '8'
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 17); // Testnet rupeeevolution addresses start with '7'
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 18);  // Testnet rupeeevolution script addresses start with '8'
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 65);     // Testnet private keys start with 'T'
-        // Testnet rupaya BIP32 pubkeys start with 'DRKV'
+        // Testnet rupeeevolution BIP32 pubkeys start with 'DRKV'
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x3a)(0x80)(0x61)(0xa0).convert_to_container<std::vector<unsigned char> >();
-        // Testnet rupaya BIP32 prvkeys start with 'DRKP'
+        // Testnet rupeeevolution BIP32 prvkeys start with 'DRKP'
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x3a)(0x80)(0x58)(0x37).convert_to_container<std::vector<unsigned char> >();
-        // Testnet rupaya BIP44 coin type is '1' (All coin's testnet default)
+        // Testnet rupeeevolution BIP44 coin type is '1' (All coin's testnet default)
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x01).convert_to_container<std::vector<unsigned char> >();
 
         convertSeed6(vFixedSeeds, pnSeed6_test, ARRAYLEN(pnSeed6_test));
@@ -378,8 +362,8 @@ public:
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 1;
-        nTargetTimespan = 24 * 60 * 60; // RUPAYA: 1 day
-        nTargetSpacing = 1 * 60;        // RUPAYA: 1 minutes
+        nTargetTimespan = 24 * 60 * 60; // RUPEEEVOLUTION: 1 day
+        nTargetSpacing = 1 * 60;        // RUPEEEVOLUTION: 1 minutes
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         genesis.nTime = 1533927507;
         genesis.nBits = 0x207fffff;
@@ -462,7 +446,7 @@ public:
     virtual void setToCheckBlockUpgradeMajority(int anToCheckBlockUpgradeMajority) { nToCheckBlockUpgradeMajority = anToCheckBlockUpgradeMajority; }
     virtual void setDefaultConsistencyChecks(bool afDefaultConsistencyChecks) { fDefaultConsistencyChecks = afDefaultConsistencyChecks; }
     virtual void setAllowMinDifficultyBlocks(bool afAllowMinDifficultyBlocks) { fAllowMinDifficultyBlocks = afAllowMinDifficultyBlocks; }
-    
+
 };
 static CUnitTestParams unitTestParams;
 

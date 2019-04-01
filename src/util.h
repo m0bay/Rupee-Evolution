@@ -13,7 +13,7 @@
 #define BITCOIN_UTIL_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/rupaya-config.h"
+#include "config/rupeeevolution-config.h"
 #endif
 
 #include "compat.h"
@@ -30,7 +30,7 @@
 #include <boost/thread/exceptions.hpp>
 #include <boost/thread/condition_variable.hpp> // for boost::thread_interrupted
 
-//RUPAYA only features
+//RUPEEEVOLUTION only features
 
 extern bool fMasterNode;
 extern bool fLiteMode;
@@ -39,7 +39,7 @@ extern int nSwiftTXDepth;
 extern int nZeromintPercentage;
 extern const int64_t AUTOMINT_DELAY;
 extern int nPreferredDenom;
-extern int nAnonymizeRupayaAmount;
+extern int nAnonymizeRupeeEvolutionAmount;
 extern int nLiquidityProvider;
 extern bool fEnableZeromint;
 extern bool fEnableAutoConvert;
@@ -215,7 +215,7 @@ void RenameThread(const char* name);
 template <typename Callable>
 void TraceThread(const char* name, Callable func)
 {
-    std::string s = strprintf("rupaya-%s", name);
+    std::string s = strprintf("rupeeevolution-%s", name);
     RenameThread(s.c_str());
     try {
         LogPrintf("%s thread start\n", name);

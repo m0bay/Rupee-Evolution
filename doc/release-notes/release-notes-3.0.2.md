@@ -1,30 +1,30 @@
-Rupaya Core version 3.0.2 is now available from:
+Rupee Evolution Core version 3.0.2 is now available from:
 
-  <https://github.com/rupaya-project/rupaya/releases>
+  <https://github.com/rupeeevolution-project/rupeeevolution/releases>
 
 This is a new minor-revision version release, including various bug fixes and
 performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/rupaya-project/rupaya/issues>
+  <https://github.com/rupeeevolution-project/rupeeevolution/issues>
 
 Recommended Update
 ==============
 
-Rupaya Core v3.0.2 is a recommended, semi-mandatory update for all users. This release contains transaction creation bug fixes for zRUPX spends, automint calculation adjustments, and other various updates/fixes.
+Rupee Evolution Core v3.0.2 is a recommended, semi-mandatory update for all users. This release contains transaction creation bug fixes for zRUPEE spends, automint calculation adjustments, and other various updates/fixes.
 
-zRUPX spending requires this update.
+zRUPEE spending requires this update.
 
 How to Upgrade
 ==============
 
-If you are running an older version, shut it down. Wait until it has completely shut down (which might take a few minutes for older versions), then run the installer (on Windows) or just copy over /Applications/RUPAYA-Qt (on Mac) or rupayad/rupaya-qt (on Linux).
+If you are running an older version, shut it down. Wait until it has completely shut down (which might take a few minutes for older versions), then run the installer (on Windows) or just copy over /Applications/RUPEEEVOLUTION-Qt (on Mac) or rupeeevolutiond/rupeeevolution-qt (on Linux).
 
 Compatibility
 ==============
 
-Rupaya Core is extensively tested on multiple operating systems using
+Rupee Evolution Core is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.8+, and Windows Vista and later.
 
 Microsoft ended support for Windows XP on [April 8th, 2014](https://www.microsoft.com/en-us/WindowsForBusiness/end-of-xp-support),
@@ -32,7 +32,7 @@ No attempt is made to prevent installing or running the software on Windows XP, 
 can still do so at your own risk but be aware that there are known instabilities and issues.
 Please do not report issues about Windows XP to the issue tracker.
 
-Rupaya Core should also work on most other Unix-like systems but is not
+Rupee Evolution Core should also work on most other Unix-like systems but is not
 frequently tested on them.
 
 ### :exclamation::exclamation::exclamation: MacOS 10.13 High Sierra :exclamation::exclamation::exclamation:
@@ -45,21 +45,21 @@ Notable Changes
 
 Auto Wallet Backup
 ---------------------
-In addition to the automatic wallet backup that is done at each start of the client, a new automatic backup function has been added that will, by default, create a backup of the wallet file during each zRUPX mint operation (zRUPX spends which re-mint their change are also included in this). This functionality is controlled by the `-backupzrupx` command-line option, which defaults to `1` (enabled, auto-backup).
+In addition to the automatic wallet backup that is done at each start of the client, a new automatic backup function has been added that will, by default, create a backup of the wallet file during each zRUPEE mint operation (zRUPEE spends which re-mint their change are also included in this). This functionality is controlled by the `-backupzrupee` command-line option, which defaults to `1` (enabled, auto-backup).
 
-Users that wish to prevent this behavior (not recommended) can pass `-backupzrupx=0` at the command-line when starting the client, or add `backupzrupx=0` to their `rupaya.conf` file.
+Users that wish to prevent this behavior (not recommended) can pass `-backupzrupee=0` at the command-line when starting the client, or add `backupzrupee=0` to their `rupeeevolution.conf` file.
 
-zRUPX Automint Calculations
+zRUPEE Automint Calculations
 ---------------------
-A bug in the automint calculations was made apparent on mainnet when block times exceeded expectations, resulting in zRUPX mint transactions that were in an unconfirmed state to still be treated as if they had never been minted. This caused automint to effectively mint more than what was intended.
+A bug in the automint calculations was made apparent on mainnet when block times exceeded expectations, resulting in zRUPEE mint transactions that were in an unconfirmed state to still be treated as if they had never been minted. This caused automint to effectively mint more than what was intended.
 
-zRUPX Spending Fix
+zRUPEE Spending Fix
 ---------------------
-The size of zRUPX spend transactions is knowingly larger than normal transactions, and while this was expected, a much stricter check against the scriptsig size is used for mainnet, causing the transactions to be rejected by the mempool, and thus not being packaged into any blocks.
+The size of zRUPEE spend transactions is knowingly larger than normal transactions, and while this was expected, a much stricter check against the scriptsig size is used for mainnet, causing the transactions to be rejected by the mempool, and thus not being packaged into any blocks.
 
-zRUPX Transaction Recovery
+zRUPEE Transaction Recovery
 ---------------------
-Due to the aforementioned issue with zRUPX spending, users may find that their attempted spends are now conflicted and zRUPX balances are not represented as expected. "Recovery" of these transactions can be done using the following methods:
+Due to the aforementioned issue with zRUPEE spending, users may find that their attempted spends are now conflicted and zRUPEE balances are not represented as expected. "Recovery" of these transactions can be done using the following methods:
 
 1. GUI:
 
@@ -71,7 +71,7 @@ Due to the aforementioned issue with zRUPX spending, users may find that their a
 
 RPC Changes
 ---------------------
-The `bip38decrypt` command has had it's parameter order changed to be more consistent with it's counterpart. The command now expects the RUPAYA address as it's first parameter and the passphrase as it's second parameter.
+The `bip38decrypt` command has had it's parameter order changed to be more consistent with it's counterpart. The command now expects the RUPEEEVOLUTION address as it's first parameter and the passphrase as it's second parameter.
 
 Bip38 Compatibility With 3rd Party Tools
 ---------------------
@@ -94,7 +94,7 @@ git merge commit are mentioned.
 
 ### Wallet
 - #271 `5e9a086` [Wallet] Remove unused member wallet in UnlockContext inner class (Jon Spock)
-- #279 `e734010` Add -backupzrupx startup flag. (presstab)
+- #279 `e734010` Add -backupzrupee startup flag. (presstab)
 - #280 `fdc182d` [Wallet] Fix zRupx spending errors. (presstab)
 - #282 `310f216` [Wallet] Count pending zRupx balance for automint. (presstab)
 - #290 `004d7b6` Include both pending and mature zerocoins for automint calculations (presstab)
@@ -125,4 +125,4 @@ Thanks to everyone who directly contributed to this release:
 - rejectedpromise
 - Warrows
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/rupaya-project-translations/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/rupeeevolution-project-translations/).

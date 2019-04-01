@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RUPAYAQT_PROPOSALRECORD_H
-#define RUPAYAQT_PROPOSALRECORD_H
+#ifndef RUPEEEVOLUTIONQT_PROPOSALRECORD_H
+#define RUPEEEVOLUTIONQT_PROPOSALRECORD_H
 
 #include "amount.h"
 #include "uint256.h"
@@ -54,4 +54,4 @@ public:
     double percentage;
 };
 
-#endif // RUPAYAQT_PROPOSALRECORD_H
+#endif // RUPEEEVOLUTIONQT_PROPOSALRECORD_H

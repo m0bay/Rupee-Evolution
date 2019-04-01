@@ -17,7 +17,7 @@
 #include "utilmoneystr.h"
 #include "wallet.h"
 #include "walletdb.h"
-#include "zrupxchain.h"
+#include "zrupeechain.h"
 
 #include <stdint.h>
 
@@ -85,7 +85,7 @@ UniValue getnewaddress(const UniValue& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "getnewaddress ( \"account\" )\n"
-            "\nReturns a new RUPAYA address for receiving payments.\n"
+            "\nReturns a new RUPEEEVOLUTION address for receiving payments.\n"
             "If 'account' is specified (recommended), it is added to the address book \n"
             "so payments received with the address will be credited to 'account'.\n"
 
@@ -93,7 +93,7 @@ UniValue getnewaddress(const UniValue& params, bool fHelp)
             "1. \"account\"        (string, optional) The account name for the address to be linked to. if not provided, the default account \"\" is used. It can also be set to the empty string \"\" to represent the default account. The account does not need to exist, it will be created if there is no account by the given name.\n"
 
             "\nResult:\n"
-            "\"rupayaaddress\"    (string) The new rupaya address\n"
+            "\"rupeeevolutionaddress\"    (string) The new rupeeevolution address\n"
 
             "\nExamples:\n" +
             HelpExampleCli("getnewaddress", "") + HelpExampleCli("getnewaddress", "\"\"") +
@@ -160,13 +160,13 @@ UniValue getaccountaddress(const UniValue& params, bool fHelp)
     if (fHelp || params.size() != 1)
         throw runtime_error(
             "getaccountaddress \"account\"\n"
-            "\nReturns the current RUPAYA address for receiving payments to this account.\n"
+            "\nReturns the current RUPEEEVOLUTION address for receiving payments to this account.\n"
 
             "\nArguments:\n"
             "1. \"account\"       (string, required) The account name for the address. It can also be set to the empty string \"\" to represent the default account. The account does not need to exist, it will be created and a new address created  if there is no account by the given name.\n"
 
             "\nResult:\n"
-            "\"rupayaaddress\"   (string) The account rupaya address\n"
+            "\"rupeeevolutionaddress\"   (string) The account rupeeevolution address\n"
 
             "\nExamples:\n" +
             HelpExampleCli("getaccountaddress", "") + HelpExampleCli("getaccountaddress", "\"\"") +
@@ -189,7 +189,7 @@ UniValue getrawchangeaddress(const UniValue& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "getrawchangeaddress\n"
-            "\nReturns a new RUPAYA address, for receiving change.\n"
+            "\nReturns a new RUPEEEVOLUTION address, for receiving change.\n"
             "This is for use with raw transactions, NOT normal use.\n"
 
             "\nResult:\n"
@@ -220,11 +220,11 @@ UniValue setaccount(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() < 1 || params.size() > 2)
         throw runtime_error(
-            "setaccount \"rupayaaddress\" \"account\"\n"
+            "setaccount \"rupeeevolutionaddress\" \"account\"\n"
             "\nSets the account associated with the given address.\n"
 
             "\nArguments:\n"
-            "1. \"rupayaaddress\"  (string, required) The rupaya address to be associated with an account.\n"
+            "1. \"rupeeevolutionaddress\"  (string, required) The rupeeevolution address to be associated with an account.\n"
             "2. \"account\"         (string, required) The account to assign the address to.\n"
 
             "\nExamples:\n" +
@@ -234,7 +234,7 @@ UniValue setaccount(const UniValue& params, bool fHelp)
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid RUPAYA address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid RUPEEEVOLUTION address");
 
 
     string strAccount;
@@ -261,11 +261,11 @@ UniValue getaccount(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "getaccount \"rupayaaddress\"\n"
+            "getaccount \"rupeeevolutionaddress\"\n"
             "\nReturns the account associated with the given address.\n"
 
             "\nArguments:\n"
-            "1. \"rupayaaddress\"  (string, required) The rupaya address for account lookup.\n"
+            "1. \"rupeeevolutionaddress\"  (string, required) The rupeeevolution address for account lookup.\n"
 
             "\nResult:\n"
             "\"accountname\"        (string) the account address\n"
@@ -277,7 +277,7 @@ UniValue getaccount(const UniValue& params, bool fHelp)
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid RUPAYA address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid RUPEEEVOLUTION address");
 
     string strAccount;
     map<CTxDestination, CAddressBookData>::iterator mi = pwalletMain->mapAddressBook.find(address.Get());
@@ -299,7 +299,7 @@ UniValue getaddressesbyaccount(const UniValue& params, bool fHelp)
 
             "\nResult:\n"
             "[                     (json array of string)\n"
-            "  \"rupayaaddress\"  (string) a rupaya address associated with the given account\n"
+            "  \"rupeeevolutionaddress\"  (string) a rupeeevolution address associated with the given account\n"
             "  ,...\n"
             "]\n"
 
@@ -337,7 +337,7 @@ void SendMoney(const CTxDestination& address, CAmount nValue, CWalletTx& wtxNew,
         throw JSONRPCError(RPC_WALLET_ERROR, strError);
     }
 
-    // Parse RUPAYA address
+    // Parse RUPEEEVOLUTION address
     CScript scriptPubKey = GetScriptForDestination(address);
 
     // Create and send the transaction
@@ -357,13 +357,13 @@ UniValue sendtoaddress(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() < 2 || params.size() > 4)
         throw runtime_error(
-            "sendtoaddress \"rupayaaddress\" amount ( \"comment\" \"comment-to\" )\n"
+            "sendtoaddress \"rupeeevolutionaddress\" amount ( \"comment\" \"comment-to\" )\n"
             "\nSend an amount to a given address. The amount is a real and is rounded to the nearest 0.00000001\n" +
             HelpRequiringPassphrase() + "\n"
 
             "\nArguments:\n"
-            "1. \"rupayaaddress\"  (string, required) The rupaya address to send to.\n"
-            "2. \"amount\"      (numeric, required) The amount in RUPAYA to send. eg 0.1\n"
+            "1. \"rupeeevolutionaddress\"  (string, required) The rupeeevolution address to send to.\n"
+            "2. \"amount\"      (numeric, required) The amount in RUPEEEVOLUTION to send. eg 0.1\n"
             "3. \"comment\"     (string, optional) A comment used to store what the transaction is for. \n"
             "                             This is not part of the transaction, just kept in your wallet.\n"
             "4. \"comment-to\"  (string, optional) A comment to store the name of the person or organization \n"
@@ -382,7 +382,7 @@ UniValue sendtoaddress(const UniValue& params, bool fHelp)
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid RUPAYA address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid RUPEEEVOLUTION address");
 
     // Amount
     CAmount nAmount = AmountFromValue(params[1]);
@@ -405,13 +405,13 @@ UniValue sendtoaddressix(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() < 2 || params.size() > 4)
         throw runtime_error(
-            "sendtoaddressix \"rupayaaddress\" amount ( \"comment\" \"comment-to\" )\n"
+            "sendtoaddressix \"rupeeevolutionaddress\" amount ( \"comment\" \"comment-to\" )\n"
             "\nSend an amount to a given address. The amount is a real and is rounded to the nearest 0.00000001\n" +
             HelpRequiringPassphrase() + "\n"
 
             "\nArguments:\n"
-            "1. \"rupayaaddress\"  (string, required) The rupaya address to send to.\n"
-            "2. \"amount\"      (numeric, required) The amount in RUPAYA to send. eg 0.1\n"
+            "1. \"rupeeevolutionaddress\"  (string, required) The rupeeevolution address to send to.\n"
+            "2. \"amount\"      (numeric, required) The amount in RUPEEEVOLUTION to send. eg 0.1\n"
             "3. \"comment\"     (string, optional) A comment used to store what the transaction is for. \n"
             "                             This is not part of the transaction, just kept in your wallet.\n"
             "4. \"comment-to\"  (string, optional) A comment to store the name of the person or organization \n"
@@ -430,7 +430,7 @@ UniValue sendtoaddressix(const UniValue& params, bool fHelp)
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid RUPAYA address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid RUPEEEVOLUTION address");
 
     // Amount
     CAmount nAmount = AmountFromValue(params[1]);
@@ -462,8 +462,8 @@ UniValue listaddressgroupings(const UniValue& params, bool fHelp)
             "[\n"
             "  [\n"
             "    [\n"
-            "      \"rupayaaddress\",     (string) The rupaya address\n"
-            "      amount,                 (numeric) The amount in RUPAYA\n"
+            "      \"rupeeevolutionaddress\",     (string) The rupeeevolution address\n"
+            "      amount,                 (numeric) The amount in RUPEEEVOLUTION\n"
             "      \"account\"             (string, optional) The account\n"
             "    ]\n"
             "    ,...\n"
@@ -499,12 +499,12 @@ UniValue signmessage(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 2)
         throw runtime_error(
-            "signmessage \"rupayaaddress\" \"message\"\n"
+            "signmessage \"rupeeevolutionaddress\" \"message\"\n"
             "\nSign a message with the private key of an address" +
             HelpRequiringPassphrase() + "\n"
 
             "\nArguments:\n"
-            "1. \"rupayaaddress\"  (string, required) The rupaya address to use for the private key.\n"
+            "1. \"rupeeevolutionaddress\"  (string, required) The rupeeevolution address to use for the private key.\n"
             "2. \"message\"         (string, required) The message to create a signature of.\n"
 
             "\nResult:\n"
@@ -554,15 +554,15 @@ UniValue getreceivedbyaddress(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() < 1 || params.size() > 2)
         throw std::runtime_error(
-            "getreceivedbyaddress \"rupayaaddress\" ( minconf )\n"
-            "\nReturns the total amount received by the given rupayaaddress in transactions with at least minconf confirmations.\n"
+            "getreceivedbyaddress \"rupeeevolutionaddress\" ( minconf )\n"
+            "\nReturns the total amount received by the given rupeeevolutionaddress in transactions with at least minconf confirmations.\n"
 
             "\nArguments:\n"
-            "1. \"rupayaaddress\"  (string, required) The rupaya address for transactions.\n"
+            "1. \"rupeeevolutionaddress\"  (string, required) The rupeeevolution address for transactions.\n"
             "2. minconf             (numeric, optional, default=1) Only include transactions confirmed at least this many times.\n"
 
             "\nResult:\n"
-            "amount   (numeric) The total amount in RUPAYA received at this address.\n"
+            "amount   (numeric) The total amount in RUPEEEVOLUTION received at this address.\n"
 
             "\nExamples:\n"
             "\nThe amount from transactions with at least 1 confirmation\n" +
@@ -576,10 +576,10 @@ UniValue getreceivedbyaddress(const UniValue& params, bool fHelp)
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
-    // rupaya address
+    // rupeeevolution address
     CBitcoinAddress address = CBitcoinAddress(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid RUPAYA address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid RUPEEEVOLUTION address");
     CScript scriptPubKey = GetScriptForDestination(address.Get());
     if (!IsMine(*pwalletMain, scriptPubKey))
         throw JSONRPCError(RPC_WALLET_ERROR, "Address not found in wallet");
@@ -618,7 +618,7 @@ UniValue getreceivedbyaccount(const UniValue& params, bool fHelp)
             "2. minconf          (numeric, optional, default=1) Only include transactions confirmed at least this many times.\n"
 
             "\nResult:\n"
-            "amount              (numeric) The total amount in RUPAYA received for this account.\n"
+            "amount              (numeric) The total amount in RUPEEEVOLUTION received for this account.\n"
 
             "\nExamples:\n"
             "\nAmount received by the default account with at least 1 confirmation\n" +
@@ -707,7 +707,7 @@ UniValue getbalance(const UniValue& params, bool fHelp)
             "3. includeWatchonly (bool, optional, default=false) Also include balance in watchonly addresses (see 'importaddress')\n"
 
             "\nResult:\n"
-            "amount              (numeric) The total amount in RUPAYA received for this account.\n"
+            "amount              (numeric) The total amount in RUPEEEVOLUTION received for this account.\n"
 
             "\nExamples:\n"
             "\nThe total amount in the server across all accounts\n" +
@@ -790,7 +790,7 @@ UniValue movecmd(const UniValue& params, bool fHelp)
             "\nArguments:\n"
             "1. \"fromaccount\"   (string, required) The name of the account to move funds from. May be the default account using \"\".\n"
             "2. \"toaccount\"     (string, required) The name of the account to move funds to. May be the default account using \"\".\n"
-            "3. amount            (numeric, required) Quantity of RUPX to move between accounts.\n"
+            "3. amount            (numeric, required) Quantity of RUPEE to move between accounts.\n"
             "4. minconf           (numeric, optional, default=1) Only use funds with at least this many confirmations.\n"
             "5. \"comment\"       (string, optional) An optional comment, stored in the wallet only.\n"
 
@@ -798,9 +798,9 @@ UniValue movecmd(const UniValue& params, bool fHelp)
             "true|false           (boolean) true if successful.\n"
 
             "\nExamples:\n"
-            "\nMove 0.01 RUPAYA from the default account to the account named tabby\n" +
+            "\nMove 0.01 RUPEEEVOLUTION from the default account to the account named tabby\n" +
             HelpExampleCli("move", "\"\" \"tabby\" 0.01") +
-            "\nMove 0.01 RUPX from timotei to akiko with a comment\n" +
+            "\nMove 0.01 RUPEE from timotei to akiko with a comment\n" +
             HelpExampleCli("move", "\"timotei\" \"akiko\" 0.01 1 \"happy birthday!\"") +
             "\nAs a json rpc call\n" +
             HelpExampleRpc("move", "\"timotei\", \"akiko\", 0.01, 1, \"happy birthday!\""));
@@ -854,15 +854,15 @@ UniValue sendfrom(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() < 3 || params.size() > 6)
         throw runtime_error(
-            "sendfrom \"fromaccount\" \"torupayaaddress\" amount ( minconf \"comment\" \"comment-to\" )\n"
-            "\nSent an amount from an account to a rupaya address.\n"
+            "sendfrom \"fromaccount\" \"torupeeevolutionaddress\" amount ( minconf \"comment\" \"comment-to\" )\n"
+            "\nSent an amount from an account to a rupeeevolution address.\n"
             "The amount is a real and is rounded to the nearest 0.00000001." +
             HelpRequiringPassphrase() + "\n"
 
             "\nArguments:\n"
             "1. \"fromaccount\"       (string, required) The name of the account to send funds from. May be the default account using \"\".\n"
-            "2. \"torupayaaddress\"  (string, required) The rupaya address to send funds to.\n"
-            "3. amount                (numeric, required) The amount in RUPAYA. (transaction fee is added on top).\n"
+            "2. \"torupeeevolutionaddress\"  (string, required) The rupeeevolution address to send funds to.\n"
+            "3. amount                (numeric, required) The amount in RUPEEEVOLUTION. (transaction fee is added on top).\n"
             "4. minconf               (numeric, optional, default=1) Only use funds with at least this many confirmations.\n"
             "5. \"comment\"           (string, optional) A comment used to store what the transaction is for. \n"
             "                                     This is not part of the transaction, just kept in your wallet.\n"
@@ -874,7 +874,7 @@ UniValue sendfrom(const UniValue& params, bool fHelp)
             "\"transactionid\"        (string) The transaction id.\n"
 
             "\nExamples:\n"
-            "\nSend 0.01 RUPAYA from the default account to the address, must have at least 1 confirmation\n" +
+            "\nSend 0.01 RUPEEEVOLUTION from the default account to the address, must have at least 1 confirmation\n" +
             HelpExampleCli("sendfrom", "\"\" \"DMJRSsuU9zfyrvxVaAEFQqK4MxZg6vgeS6\" 0.01") +
             "\nSend 0.01 from the tabby account to the given address, funds must have at least 6 confirmations\n" +
             HelpExampleCli("sendfrom", "\"tabby\" \"DMJRSsuU9zfyrvxVaAEFQqK4MxZg6vgeS6\" 0.01 6 \"donation\" \"seans outpost\"") +
@@ -886,7 +886,7 @@ UniValue sendfrom(const UniValue& params, bool fHelp)
     string strAccount = AccountFromValue(params[0]);
     CBitcoinAddress address(params[1].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid RUPAYA address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid RUPEEEVOLUTION address");
     CAmount nAmount = AmountFromValue(params[2]);
     int nMinDepth = 1;
     if (params.size() > 3)
@@ -924,7 +924,7 @@ UniValue sendmany(const UniValue& params, bool fHelp)
             "1. \"fromaccount\"         (string, required) The account to send the funds from, can be \"\" for the default account\n"
             "2. \"amounts\"             (string, required) A json object with addresses and amounts\n"
             "    {\n"
-            "      \"address\":amount   (numeric) The rupaya address is the key, the numeric amount in RUPAYA is the value\n"
+            "      \"address\":amount   (numeric) The rupeeevolution address is the key, the numeric amount in RUPEEEVOLUTION is the value\n"
             "      ,...\n"
             "    }\n"
             "3. minconf                 (numeric, optional, default=1) Only use the balance confirmed at least this many times.\n"
@@ -963,7 +963,7 @@ UniValue sendmany(const UniValue& params, bool fHelp)
     BOOST_FOREACH(const string& name_, keys) {
         CBitcoinAddress address(name_);
         if (!address.IsValid())
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid RUPAYA address: ")+name_);
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid RUPEEEVOLUTION address: ")+name_);
 
         if (setAddress.count(address))
             throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid parameter, duplicated address: ")+name_);
@@ -1005,20 +1005,20 @@ UniValue addmultisigaddress(const UniValue& params, bool fHelp)
         throw runtime_error(
             "addmultisigaddress nrequired [\"key\",...] ( \"account\" )\n"
             "\nAdd a nrequired-to-sign multisignature address to the wallet.\n"
-            "Each key is a RUPAYA address or hex-encoded public key.\n"
+            "Each key is a RUPEEEVOLUTION address or hex-encoded public key.\n"
             "If 'account' is specified, assign address to that account.\n"
 
             "\nArguments:\n"
             "1. nrequired        (numeric, required) The number of required signatures out of the n keys or addresses.\n"
-            "2. \"keysobject\"   (string, required) A json array of rupaya addresses or hex-encoded public keys\n"
+            "2. \"keysobject\"   (string, required) A json array of rupeeevolution addresses or hex-encoded public keys\n"
             "     [\n"
-            "       \"address\"  (string) rupaya address or hex-encoded public key\n"
+            "       \"address\"  (string) rupeeevolution address or hex-encoded public key\n"
             "       ...,\n"
             "     ]\n"
             "3. \"account\"      (string, optional) An account to assign the addresses to.\n"
 
             "\nResult:\n"
-            "\"rupayaaddress\"  (string) A rupaya address associated with the keys.\n"
+            "\"rupeeevolutionaddress\"  (string) A rupeeevolution address associated with the keys.\n"
 
             "\nExamples:\n"
             "\nAdd a multisig address from 2 addresses\n" +
@@ -1190,7 +1190,7 @@ UniValue listreceivedbyaddress(const UniValue& params, bool fHelp)
             "    \"involvesWatchonly\" : \"true\",    (bool) Only returned if imported addresses were involved in transaction\n"
             "    \"address\" : \"receivingaddress\",  (string) The receiving address\n"
             "    \"account\" : \"accountname\",       (string) The account of the receiving address. The default account is \"\".\n"
-            "    \"amount\" : x.xxx,                  (numeric) The total amount in RUPAYA received by the address\n"
+            "    \"amount\" : x.xxx,                  (numeric) The total amount in RUPEEEVOLUTION received by the address\n"
             "    \"confirmations\" : n                (numeric) The number of confirmations of the most recent transaction included\n"
             "    \"bcconfirmations\" : n              (numeric) The number of blockchain confirmations of the most recent transaction included\n"
             "  }\n"
@@ -1342,17 +1342,17 @@ UniValue listtransactions(const UniValue& params, bool fHelp)
             "  {\n"
             "    \"account\":\"accountname\",       (string) The account name associated with the transaction. \n"
             "                                                It will be \"\" for the default account.\n"
-            "    \"address\":\"rupayaaddress\",    (string) The rupaya address of the transaction. Not present for \n"
+            "    \"address\":\"rupeeevolutionaddress\",    (string) The rupeeevolution address of the transaction. Not present for \n"
             "                                                move transactions (category = move).\n"
             "    \"category\":\"send|receive|move\", (string) The transaction category. 'move' is a local (off blockchain)\n"
             "                                                transaction between accounts, and not associated with an address,\n"
             "                                                transaction id or block. 'send' and 'receive' transactions are \n"
             "                                                associated with an address, transaction id and block details\n"
-            "    \"amount\": x.xxx,          (numeric) The amount in RUPAYA. This is negative for the 'send' category, and for the\n"
+            "    \"amount\": x.xxx,          (numeric) The amount in RUPEEEVOLUTION. This is negative for the 'send' category, and for the\n"
             "                                         'move' category for moves outbound. It is positive for the 'receive' category,\n"
             "                                         and for the 'move' category for inbound funds.\n"
             "    \"vout\" : n,               (numeric) the vout value\n"
-            "    \"fee\": x.xxx,             (numeric) The amount of the fee in RUPAYA. This is negative and only available for the \n"
+            "    \"fee\": x.xxx,             (numeric) The amount of the fee in RUPEEEVOLUTION. This is negative and only available for the \n"
             "                                         'send' category of transactions.\n"
             "    \"confirmations\": n,       (numeric) The number of confirmations for the transaction. Available for 'send' and \n"
             "                                         'receive' category of transactions.\n"
@@ -1537,12 +1537,12 @@ UniValue listsinceblock(const UniValue& params, bool fHelp)
             "{\n"
             "  \"transactions\": [\n"
             "    \"account\":\"accountname\",       (string) The account name associated with the transaction. Will be \"\" for the default account.\n"
-            "    \"address\":\"rupayaaddress\",    (string) The rupaya address of the transaction. Not present for move transactions (category = move).\n"
+            "    \"address\":\"rupeeevolutionaddress\",    (string) The rupeeevolution address of the transaction. Not present for move transactions (category = move).\n"
             "    \"category\":\"send|receive\",     (string) The transaction category. 'send' has negative amounts, 'receive' has positive amounts.\n"
-            "    \"amount\": x.xxx,          (numeric) The amount in RUPAYA. This is negative for the 'send' category, and for the 'move' category for moves \n"
+            "    \"amount\": x.xxx,          (numeric) The amount in RUPEEEVOLUTION. This is negative for the 'send' category, and for the 'move' category for moves \n"
             "                                          outbound. It is positive for the 'receive' category, and for the 'move' category for inbound funds.\n"
             "    \"vout\" : n,               (numeric) the vout value\n"
-            "    \"fee\": x.xxx,             (numeric) The amount of the fee in RUPAYA. This is negative and only available for the 'send' category of transactions.\n"
+            "    \"fee\": x.xxx,             (numeric) The amount of the fee in RUPEEEVOLUTION. This is negative and only available for the 'send' category of transactions.\n"
             "    \"confirmations\": n,       (numeric) The number of confirmations for the transaction. Available for 'send' and 'receive' category of transactions.\n"
             "    \"bcconfirmations\" : n,    (numeric) The number of blockchain confirmations for the transaction. Available for 'send' and 'receive' category of transactions.\n"
             "    \"blockhash\": \"hashvalue\",     (string) The block hash containing the transaction. Available for 'send' and 'receive' category of transactions.\n"
@@ -1622,7 +1622,7 @@ UniValue gettransaction(const UniValue& params, bool fHelp)
 
             "\nResult:\n"
             "{\n"
-            "  \"amount\" : x.xxx,        (numeric) The transaction amount in RUPAYA\n"
+            "  \"amount\" : x.xxx,        (numeric) The transaction amount in RUPEEEVOLUTION\n"
             "  \"confirmations\" : n,     (numeric) The number of confirmations\n"
             "  \"bcconfirmations\" : n,   (numeric) The number of blockchain confirmations\n"
             "  \"blockhash\" : \"hash\",  (string) The block hash\n"
@@ -1634,9 +1634,9 @@ UniValue gettransaction(const UniValue& params, bool fHelp)
             "  \"details\" : [\n"
             "    {\n"
             "      \"account\" : \"accountname\",  (string) The account name involved in the transaction, can be \"\" for the default account.\n"
-            "      \"address\" : \"rupayaaddress\",   (string) The rupaya address involved in the transaction\n"
+            "      \"address\" : \"rupeeevolutionaddress\",   (string) The rupeeevolution address involved in the transaction\n"
             "      \"category\" : \"send|receive\",    (string) The category, either 'send' or 'receive'\n"
-            "      \"amount\" : x.xxx                  (numeric) The amount in RUPAYA\n"
+            "      \"amount\" : x.xxx                  (numeric) The amount in RUPEEEVOLUTION\n"
             "      \"vout\" : n,                       (numeric) the vout value\n"
             "    }\n"
             "    ,...\n"
@@ -1757,7 +1757,7 @@ UniValue walletpassphrase(const UniValue& params, bool fHelp)
         throw runtime_error(
             "walletpassphrase \"passphrase\" timeout ( anonymizeonly )\n"
             "\nStores the wallet decryption key in memory for 'timeout' seconds.\n"
-            "This is needed prior to performing transactions related to private keys such as sending RUPAYAs\n"
+            "This is needed prior to performing transactions related to private keys such as sending RUPEEEVOLUTIONs\n"
 
             "\nArguments:\n"
             "1. \"passphrase\"     (string, required) The wallet passphrase\n"
@@ -1922,10 +1922,10 @@ UniValue encryptwallet(const UniValue& params, bool fHelp)
             "\nExamples:\n"
             "\nEncrypt you wallet\n" +
             HelpExampleCli("encryptwallet", "\"my pass phrase\"") +
-            "\nNow set the passphrase to use the wallet, such as for signing or sending RUPAYAs\n" +
+            "\nNow set the passphrase to use the wallet, such as for signing or sending RUPEEEVOLUTIONs\n" +
             HelpExampleCli("walletpassphrase", "\"my pass phrase\"") +
             "\nNow we can so something like sign\n" +
-            HelpExampleCli("signmessage", "\"rupayaaddress\" \"test message\"") +
+            HelpExampleCli("signmessage", "\"rupeeevolutionaddress\" \"test message\"") +
             "\nNow lock the wallet again by removing the passphrase\n" +
             HelpExampleCli("walletlock", "") +
             "\nAs a json rpc call\n" +
@@ -1956,7 +1956,7 @@ UniValue encryptwallet(const UniValue& params, bool fHelp)
     // slack space in .dat files; that is bad if the old data is
     // unencrypted private keys. So:
     StartShutdown();
-    return "wallet encrypted; rupaya server stopping, restart to run with encrypted wallet. The keypool has been flushed, you need to make a new backup.";
+    return "wallet encrypted; rupeeevolution server stopping, restart to run with encrypted wallet. The keypool has been flushed, you need to make a new backup.";
 }
 
 UniValue lockunspent(const UniValue& params, bool fHelp)
@@ -1966,7 +1966,7 @@ UniValue lockunspent(const UniValue& params, bool fHelp)
             "lockunspent unlock [{\"txid\":\"txid\",\"vout\":n},...]\n"
             "\nUpdates list of temporarily unspendable outputs.\n"
             "Temporarily lock (unlock=false) or unlock (unlock=true) specified transaction outputs.\n"
-            "A locked transaction output will not be chosen by automatic coin selection, when spending RUPAYAs.\n"
+            "A locked transaction output will not be chosen by automatic coin selection, when spending RUPEEEVOLUTIONs.\n"
             "Locks are stored in memory only. Nodes start with zero locked outputs, and the locked output list\n"
             "is always cleared (by virtue of process exit) when a node stops or fails.\n"
             "Also see the listunspent call\n"
@@ -2095,7 +2095,7 @@ UniValue settxfee(const UniValue& params, bool fHelp)
             "\nSet the transaction fee per kB.\n"
 
             "\nArguments:\n"
-            "1. amount         (numeric, required) The transaction fee in RUPAYA/kB rounded to the nearest 0.00000001\n"
+            "1. amount         (numeric, required) The transaction fee in RUPEEEVOLUTION/kB rounded to the nearest 0.00000001\n"
 
             "\nResult\n"
             "true|false        (boolean) Returns true if successful\n"
@@ -2123,12 +2123,12 @@ UniValue getwalletinfo(const UniValue& params, bool fHelp)
             "\nResult:\n"
             "{\n"
             "  \"walletversion\": xxxxx,     (numeric) the wallet version\n"
-            "  \"balance\": xxxxxxx,         (numeric) the total RUPAYA balance of the wallet\n"
+            "  \"balance\": xxxxxxx,         (numeric) the total RUPEEEVOLUTION balance of the wallet\n"
             "  \"txcount\": xxxxxxx,         (numeric) the total number of transactions in the wallet\n"
             "  \"keypoololdest\": xxxxxx,    (numeric) the timestamp (seconds since GMT epoch) of the oldest pre-generated key in the key pool\n"
             "  \"keypoolsize\": xxxx,        (numeric) how many new keys are pre-generated\n"
             "  \"unlocked_until\": ttt,      (numeric) the timestamp in seconds since epoch (midnight Jan 1 1970 GMT) that the wallet is unlocked for transfers, or 0 if the wallet is locked\n"
-            "  \"paytxfee\": x.xxxx,         (numeric) the transaction fee configuration, set in RUPX/kB\n"
+            "  \"paytxfee\": x.xxxx,         (numeric) the transaction fee configuration, set in RUPEE/kB\n"
             "  \"automintaddresses\": status (boolean) the status of automint addresses (true if enabled, false if disabled)\n"
             "}\n"
 
@@ -2267,7 +2267,7 @@ UniValue autocombinerewards(const UniValue& params, bool fHelp)
     if (fHelp || params.size() < 1 || (fEnable && params.size() != 2) || params.size() > 2)
         throw runtime_error(
             "autocombinerewards enable ( threshold )\n"
-            "\nWallet will automatically monitor for any coins with value below the threshold amount, and combine them if they reside with the same RUPAYA address\n"
+            "\nWallet will automatically monitor for any coins with value below the threshold amount, and combine them if they reside with the same RUPEEEVOLUTION address\n"
             "When autocombinerewards runs it will create a transaction, and therefore will be subject to transaction fees.\n"
 
             "\nArguments:\n"
@@ -2476,7 +2476,7 @@ UniValue multisend(const UniValue& params, bool fHelp)
             "The MultiSend transaction is sent when the staked coins mature (100 confirmations)\n"
             "****************************************************************\n"
             "TO CREATE OR ADD TO THE MULTISEND VECTOR:\n"
-            "multisend <RUPAYA Address> <percent>\n"
+            "multisend <RUPEEEVOLUTION Address> <percent>\n"
             "This will add a new address to the MultiSend vector\n"
             "Percent is a whole number 1 to 100.\n"
             "****************************************************************\n"
@@ -2495,7 +2495,7 @@ UniValue multisend(const UniValue& params, bool fHelp)
     string strAddress = params[0].get_str();
     CBitcoinAddress address(strAddress);
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid RUPAYA address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid RUPEEEVOLUTION address");
     if (std::stoi(params[1].get_str().c_str()) < 0)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, expected valid percentage");
     if (pwalletMain->IsLocked())
@@ -2540,11 +2540,11 @@ UniValue getzerocoinbalance(const UniValue& params, bool fHelp)
     if (fHelp || params.size() != 0)
         throw runtime_error(
             "getzerocoinbalance\n"
-            "\nReturn the wallet's total zRUPX balance.\n" +
+            "\nReturn the wallet's total zRUPEE balance.\n" +
             HelpRequiringPassphrase() + "\n"
 
             "\nResult:\n"
-            "amount         (numeric) Total zRUPX balance.\n"
+            "amount         (numeric) Total zRUPEE balance.\n"
 
             "\nExamples:\n" +
             HelpExampleCli("getzerocoinbalance", "") + HelpExampleRpc("getzerocoinbalance", ""));
@@ -2568,7 +2568,7 @@ UniValue listmintedzerocoins(const UniValue& params, bool fHelp)
     if (fHelp || params.size() > 2)
         throw runtime_error(
             "listmintedzerocoins (fVerbose) (fMatureOnly)\n"
-            "\nList all zRUPX mints in the wallet.\n" +
+            "\nList all zRUPEE mints in the wallet.\n" +
             HelpRequiringPassphrase() + "\n"
 
             "\nArguments:\n"
@@ -2586,7 +2586,7 @@ UniValue listmintedzerocoins(const UniValue& params, bool fHelp)
             "  {\n"
             "    \"serial hash\": \"xxx\",   (string) Mint serial hash in hex format.\n"
             "    \"version\": n,   (numeric) Zerocoin version number.\n"
-            "    \"zRUPX ID\": \"xxx\",   (string) Pubcoin in hex format.\n"
+            "    \"zRUPEE ID\": \"xxx\",   (string) Pubcoin in hex format.\n"
             "    \"denomination\": n,   (numeric) Coin denomination.\n"
             "    \"confirmations\": n   (numeric) Number of confirmations.\n"
             "  }\n"
@@ -2606,7 +2606,7 @@ UniValue listmintedzerocoins(const UniValue& params, bool fHelp)
     EnsureWalletIsUnlocked(true);
 
     CWalletDB walletdb(pwalletMain->strWalletFile);
-    set<CMintMeta> setMints = pwalletMain->zrupxTracker->ListMints(true, fMatureOnly, true);
+    set<CMintMeta> setMints = pwalletMain->zrupeeTracker->ListMints(true, fMatureOnly, true);
 
     int nBestHeight = chainActive.Height();
 
@@ -2617,7 +2617,7 @@ UniValue listmintedzerocoins(const UniValue& params, bool fHelp)
             UniValue objMint(UniValue::VOBJ);
             objMint.push_back(Pair("serial hash", m.hashSerial.GetHex()));  // Serial hash
             objMint.push_back(Pair("version", m.nVersion));                 // Zerocoin version
-            objMint.push_back(Pair("zRUPXV ID", m.hashPubcoin.GetHex()));     // PubCoin
+            objMint.push_back(Pair("zRUPEEV ID", m.hashPubcoin.GetHex()));     // PubCoin
             int denom = libzerocoin::ZerocoinDenominationToInt(m.denom);
             objMint.push_back(Pair("denomination", denom));                 // Denomination
             int nConfirmations = (m.nHeight && nBestHeight > m.nHeight) ? nBestHeight - m.nHeight : 0;
@@ -2659,7 +2659,7 @@ UniValue listzerocoinamounts(const UniValue& params, bool fHelp)
     EnsureWalletIsUnlocked(true);
 
     CWalletDB walletdb(pwalletMain->strWalletFile);
-    set<CMintMeta> setMints = pwalletMain->zrupxTracker->ListMints(true, true, true);
+    set<CMintMeta> setMints = pwalletMain->zrupeeTracker->ListMints(true, true, true);
 
     std::map<libzerocoin::CoinDenomination, CAmount> spread;
     for (const auto& denom : libzerocoin::zerocoinDenomList)
@@ -2683,7 +2683,7 @@ UniValue listspentzerocoins(const UniValue& params, bool fHelp)
     if (fHelp || params.size() != 0)
         throw runtime_error(
             "listspentzerocoins\n"
-            "\nList all the spent zRUPX mints in the wallet.\n" +
+            "\nList all the spent zRUPEE mints in the wallet.\n" +
             HelpRequiringPassphrase() + "\n"
 
             "\nResult:\n"
@@ -2715,11 +2715,11 @@ UniValue mintzerocoin(const UniValue& params, bool fHelp)
     if (fHelp || params.size() < 1 || params.size() > 2)
         throw runtime_error(
             "mintzerocoin amount ( utxos )\n"
-            "\nMint the specified zRUPX amount\n" +
+            "\nMint the specified zRUPEE amount\n" +
             HelpRequiringPassphrase() + "\n"
 
             "\nArguments:\n"
-            "1. amount      (numeric, required) Enter an amount of Rupx to convert to zRUPX\n"
+            "1. amount      (numeric, required) Enter an amount of Rupx to convert to zRUPEE\n"
             "2. utxos       (string, optional) A json array of objects.\n"
             "                   Each object needs the txid (string) and vout (numeric)\n"
             "  [\n"
@@ -2763,7 +2763,7 @@ UniValue mintzerocoin(const UniValue& params, bool fHelp)
 
     int64_t nTime = GetTimeMillis();
     if(GetAdjustedTime() > GetSporkValue(SPORK_16_ZEROCOIN_MAINTENANCE_MODE))
-        throw JSONRPCError(RPC_WALLET_ERROR, "zRUPX is currently disabled due to maintenance.");
+        throw JSONRPCError(RPC_WALLET_ERROR, "zRUPEE is currently disabled due to maintenance.");
 
     EnsureWalletIsUnlocked(true);
 
@@ -2826,7 +2826,7 @@ UniValue spendzerocoin(const UniValue& params, bool fHelp)
     if (fHelp || params.size() > 5 || params.size() < 4)
         throw runtime_error(
             "spendzerocoin amount mintchange minimizechange securitylevel ( \"address\" )\n"
-            "\nSpend zRUPX to a RUPAYA address.\n" +
+            "\nSpend zRUPEE to a RUPEEEVOLUTION address.\n" +
             HelpRequiringPassphrase() + "\n"
 
             "\nArguments:\n"
@@ -2857,8 +2857,8 @@ UniValue spendzerocoin(const UniValue& params, bool fHelp)
             "  ],\n"
             "  \"outputs\": [                 (array) JSON array of output objects.\n"
             "    {\n"
-            "      \"value\": amount,         (numeric) Value in RUPAYA.\n"
-            "      \"address\": \"xxx\"         (string) RUPAYA address or \"zerocoinmint\" for reminted change.\n"
+            "      \"value\": amount,         (numeric) Value in RUPEEEVOLUTION.\n"
+            "      \"address\": \"xxx\"         (string) RUPEEEVOLUTION address or \"zerocoinmint\" for reminted change.\n"
             "    }\n"
             "    ,...\n"
             "  ]\n"
@@ -2871,19 +2871,19 @@ UniValue spendzerocoin(const UniValue& params, bool fHelp)
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
     if(GetAdjustedTime() > GetSporkValue(SPORK_16_ZEROCOIN_MAINTENANCE_MODE))
-        throw JSONRPCError(RPC_WALLET_ERROR, "zRUPX is currently disabled due to maintenance.");
+        throw JSONRPCError(RPC_WALLET_ERROR, "zRUPEE is currently disabled due to maintenance.");
 
     EnsureWalletIsUnlocked();
 
     CAmount nAmount = AmountFromValue(params[0]);   // Spending amount
-    bool fMintChange = params[1].get_bool();        // Mint change to zRUPX
+    bool fMintChange = params[1].get_bool();        // Mint change to zRUPEE
     bool fMinimizeChange = params[2].get_bool();    // Minimize change
     int nSecurityLevel = params[3].get_int();       // Security level
     std::string address_str = params.size() > 4 ? params[4].get_str() : "";
 
     vector<CZerocoinMint> vMintsSelected;
 
-    return DoZrupxSpend(nAmount, fMintChange, fMinimizeChange, nSecurityLevel, vMintsSelected, address_str);
+    return DoZrupeeSpend(nAmount, fMintChange, fMinimizeChange, nSecurityLevel, vMintsSelected, address_str);
 }
 
 
@@ -2892,7 +2892,7 @@ UniValue spendzerocoinmints(const UniValue& params, bool fHelp)
     if (fHelp || params.size() < 1 || params.size() > 2)
         throw runtime_error(
             "spendzerocoinmints mints_list (\"address\") \n"
-            "\nSpend zRUPX mints to a RUPX address.\n" +
+            "\nSpend zRUPEE mints to a RUPEE address.\n" +
             HelpRequiringPassphrase() + "\n"
 
             "\nArguments:\n"
@@ -2915,8 +2915,8 @@ UniValue spendzerocoinmints(const UniValue& params, bool fHelp)
             "  ],\n"
             "  \"outputs\": [                 (array) JSON array of output objects.\n"
             "    {\n"
-            "      \"value\": amount,         (numeric) Value in RUPX.\n"
-            "      \"address\": \"xxx\"         (string) RUPX address or \"zerocoinmint\" for reminted change.\n"
+            "      \"value\": amount,         (numeric) Value in RUPEE.\n"
+            "      \"address\": \"xxx\"         (string) RUPEE address or \"zerocoinmint\" for reminted change.\n"
             "    }\n"
             "    ,...\n"
             "  ]\n"
@@ -2929,7 +2929,7 @@ UniValue spendzerocoinmints(const UniValue& params, bool fHelp)
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
     if(GetAdjustedTime() > GetSporkValue(SPORK_16_ZEROCOIN_MAINTENANCE_MODE))
-        throw JSONRPCError(RPC_WALLET_ERROR, "zRUPX is currently disabled due to maintenance.");
+        throw JSONRPCError(RPC_WALLET_ERROR, "zRUPEE is currently disabled due to maintenance.");
 
     std::string address_str = "";
     if (params.size() > 1) {
@@ -2968,11 +2968,11 @@ UniValue spendzerocoinmints(const UniValue& params, bool fHelp)
         nAmount += mint.GetDenominationAsAmount();
     }
 
-    return DoZrupxSpend(nAmount, false, true, 100, vMintsSelected, address_str);
+    return DoZrupeeSpend(nAmount, false, true, 100, vMintsSelected, address_str);
 }
 
 
-extern UniValue DoZrupxSpend(const CAmount nAmount, bool fMintChange, bool fMinimizeChange, const int nSecurityLevel, vector<CZerocoinMint>& vMintsSelected, std::string address_str)
+extern UniValue DoZrupeeSpend(const CAmount nAmount, bool fMintChange, bool fMinimizeChange, const int nSecurityLevel, vector<CZerocoinMint>& vMintsSelected, std::string address_str)
 {
     int64_t nTimeStart = GetTimeMillis();
     CBitcoinAddress address = CBitcoinAddress(); // Optional sending address. Dummy initialization here.
@@ -2983,7 +2983,7 @@ extern UniValue DoZrupxSpend(const CAmount nAmount, bool fMintChange, bool fMini
     if(address_str != "") { // Spend to supplied destination address
         address = CBitcoinAddress(address_str);
         if(!address.IsValid())
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid RUPAYA address");
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid RUPEEEVOLUTION address");
         fSuccess = pwalletMain->SpendZerocoin(nAmount, nSecurityLevel, wtx, receipt, vMintsSelected, fMintChange, fMinimizeChange, &address);
     } else                   // Spend to newly generated local address
         fSuccess = pwalletMain->SpendZerocoin(nAmount, nSecurityLevel, wtx, receipt, vMintsSelected, fMintChange, fMinimizeChange);
@@ -3064,8 +3064,8 @@ UniValue resetmintzerocoin(const UniValue& params, bool fHelp)
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
     CWalletDB walletdb(pwalletMain->strWalletFile);
-    CzRUPXTracker* zrupxTracker = pwalletMain->zrupxTracker.get();
-    set<CMintMeta> setMints = zrupxTracker->ListMints(false, false, true);
+    CzRUPEETracker* zrupeeTracker = pwalletMain->zrupeeTracker.get();
+    set<CMintMeta> setMints = zrupeeTracker->ListMints(false, false, true);
     vector<CMintMeta> vMintsToFind(setMints.begin(), setMints.end());
     vector<CMintMeta> vMintsMissing;
     vector<CMintMeta> vMintsToUpdate;
@@ -3076,14 +3076,14 @@ UniValue resetmintzerocoin(const UniValue& params, bool fHelp)
     // update the meta data of mints that were marked for updating
     UniValue arrUpdated(UniValue::VARR);
     for (CMintMeta meta : vMintsToUpdate) {
-        zrupxTracker->UpdateState(meta);
+        zrupeeTracker->UpdateState(meta);
         arrUpdated.push_back(meta.hashPubcoin.GetHex());
     }
 
     // delete any mints that were unable to be located on the blockchain
     UniValue arrDeleted(UniValue::VARR);
     for (CMintMeta mint : vMintsMissing) {
-        zrupxTracker->Archive(mint);
+        zrupeeTracker->Archive(mint);
         arrDeleted.push_back(mint.hashPubcoin.GetHex());
     }
 
@@ -3117,8 +3117,8 @@ UniValue resetspentzerocoin(const UniValue& params, bool fHelp)
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
     CWalletDB walletdb(pwalletMain->strWalletFile);
-    CzRUPXTracker* zrupxTracker = pwalletMain->zrupxTracker.get();
-    set<CMintMeta> setMints = zrupxTracker->ListMints(false, false, false);
+    CzRUPEETracker* zrupeeTracker = pwalletMain->zrupeeTracker.get();
+    set<CMintMeta> setMints = zrupeeTracker->ListMints(false, false, false);
     list<CZerocoinSpend> listSpends = walletdb.ListSpentCoins();
     list<CZerocoinSpend> listUnconfirmedSpends;
 
@@ -3140,7 +3140,7 @@ UniValue resetspentzerocoin(const UniValue& params, bool fHelp)
     for (CZerocoinSpend spend : listUnconfirmedSpends) {
         for (auto& meta : setMints) {
             if (meta.hashSerial == GetSerialHash(spend.GetSerial())) {
-                zrupxTracker->SetPubcoinNotUsed(meta.hashPubcoin);
+                zrupeeTracker->SetPubcoinNotUsed(meta.hashPubcoin);
                 walletdb.EraseZerocoinSpendSerialEntry(spend.GetSerial());
                 RemoveSerialFromDB(spend.GetSerial());
                 UniValue obj(UniValue::VOBJ);
@@ -3222,7 +3222,7 @@ UniValue exportzerocoins(const UniValue& params, bool fHelp)
 
             "\nArguments:\n"
             "1. \"include_spent\"        (bool, required) Include mints that have already been spent\n"
-            "2. \"denomination\"         (integer, optional) Export a specific denomination of zRUPX\n"
+            "2. \"denomination\"         (integer, optional) Export a specific denomination of zRUPEE\n"
 
             "\nResult:\n"
             "[                   (array of json object)\n"
@@ -3234,8 +3234,8 @@ UniValue exportzerocoins(const UniValue& params, bool fHelp)
             "    \"t\": \"txid\",    (string) The txid that the coin was minted in\n"
             "    \"h\": n,         (numeric) The height the tx was added to the blockchain\n"
             "    \"u\": used,      (boolean) Whether the mint has been spent\n"
-            "    \"v\": version,   (numeric) The version of the zRUPX\n"
-            "    \"k\": \"privkey\"  (string) The zRUPX private key (V2+ zRUPX only)\n"
+            "    \"v\": version,   (numeric) The version of the zRUPEE\n"
+            "    \"k\": \"privkey\"  (string) The zRUPEE private key (V2+ zRUPEE only)\n"
             "  }\n"
             "  ,...\n"
             "]\n"
@@ -3254,8 +3254,8 @@ UniValue exportzerocoins(const UniValue& params, bool fHelp)
     if (params.size() == 2)
         denomination = libzerocoin::IntToZerocoinDenomination(params[1].get_int());
 
-    CzRUPXTracker* zrupxTracker = pwalletMain->zrupxTracker.get();
-    set<CMintMeta> setMints = zrupxTracker->ListMints(!fIncludeSpent, false, false);
+    CzRUPEETracker* zrupeeTracker = pwalletMain->zrupeeTracker.get();
+    set<CMintMeta> setMints = zrupeeTracker->ListMints(!fIncludeSpent, false, false);
 
     UniValue jsonList(UniValue::VARR);
     for (const CMintMeta& meta : setMints) {
@@ -3305,7 +3305,7 @@ UniValue importzerocoins(const UniValue& params, bool fHelp)
             "\nResult:\n"
             "{\n"
             "  \"added\": n,        (numeric) The quantity of zerocoin mints that were added\n"
-            "  \"value\": amount    (numeric) The total zRUPX value of zerocoin mints that were added\n"
+            "  \"value\": amount    (numeric) The total zRUPEE value of zerocoin mints that were added\n"
             "}\n"
 
             "\nExamples\n" +
@@ -3369,7 +3369,7 @@ UniValue importzerocoins(const UniValue& params, bool fHelp)
         CZerocoinMint mint(denom, bnValue, bnRandom, bnSerial, fUsed, nVersion, &privkey);
         mint.SetTxHash(txid);
         mint.SetHeight(nHeight);
-        pwalletMain->zrupxTracker->Add(mint, true);
+        pwalletMain->zrupeeTracker->Add(mint, true);
         count++;
         nValue += libzerocoin::ZerocoinDenominationToAmount(denom);
     }
@@ -3385,7 +3385,7 @@ UniValue reconsiderzerocoins(const UniValue& params, bool fHelp)
     if(fHelp || !params.empty())
         throw runtime_error(
             "reconsiderzerocoins\n"
-            "\nCheck archived zRUPX list to see if any mints were added to the blockchain.\n" +
+            "\nCheck archived zRUPEE list to see if any mints were added to the blockchain.\n" +
             HelpRequiringPassphrase() + "\n"
 
             "\nResult:\n"
@@ -3431,30 +3431,30 @@ UniValue reconsiderzerocoins(const UniValue& params, bool fHelp)
     return arrRet;
 }
 
-UniValue setzrupxseed(const UniValue& params, bool fHelp)
+UniValue setzrupeeseed(const UniValue& params, bool fHelp)
 {
     if(fHelp || params.size() != 1)
         throw runtime_error(
-            "setzrupxseed \"seed\"\n"
-            "\nSet the wallet's deterministic zrupx seed to a specific value.\n" +
+            "setzrupeeseed \"seed\"\n"
+            "\nSet the wallet's deterministic zrupee seed to a specific value.\n" +
             HelpRequiringPassphrase() + "\n"
 
             "\nArguments:\n"
-            "1. \"seed\"        (string, required) The deterministic zrupx seed.\n"
+            "1. \"seed\"        (string, required) The deterministic zrupee seed.\n"
 
             "\nResult\n"
             "\"success\" : b,  (boolean) Whether the seed was successfully set.\n"
 
             "\nExamples\n" +
-            HelpExampleCli("setzrupxseed", "63f793e7895dd30d99187b35fbfb314a5f91af0add9e0a4e5877036d1e392dd5") +
-            HelpExampleRpc("setzrupxseed", "63f793e7895dd30d99187b35fbfb314a5f91af0add9e0a4e5877036d1e392dd5"));
+            HelpExampleCli("setzrupeeseed", "63f793e7895dd30d99187b35fbfb314a5f91af0add9e0a4e5877036d1e392dd5") +
+            HelpExampleRpc("setzrupeeseed", "63f793e7895dd30d99187b35fbfb314a5f91af0add9e0a4e5877036d1e392dd5"));
 
     EnsureWalletIsUnlocked();
 
     uint256 seed;
     seed.SetHex(params[0].get_str());
 
-    CzRUPXWallet* zwallet = pwalletMain->getZWallet();
+    CzRUPEEWallet* zwallet = pwalletMain->getZWallet();
     bool fSuccess = zwallet->SetMasterSeed(seed, true);
     if (fSuccess)
         zwallet->SyncWithChain();
@@ -3465,23 +3465,23 @@ UniValue setzrupxseed(const UniValue& params, bool fHelp)
     return ret;
 }
 
-UniValue getzrupxseed(const UniValue& params, bool fHelp)
+UniValue getzrupeeseed(const UniValue& params, bool fHelp)
 {
     if(fHelp || !params.empty())
         throw runtime_error(
-            "getzrupxseed\n"
-            "\nCheck archived zRUPX list to see if any mints were added to the blockchain.\n" +
+            "getzrupeeseed\n"
+            "\nCheck archived zRUPEE list to see if any mints were added to the blockchain.\n" +
             HelpRequiringPassphrase() + "\n"
 
             "\nResult\n"
-            "\"seed\" : s,  (string) The deterministic zRUPX seed.\n"
+            "\"seed\" : s,  (string) The deterministic zRUPEE seed.\n"
 
             "\nExamples\n" +
-            HelpExampleCli("getzrupxseed", "") + HelpExampleRpc("getzrupxseed", ""));
+            HelpExampleCli("getzrupeeseed", "") + HelpExampleRpc("getzrupeeseed", ""));
 
     EnsureWalletIsUnlocked();
 
-    CzRUPXWallet* zwallet = pwalletMain->getZWallet();
+    CzRUPEEWallet* zwallet = pwalletMain->getZWallet();
     uint256 seed = zwallet->GetMasterSeed();
 
     UniValue ret(UniValue::VOBJ);
@@ -3495,12 +3495,12 @@ UniValue generatemintlist(const UniValue& params, bool fHelp)
     if(fHelp || params.size() != 2)
         throw runtime_error(
             "generatemintlist\n"
-            "\nShow mints that are derived from the deterministic zRUPX seed.\n" +
+            "\nShow mints that are derived from the deterministic zRUPEE seed.\n" +
             HelpRequiringPassphrase() + "\n"
 
             "\nArguments\n"
-            "1. \"count\"  : n,  (numeric) Which sequential zRUPX to start with.\n"
-            "2. \"range\"  : n,  (numeric) How many zRUPX to generate.\n"
+            "1. \"count\"  : n,  (numeric) Which sequential zRUPEE to start with.\n"
+            "2. \"range\"  : n,  (numeric) How many zRUPEE to generate.\n"
 
             "\nResult:\n"
             "[\n"
@@ -3520,7 +3520,7 @@ UniValue generatemintlist(const UniValue& params, bool fHelp)
 
     int nCount = params[0].get_int();
     int nRange = params[1].get_int();
-    CzRUPXWallet* zwallet = pwalletMain->zwalletMain;
+    CzRUPEEWallet* zwallet = pwalletMain->zwalletMain;
 
     UniValue arrRet(UniValue::VARR);
     for (int i = nCount; i < nCount + nRange; i++) {
@@ -3539,28 +3539,28 @@ UniValue generatemintlist(const UniValue& params, bool fHelp)
     return arrRet;
 }
 
-UniValue dzrupxstate(const UniValue& params, bool fHelp) {
+UniValue dzrupeestate(const UniValue& params, bool fHelp) {
     if (fHelp || params.size() != 0)
         throw runtime_error(
-                "dzrupxstate\n"
-                        "\nThe current state of the mintpool of the deterministic zRUPX wallet.\n" +
+                "dzrupeestate\n"
+                        "\nThe current state of the mintpool of the deterministic zRUPEE wallet.\n" +
                 HelpRequiringPassphrase() + "\n"
 
                         "\nExamples\n" +
                 HelpExampleCli("mintpoolstatus", "") + HelpExampleRpc("mintpoolstatus", ""));
 
-    CzRUPXWallet* zwallet = pwalletMain->zwalletMain;
+    CzRUPEEWallet* zwallet = pwalletMain->zwalletMain;
     UniValue obj(UniValue::VOBJ);
     int nCount, nCountLastUsed;
     zwallet->GetState(nCount, nCountLastUsed);
-    obj.push_back(Pair("dzrupx_count", nCount));
+    obj.push_back(Pair("dzrupee_count", nCount));
     obj.push_back(Pair("mintpool_count", nCountLastUsed));
 
     return obj;
 }
 
 
-void static SearchThread(CzRUPXWallet* zwallet, int nCountStart, int nCountEnd)
+void static SearchThread(CzRUPEEWallet* zwallet, int nCountStart, int nCountEnd)
 {
     LogPrintf("%s: start=%d end=%d\n", __func__, nCountStart, nCountEnd);
     CWalletDB walletDB(pwalletMain->strWalletFile);
@@ -3577,7 +3577,7 @@ void static SearchThread(CzRUPXWallet* zwallet, int nCountStart, int nCountEnd)
             CBigNum bnSerial;
             CBigNum bnRandomness;
             CKey key;
-            zwallet->SeedToZRUPX(zerocoinSeed, bnValue, bnSerial, bnRandomness, key);
+            zwallet->SeedToZRUPEE(zerocoinSeed, bnValue, bnSerial, bnRandomness, key);
 
             uint256 hashPubcoin = GetPubCoinHash(bnValue);
             zwallet->AddToMintPool(make_pair(hashPubcoin, i), true);
@@ -3590,21 +3590,21 @@ void static SearchThread(CzRUPXWallet* zwallet, int nCountStart, int nCountEnd)
     }
 }
 
-UniValue searchdzrupx(const UniValue& params, bool fHelp)
+UniValue searchdzrupee(const UniValue& params, bool fHelp)
 {
     if(fHelp || params.size() != 3)
         throw runtime_error(
-            "searchdzrupx\n"
-            "\nMake an extended search for deterministically generated zRUPX that have not yet been recognized by the wallet.\n" +
+            "searchdzrupee\n"
+            "\nMake an extended search for deterministically generated zRUPEE that have not yet been recognized by the wallet.\n" +
             HelpRequiringPassphrase() + "\n"
 
             "\nArguments\n"
-            "1. \"count\"       (numeric) Which sequential zRUPX to start with.\n"
-            "2. \"range\"       (numeric) How many zRUPX to generate.\n"
+            "1. \"count\"       (numeric) Which sequential zRUPEE to start with.\n"
+            "2. \"range\"       (numeric) How many zRUPEE to generate.\n"
             "3. \"threads\"     (numeric) How many threads should this operation consume.\n"
 
             "\nExamples\n" +
-            HelpExampleCli("searchdzrupx", "1, 100, 2") + HelpExampleRpc("searchdzrupx", "1, 100, 2"));
+            HelpExampleCli("searchdzrupee", "1, 100, 2") + HelpExampleRpc("searchdzrupee", "1, 100, 2"));
 
     EnsureWalletIsUnlocked();
 
@@ -3618,9 +3618,9 @@ UniValue searchdzrupx(const UniValue& params, bool fHelp)
 
     int nThreads = params[2].get_int();
 
-    CzRUPXWallet* zwallet = pwalletMain->zwalletMain;
+    CzRUPEEWallet* zwallet = pwalletMain->zwalletMain;
 
-    boost::thread_group* dzrupxThreads = new boost::thread_group();
+    boost::thread_group* dzrupeeThreads = new boost::thread_group();
     int nRangePerThread = nRange / nThreads;
 
     int nPrevThreadEnd = nCount - 1;
@@ -3628,12 +3628,12 @@ UniValue searchdzrupx(const UniValue& params, bool fHelp)
         int nStart = nPrevThreadEnd + 1;;
         int nEnd = nStart + nRangePerThread;
         nPrevThreadEnd = nEnd;
-        dzrupxThreads->create_thread(boost::bind(&SearchThread, zwallet, nStart, nEnd));
+        dzrupeeThreads->create_thread(boost::bind(&SearchThread, zwallet, nStart, nEnd));
     }
 
-    dzrupxThreads->join_all();
+    dzrupeeThreads->join_all();
 
-    zwallet->RemoveMintsFromPool(pwalletMain->zrupxTracker->GetSerialHashes());
+    zwallet->RemoveMintsFromPool(pwalletMain->zrupeeTracker->GetSerialHashes());
     zwallet->SyncWithChain(false);
 
     //todo: better response

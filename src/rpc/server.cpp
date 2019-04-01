@@ -266,11 +266,11 @@ UniValue stop(const UniValue& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "stop\n"
-            "\nStop RUPAYA server.");
+            "\nStop RUPEEEVOLUTION server.");
     // Event loop will exit after current HTTP requests have been handled, so
     // this reply will get back to the client.
     StartShutdown();
-    return "RUPAYA server stopping";
+    return "RUPEEEVOLUTION server stopping";
 }
 
 
@@ -356,37 +356,37 @@ static const CRPCCommand vRPCCommands[] =
         {"hidden", "reconsiderblock", &reconsiderblock, true, true, false},
         {"hidden", "setmocktime", &setmocktime, true, false, false},
 
-        /* RUPAYA features */
-        {"rupaya", "masternode", &masternode, true, true, false},
-        {"rupaya", "listmasternodes", &listmasternodes, true, true, false},
-        {"rupaya", "getmasternodecount", &getmasternodecount, true, true, false},
-        {"rupaya", "masternodeconnect", &masternodeconnect, true, true, false},
-        {"rupaya", "createmasternodebroadcast", &createmasternodebroadcast, true, true, false},
-        {"rupaya", "decodemasternodebroadcast", &decodemasternodebroadcast, true, true, false},
-        {"rupaya", "relaymasternodebroadcast", &relaymasternodebroadcast, true, true, false},
-        {"rupaya", "masternodecurrent", &masternodecurrent, true, true, false},
-        {"rupaya", "masternodedebug", &masternodedebug, true, true, false},
-        {"rupaya", "startmasternode", &startmasternode, true, true, false},
-        {"rupaya", "createmasternodekey", &createmasternodekey, true, true, false},
-        {"rupaya", "getmasternodeoutputs", &getmasternodeoutputs, true, true, false},
-        {"rupaya", "listmasternodeconf", &listmasternodeconf, true, true, false},
-        {"rupaya", "getmasternodestatus", &getmasternodestatus, true, true, false},
-        {"rupaya", "getmasternodewinners", &getmasternodewinners, true, true, false},
-        {"rupaya", "getmasternodescores", &getmasternodescores, true, true, false},
-        {"rupaya", "mnbudget", &mnbudget, true, true, false},
-        {"rupaya", "preparebudget", &preparebudget, true, true, false},
-        {"rupaya", "submitbudget", &submitbudget, true, true, false},
-        {"rupaya", "mnbudgetvote", &mnbudgetvote, true, true, false},
-        {"rupaya", "getbudgetvotes", &getbudgetvotes, true, true, false},
-        {"rupaya", "getnextsuperblock", &getnextsuperblock, true, true, false},
-        {"rupaya", "getbudgetprojection", &getbudgetprojection, true, true, false},
-        {"rupaya", "getbudgetinfo", &getbudgetinfo, true, true, false},
-        {"rupaya", "mnbudgetrawvote", &mnbudgetrawvote, true, true, false},
-        {"rupaya", "mnfinalbudget", &mnfinalbudget, true, true, false},
-        {"rupaya", "checkbudgets", &checkbudgets, true, true, false},
-        {"rupaya", "mnsync", &mnsync, true, true, false},
-        {"rupaya", "spork", &spork, true, true, false},
-        {"rupaya", "getpoolinfo", &getpoolinfo, true, true, false},
+        /* RUPEEEVOLUTION features */
+        {"rupeeevolution", "masternode", &masternode, true, true, false},
+        {"rupeeevolution", "listmasternodes", &listmasternodes, true, true, false},
+        {"rupeeevolution", "getmasternodecount", &getmasternodecount, true, true, false},
+        {"rupeeevolution", "masternodeconnect", &masternodeconnect, true, true, false},
+        {"rupeeevolution", "createmasternodebroadcast", &createmasternodebroadcast, true, true, false},
+        {"rupeeevolution", "decodemasternodebroadcast", &decodemasternodebroadcast, true, true, false},
+        {"rupeeevolution", "relaymasternodebroadcast", &relaymasternodebroadcast, true, true, false},
+        {"rupeeevolution", "masternodecurrent", &masternodecurrent, true, true, false},
+        {"rupeeevolution", "masternodedebug", &masternodedebug, true, true, false},
+        {"rupeeevolution", "startmasternode", &startmasternode, true, true, false},
+        {"rupeeevolution", "createmasternodekey", &createmasternodekey, true, true, false},
+        {"rupeeevolution", "getmasternodeoutputs", &getmasternodeoutputs, true, true, false},
+        {"rupeeevolution", "listmasternodeconf", &listmasternodeconf, true, true, false},
+        {"rupeeevolution", "getmasternodestatus", &getmasternodestatus, true, true, false},
+        {"rupeeevolution", "getmasternodewinners", &getmasternodewinners, true, true, false},
+        {"rupeeevolution", "getmasternodescores", &getmasternodescores, true, true, false},
+        {"rupeeevolution", "mnbudget", &mnbudget, true, true, false},
+        {"rupeeevolution", "preparebudget", &preparebudget, true, true, false},
+        {"rupeeevolution", "submitbudget", &submitbudget, true, true, false},
+        {"rupeeevolution", "mnbudgetvote", &mnbudgetvote, true, true, false},
+        {"rupeeevolution", "getbudgetvotes", &getbudgetvotes, true, true, false},
+        {"rupeeevolution", "getnextsuperblock", &getnextsuperblock, true, true, false},
+        {"rupeeevolution", "getbudgetprojection", &getbudgetprojection, true, true, false},
+        {"rupeeevolution", "getbudgetinfo", &getbudgetinfo, true, true, false},
+        {"rupeeevolution", "mnbudgetrawvote", &mnbudgetrawvote, true, true, false},
+        {"rupeeevolution", "mnfinalbudget", &mnfinalbudget, true, true, false},
+        {"rupeeevolution", "checkbudgets", &checkbudgets, true, true, false},
+        {"rupeeevolution", "mnsync", &mnsync, true, true, false},
+        {"rupeeevolution", "spork", &spork, true, true, false},
+        {"rupeeevolution", "getpoolinfo", &getpoolinfo, true, true, false},
 
 #ifdef ENABLE_WALLET
         /* Wallet */
@@ -454,11 +454,11 @@ static const CRPCCommand vRPCCommands[] =
         {"zerocoin", "exportzerocoins", &exportzerocoins, false, false, true},
         {"zerocoin", "reconsiderzerocoins", &reconsiderzerocoins, false, false, true},
         {"zerocoin", "getspentzerocoinamount", &getspentzerocoinamount, false, false, false},
-        {"zerocoin", "getzrupxseed", &getzrupxseed, false, false, true},
-        {"zerocoin", "setzrupxseed", &setzrupxseed, false, false, true},
+        {"zerocoin", "getzrupeeseed", &getzrupeeseed, false, false, true},
+        {"zerocoin", "setzrupeeseed", &setzrupeeseed, false, false, true},
         {"zerocoin", "generatemintlist", &generatemintlist, false, false, true},
-        {"zerocoin", "searchdzrupx", &searchdzrupx, false, false, true},
-        {"zerocoin", "dzrupxstate", &dzrupxstate, false, false, true}
+        {"zerocoin", "searchdzrupee", &searchdzrupee, false, false, true},
+        {"zerocoin", "dzrupeestate", &dzrupeestate, false, false, true}
 
 #endif // ENABLE_WALLET
 };
@@ -622,7 +622,7 @@ std::vector<std::string> CRPCTable::listCommands() const
 
 std::string HelpExampleCli(string methodname, string args)
 {
-    return "> rupaya-cli " + methodname + " " + args + "\n";
+    return "> rupeeevolution-cli " + methodname + " " + args + "\n";
 }
 
 std::string HelpExampleRpc(string methodname, string args)

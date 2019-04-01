@@ -5,7 +5,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/rupaya-config.h"
+#include "config/rupeeevolution-config.h"
 #endif
 
 #include "optionsmodel.h"
@@ -62,7 +62,7 @@ void OptionsModel::Init()
 
     // Display
     if (!settings.contains("nDisplayUnit"))
-        settings.setValue("nDisplayUnit", BitcoinUnits::RUPX);
+        settings.setValue("nDisplayUnit", BitcoinUnits::RUPEE);
     nDisplayUnit = settings.value("nDisplayUnit").toInt();
 
     if (!settings.contains("strThirdPartyTxUrls"))
@@ -97,10 +97,10 @@ void OptionsModel::Init()
         settings.setValue("nPreferredDenom", 0);
     nPreferredDenom = settings.value("nPreferredDenom", "0").toLongLong();
 
-    if (!settings.contains("nAnonymizeRupayaAmount"))
-        settings.setValue("nAnonymizeRupayaAmount", 1000);
+    if (!settings.contains("nAnonymizeRupeeEvolutionAmount"))
+        settings.setValue("nAnonymizeRupeeEvolutionAmount", 1000);
 
-    nAnonymizeRupayaAmount = settings.value("nAnonymizeRupayaAmount").toLongLong();
+    nAnonymizeRupeeEvolutionAmount = settings.value("nAnonymizeRupeeEvolutionAmount").toLongLong();
 
     if (!settings.contains("fShowMasternodesTab"))
         settings.setValue("fShowMasternodesTab", masternodeConfig.getCount());
@@ -176,8 +176,8 @@ void OptionsModel::Init()
         SoftSetArg("-zeromintpercentage", settings.value("nZeromintPercentage").toString().toStdString());
     if (settings.contains("nPreferredDenom"))
         SoftSetArg("-preferredDenom", settings.value("nPreferredDenom").toString().toStdString());
-    if (settings.contains("nAnonymizeRupayaAmount"))
-        SoftSetArg("-anonymizerupayaamount", settings.value("nAnonymizeRupayaAmount").toString().toStdString());
+    if (settings.contains("nAnonymizeRupeeEvolutionAmount"))
+        SoftSetArg("-anonymizerupeeevolutionamount", settings.value("nAnonymizeRupeeEvolutionAmount").toString().toStdString());
 
     language = settings.value("language").toString();
 }
@@ -188,7 +188,7 @@ void OptionsModel::Reset()
 
     // Remove all entries from our QSettings object
     settings.clear();
-    resetSettings = true; // Needed in rupaya.cpp during shotdown to also remove the window positions
+    resetSettings = true; // Needed in rupeeevolution.cpp during shotdown to also remove the window positions
 
     // default setting for OptionsModel::StartAtStartup - disabled
     if (GUIUtil::GetStartOnSystemStartup())
@@ -272,8 +272,8 @@ QVariant OptionsModel::data(const QModelIndex& index, int role) const
             return QVariant(nZeromintPercentage);
         case ZeromintPrefDenom:
             return QVariant(nPreferredDenom);
-        case AnonymizeRupayaAmount:
-            return QVariant(nAnonymizeRupayaAmount);
+        case AnonymizeRupeeEvolutionAmount:
+            return QVariant(nAnonymizeRupeeEvolutionAmount);
         case Listen:
             return settings.value("fListen");
         default:
@@ -410,10 +410,10 @@ bool OptionsModel::setData(const QModelIndex& index, const QVariant& value, int 
             settings.setValue("fHideOrphans", fHideOrphans);
             emit hideOrphansChanged(fHideOrphans);
             break;
-        case AnonymizeRupayaAmount:
-            nAnonymizeRupayaAmount = value.toInt();
-            settings.setValue("nAnonymizeRupayaAmount", nAnonymizeRupayaAmount);
-            emit anonymizeRupayaAmountChanged(nAnonymizeRupayaAmount);
+        case AnonymizeRupeeEvolutionAmount:
+            nAnonymizeRupeeEvolutionAmount = value.toInt();
+            settings.setValue("nAnonymizeRupeeEvolutionAmount", nAnonymizeRupeeEvolutionAmount);
+            emit anonymizeRupeeEvolutionAmountChanged(nAnonymizeRupeeEvolutionAmount);
             break;
         case CoinControlFeatures:
             fCoinControlFeatures = value.toBool();

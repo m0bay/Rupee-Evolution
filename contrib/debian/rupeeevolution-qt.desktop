@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=RUPEEEVOLUTION
+Comment=RUPEEEVOLUTION P2P Cryptocurrency
+Comment[fr]=RUPEEEVOLUTION, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=RUPEEEVOLUTION, eşten eşe kriptografik sanal para birimi
+Exec=rupeeevolution-qt %u
+Terminal=false
+Type=Application
+Icon=rupeeevolution128
+MimeType=x-scheme-handler/rupeeevolution;
+Categories=Office;Finance;

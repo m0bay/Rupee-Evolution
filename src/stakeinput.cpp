@@ -1,5 +1,5 @@
 // Copyright (c) 2017-2018 The PIVX Developers
-// Copyright (c) 2018 The RUPAYA Developers 
+// Copyright (c) 2018 The RUPEEEVOLUTION Developers 
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -42,7 +42,7 @@ uint32_t CZRupxStake::GetChecksum()
     return nChecksum;
 }
 
-// The zRUPX block index is the first appearance of the accumulator checksum that was used in the spend
+// The zRUPEE block index is the first appearance of the accumulator checksum that was used in the spend
 // note that this also means when staking that this checksum should be from a block that is beyond 60 minutes old and
 // 100 blocks deep.
 CBlockIndex* CZRupxStake::GetIndexFrom()
@@ -95,7 +95,7 @@ bool CZRupxStake::GetModifier(uint64_t& nStakeModifier)
 
 CDataStream CZRupxStake::GetUniqueness()
 {
-    //The unique identifier for a zRUPX is a hash of the serial
+    //The unique identifier for a zRUPEE is a hash of the serial
     CDataStream ss(SER_GETHASH, 0);
     ss << hashSerial;
     return ss;
@@ -124,17 +124,17 @@ bool CZRupxStake::CreateTxIn(CWallet* pwallet, CTxIn& txIn, uint256 hashTxOut)
 
 bool CZRupxStake::CreateTxOuts(CWallet* pwallet, vector<CTxOut>& vout, CAmount nTotal)
 {
-    //Create an output returning the zRUPX that was staked
+    //Create an output returning the zRUPEE that was staked
     CTxOut outReward;
     libzerocoin::CoinDenomination denomStaked = libzerocoin::AmountToZerocoinDenomination(this->GetValue());
     CDeterministicMint dMint;
-    if (!pwallet->CreateZRUPXOutPut(denomStaked, outReward, dMint))
-        return error("%s: failed to create zRUPX output", __func__);
+    if (!pwallet->CreateZRUPEEOutPut(denomStaked, outReward, dMint))
+        return error("%s: failed to create zRUPEE output", __func__);
     vout.emplace_back(outReward);
 
     //Add new staked denom to our wallet
     if (!pwallet->DatabaseMint(dMint))
-        return error("%s: failed to database the staked zRUPX", __func__);
+        return error("%s: failed to database the staked zRUPEE", __func__);
 
     //Now, we need to find out what the masternode reward will be for this block
     CAmount masternodeReward = GetMasternodePayment(chainActive.Height(), nTotal, 0, true);
@@ -151,8 +151,8 @@ bool CZRupxStake::CreateTxOuts(CWallet* pwallet, vector<CTxOut>& vout, CAmount n
             CTxOut out;
             CDeterministicMint dMintReward;
             
-            if (!pwallet->CreateZRUPXOutPut(denom, out, dMintReward))
-                return error("%s: failed to create zRUPX output", __func__);
+            if (!pwallet->CreateZRUPEEOutPut(denom, out, dMintReward))
+                return error("%s: failed to create zRUPEE output", __func__);
             
             vout.emplace_back(out);
 
@@ -174,16 +174,16 @@ bool CZRupxStake::GetTxFrom(CTransaction& tx)
 
 bool CZRupxStake::MarkSpent(CWallet *pwallet, const uint256& txid)
 {
-    CzRUPXTracker* zrupxTracker = pwallet->zrupxTracker.get();
+    CzRUPEETracker* zrupeeTracker = pwallet->zrupeeTracker.get();
     CMintMeta meta;
-    if (!zrupxTracker->GetMetaFromStakeHash(hashSerial, meta))
+    if (!zrupeeTracker->GetMetaFromStakeHash(hashSerial, meta))
         return error("%s: tracker does not have serialhash", __func__);
 
-    zrupxTracker->SetPubcoinUsed(meta.hashPubcoin, txid);
+    zrupeeTracker->SetPubcoinUsed(meta.hashPubcoin, txid);
     return true;
 }
 
-//!RUPAYA Stake
+//!RUPEEEVOLUTION Stake
 bool CRupxStake::SetInput(CTransaction txPrev, unsigned int n)
 {
     this->txFrom = txPrev;
@@ -259,7 +259,7 @@ bool CRupxStake::GetModifier(uint64_t& nStakeModifier)
 
 CDataStream CRupxStake::GetUniqueness()
 {
-    //The unique identifier for a RUPAYA stake is the outpoint
+    //The unique identifier for a RUPEEEVOLUTION stake is the outpoint
     CDataStream ss(SER_NETWORK, 0);
     ss << nPosition << txFrom.GetHash();
     return ss;

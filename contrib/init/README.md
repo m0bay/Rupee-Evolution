@@ -1,11 +1,11 @@
 Sample configuration files for:
 ```
-SystemD: rupayad.service
-Upstart: rupayad.conf
-OpenRC:  rupayad.openrc
-         rupayad.openrcconf
-CentOS:  rupayad.init
-macOS:    org.rupaya.rupayad.plist
+SystemD: rupeeevolutiond.service
+Upstart: rupeeevolutiond.conf
+OpenRC:  rupeeevolutiond.openrc
+         rupeeevolutiond.openrcconf
+CentOS:  rupeeevolutiond.init
+macOS:    org.rupeeevolution.rupeeevolutiond.plist
 ```
 have been made available to assist packagers in creating node packages here.
 

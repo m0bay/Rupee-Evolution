@@ -23,8 +23,8 @@
 #include "validationinterface.h"
 #include "wallet_ismine.h"
 #include "walletdb.h"
-#include "zrupxwallet.h"
-#include "zrupxtracker.h"
+#include "zrupeewallet.h"
+#include "zrupeetracker.h"
 
 #include <algorithm>
 #include <map>
@@ -86,30 +86,30 @@ enum AvailableCoinsType {
     ALL_COINS = 1,
     ONLY_DENOMINATED = 2,
     ONLY_NOT10000IFMN = 3,
-    ONLY_NONDENOMINATED_NOT10000IFMN = 4, // ONLY_NONDENOMINATED and not 10000 RUPAYA at the same time
+    ONLY_NONDENOMINATED_NOT10000IFMN = 4, // ONLY_NONDENOMINATED and not 10000 RUPEEEVOLUTION at the same time
     ONLY_10000 = 5,                        // find masternode outputs including locked ones (use with caution)
     STAKABLE_COINS = 6                          // UTXO's that are valid for staking
 };
 
-// Possible states for zRUPX send
+// Possible states for zRUPEE send
 enum ZerocoinSpendStatus {
-    ZRUPX_SPEND_OKAY = 0,                            // No error
-    ZRUPX_SPEND_ERROR = 1,                           // Unspecified class of errors, more details are (hopefully) in the returning text
-    ZRUPX_WALLET_LOCKED = 2,                         // Wallet was locked
-    ZRUPX_COMMIT_FAILED = 3,                         // Commit failed, reset status
-    ZRUPX_ERASE_SPENDS_FAILED = 4,                   // Erasing spends during reset failed
-    ZRUPX_ERASE_NEW_MINTS_FAILED = 5,                // Erasing new mints during reset failed
-    ZRUPX_TRX_FUNDS_PROBLEMS = 6,                    // Everything related to available funds
-    ZRUPX_TRX_CREATE = 7,                            // Everything related to create the transaction
-    ZRUPX_TRX_CHANGE = 8,                            // Everything related to transaction change
-    ZRUPX_TXMINT_GENERAL = 9,                        // General errors in MintToTxIn
-    ZRUPX_INVALID_COIN = 10,                         // Selected mint coin is not valid
-    ZRUPX_FAILED_ACCUMULATOR_INITIALIZATION = 11,    // Failed to initialize witness
-    ZRUPX_INVALID_WITNESS = 12,                      // Spend coin transaction did not verify
-    ZRUPX_BAD_SERIALIZATION = 13,                    // Transaction verification failed
-    ZRUPX_SPENT_USED_ZRUPX = 14,                      // Coin has already been spend
-    ZRUPX_TX_TOO_LARGE = 15,                          // The transaction is larger than the max tx size
-    ZRUPX_SPEND_V1_SEC_LEVEL                         // Spend is V1 and security level is not set to 100
+    ZRUPEE_SPEND_OKAY = 0,                            // No error
+    ZRUPEE_SPEND_ERROR = 1,                           // Unspecified class of errors, more details are (hopefully) in the returning text
+    ZRUPEE_WALLET_LOCKED = 2,                         // Wallet was locked
+    ZRUPEE_COMMIT_FAILED = 3,                         // Commit failed, reset status
+    ZRUPEE_ERASE_SPENDS_FAILED = 4,                   // Erasing spends during reset failed
+    ZRUPEE_ERASE_NEW_MINTS_FAILED = 5,                // Erasing new mints during reset failed
+    ZRUPEE_TRX_FUNDS_PROBLEMS = 6,                    // Everything related to available funds
+    ZRUPEE_TRX_CREATE = 7,                            // Everything related to create the transaction
+    ZRUPEE_TRX_CHANGE = 8,                            // Everything related to transaction change
+    ZRUPEE_TXMINT_GENERAL = 9,                        // General errors in MintToTxIn
+    ZRUPEE_INVALID_COIN = 10,                         // Selected mint coin is not valid
+    ZRUPEE_FAILED_ACCUMULATOR_INITIALIZATION = 11,    // Failed to initialize witness
+    ZRUPEE_INVALID_WITNESS = 12,                      // Spend coin transaction did not verify
+    ZRUPEE_BAD_SERIALIZATION = 13,                    // Transaction verification failed
+    ZRUPEE_SPENT_USED_ZRUPEE = 14,                      // Coin has already been spend
+    ZRUPEE_TX_TOO_LARGE = 15,                          // The transaction is larger than the max tx size
+    ZRUPEE_SPEND_V1_SEC_LEVEL                         // Spend is V1 and security level is not set to 100
 };
 
 struct CompactTallyItem {
@@ -217,13 +217,13 @@ public:
     void ReconsiderZerocoins(std::list<CZerocoinMint>& listMintsRestored, std::list<CDeterministicMint>& listDMintsRestored);
     void ZRupxBackupWallet();
     bool GetZerocoinKey(const CBigNum& bnSerial, CKey& key);
-    bool CreateZRUPXOutPut(libzerocoin::CoinDenomination denomination, CTxOut& outMint, CDeterministicMint& dMint);
+    bool CreateZRUPEEOutPut(libzerocoin::CoinDenomination denomination, CTxOut& outMint, CDeterministicMint& dMint);
     bool GetMint(const uint256& hashSerial, CZerocoinMint& mint);
     bool GetMintFromStakeHash(const uint256& hashStake, CZerocoinMint& mint);
     bool DatabaseMint(CDeterministicMint& dMint);
     bool SetMintUnspent(const CBigNum& bnSerial);
     bool UpdateMint(const CBigNum& bnValue, const int& nHeight, const uint256& txid, const libzerocoin::CoinDenomination& denom);
-    string GetUniqueWalletBackupName(bool fzrupxAuto) const;
+    string GetUniqueWalletBackupName(bool fzrupeeAuto) const;
     void InitAutoConvertAddresses();
 
 
@@ -240,7 +240,7 @@ public:
      */
     mutable CCriticalSection cs_wallet;
 
-    CzRUPXWallet* zwalletMain;
+    CzRUPEEWallet* zwalletMain;
 
     std::set<CBitcoinAddress> setAutoConvertAddresses;
 
@@ -248,7 +248,7 @@ public:
     bool fWalletUnlockAnonymizeOnly;
     std::string strWalletFile;
     bool fBackupMints;
-    std::unique_ptr<CzRUPXTracker> zrupxTracker;
+    std::unique_ptr<CzRUPEETracker> zrupeeTracker;
 
     std::set<int64_t> setKeyPool;
     std::map<CKeyID, CKeyMetadata> mapKeyMetadata;
@@ -333,13 +333,13 @@ public:
         return nZeromintPercentage;
     }
 
-    void setZWallet(CzRUPXWallet* zwallet)
+    void setZWallet(CzRUPEEWallet* zwallet)
     {
         zwalletMain = zwallet;
-        zrupxTracker = std::unique_ptr<CzRUPXTracker>(new CzRUPXTracker(strWalletFile));
+        zrupeeTracker = std::unique_ptr<CzRUPEETracker>(new CzRUPEETracker(strWalletFile));
     }
 
-    CzRUPXWallet* getZWallet() { return zwalletMain; }
+    CzRUPEEWallet* getZWallet() { return zwalletMain; }
 
     bool isZeromintEnabled()
     {
@@ -679,8 +679,8 @@ public:
     /** MultiSig address added */
     boost::signals2::signal<void(bool fHaveMultiSig)> NotifyMultiSigChanged;
 
-    /** zRUPX reset */
-    boost::signals2::signal<void()> NotifyzRUPXReset;
+    /** zRUPEE reset */
+    boost::signals2::signal<void()> NotifyzRUPEEReset;
 
     /** notify wallet file backed up */
     boost::signals2::signal<void (const bool& fSuccess, const std::string& filename)> NotifyWalletBacked;

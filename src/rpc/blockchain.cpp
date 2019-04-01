@@ -124,12 +124,12 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
 
     result.push_back(Pair("moneysupply",ValueFromAmount(blockindex->nMoneySupply)));
 
-    UniValue zrupxObj(UniValue::VOBJ);
+    UniValue zrupeeObj(UniValue::VOBJ);
     for (auto denom : libzerocoin::zerocoinDenomList) {
-        zrupxObj.push_back(Pair(to_string(denom), ValueFromAmount(blockindex->mapZerocoinSupply.at(denom) * (denom*COIN))));
+        zrupeeObj.push_back(Pair(to_string(denom), ValueFromAmount(blockindex->mapZerocoinSupply.at(denom) * (denom*COIN))));
     }
-    zrupxObj.push_back(Pair("total", ValueFromAmount(blockindex->GetZerocoinSupply())));
-    result.push_back(Pair("zRUPXsupply", zrupxObj));
+    zrupeeObj.push_back(Pair("total", ValueFromAmount(blockindex->GetZerocoinSupply())));
+    result.push_back(Pair("zRUPEEsupply", zrupeeObj));
 
     return result;
 }
@@ -249,7 +249,7 @@ UniValue getrawmempool(const UniValue& params, bool fHelp)
             "{                           (json object)\n"
             "  \"transactionid\" : {       (json object)\n"
             "    \"size\" : n,             (numeric) transaction size in bytes\n"
-            "    \"fee\" : n,              (numeric) transaction fee in rupaya\n"
+            "    \"fee\" : n,              (numeric) transaction fee in rupeeevolution\n"
             "    \"time\" : n,             (numeric) local time transaction entered pool in seconds since 1 Jan 1970 GMT\n"
             "    \"height\" : n,           (numeric) block height when transaction entered pool\n"
             "    \"startingpriority\" : n, (numeric) priority when transaction entered pool\n"
@@ -330,17 +330,17 @@ UniValue getblock(const UniValue& params, bool fHelp)
             "  \"previousblockhash\" : \"hash\",  (string) The hash of the previous block\n"
             "  \"nextblockhash\" : \"hash\"       (string) The hash of the next block\n"
             "  \"moneysupply\" : \"supply\"       (numeric) The money supply when this block was added to the blockchain\n"
-            "  \"zRUPXsupply\" :\n"
+            "  \"zRUPEEsupply\" :\n"
             "  {\n"
-            "     \"1\" : n,            (numeric) supply of 1 zRUPX denomination\n"
-            "     \"5\" : n,            (numeric) supply of 5 zRUPX denomination\n"
-            "     \"10\" : n,           (numeric) supply of 10 zRUPX denomination\n"
-            "     \"50\" : n,           (numeric) supply of 50 zRUPX denomination\n"
-            "     \"100\" : n,          (numeric) supply of 100 zRUPX denomination\n"
-            "     \"500\" : n,          (numeric) supply of 500 zRUPX denomination\n"
-            "     \"1000\" : n,         (numeric) supply of 1000 zRUPX denomination\n"
-            "     \"5000\" : n,         (numeric) supply of 5000 zRUPX denomination\n"
-            "     \"total\" : n,        (numeric) The total supply of all zRUPX denominations\n"
+            "     \"1\" : n,            (numeric) supply of 1 zRUPEE denomination\n"
+            "     \"5\" : n,            (numeric) supply of 5 zRUPEE denomination\n"
+            "     \"10\" : n,           (numeric) supply of 10 zRUPEE denomination\n"
+            "     \"50\" : n,           (numeric) supply of 50 zRUPEE denomination\n"
+            "     \"100\" : n,          (numeric) supply of 100 zRUPEE denomination\n"
+            "     \"500\" : n,          (numeric) supply of 500 zRUPEE denomination\n"
+            "     \"1000\" : n,         (numeric) supply of 1000 zRUPEE denomination\n"
+            "     \"5000\" : n,         (numeric) supply of 5000 zRUPEE denomination\n"
+            "     \"total\" : n,        (numeric) The total supply of all zRUPEE denominations\n"
             "  }\n"
             "}\n"
 
@@ -493,8 +493,8 @@ UniValue gettxout(const UniValue& params, bool fHelp)
             "     \"hex\" : \"hex\",        (string) \n"
             "     \"reqSigs\" : n,          (numeric) Number of required signatures\n"
             "     \"type\" : \"pubkeyhash\", (string) The type, eg pubkeyhash\n"
-            "     \"addresses\" : [          (array of string) array of rupaya addresses\n"
-            "     \"rupayaaddress\"   	 	(string) rupaya address\n"
+            "     \"addresses\" : [          (array of string) array of rupeeevolution addresses\n"
+            "     \"rupeeevolutionaddress\"   	 	(string) rupeeevolution address\n"
             "        ,...\n"
             "     ]\n"
             "  },\n"
@@ -1060,7 +1060,7 @@ UniValue getaccumulatorwitness(const UniValue& params, bool fHelp)
     int nMintsAdded = 0;
     CZerocoinSpendReceipt receipt;
     if (!GenerateAccumulatorWitness(pubCoin, accumulator, witness, 100, nMintsAdded, strFailReason)) {
-        receipt.SetStatus(_(strFailReason.c_str()), ZRUPX_FAILED_ACCUMULATOR_INITIALIZATION);
+        receipt.SetStatus(_(strFailReason.c_str()), ZRUPEE_FAILED_ACCUMULATOR_INITIALIZATION);
         throw JSONRPCError(RPC_DATABASE_ERROR, receipt.GetStatusMessage());
     }
 

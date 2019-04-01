@@ -9,7 +9,7 @@
 #define BITCOIN_MAIN_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/rupaya-config.h"
+#include "config/rupeeevolution-config.h"
 #endif
 
 #include "amount.h"
@@ -40,7 +40,7 @@
 #include <vector>
 
 #include "libzerocoin/CoinSpend.h"
-#include "lightzrupxthread.h"
+#include "lightzrupeethread.h"
 
 #include <boost/unordered_map.hpp>
 
@@ -234,7 +234,7 @@ bool GetTransaction(const uint256& hash, CTransaction& tx, uint256& hashBlock, b
 
 // ***TODO***
 double ConvertBitsToDouble(unsigned int nBits);
-int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCount, bool isZRUPXStake);
+int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCount, bool isZRUPEEStake);
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader* pblock, bool fProofOfStake);
 
 bool ActivateBestChain(CValidationState& state, CBlock* pblock = NULL, bool fAlreadyChecked = false);
@@ -356,9 +356,9 @@ bool IsTransactionInChain(const uint256& txId, int& nHeightTx, CTransaction& tx)
 bool IsTransactionInChain(const uint256& txId, int& nHeightTx);
 bool IsBlockHashInChain(const uint256& hashBlock);
 //bool ValidOutPoint(const COutPoint out, int nHeight);
-void RecalculateZRUPXSpent();
-void RecalculateZRUPXMinted();
-bool RecalculateRUPAYASupply(int nHeightStart);
+void RecalculateZRUPEESpent();
+void RecalculateZRUPEEMinted();
+bool RecalculateRUPEEEVOLUTIONSupply(int nHeightStart);
 bool ReindexAccumulators(list<uint256>& listMissingCheckpoints, string& strError);
 
 

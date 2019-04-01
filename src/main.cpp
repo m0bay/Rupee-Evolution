@@ -33,7 +33,7 @@
 #include "util.h"
 #include "utilmoneystr.h"
 #include "validationinterface.h"
-#include "zrupxchain.h"
+#include "zrupeechain.h"
 
 #include "libzerocoin/Denominations.h"
 #include "primitives/zerocoin.h"
@@ -52,7 +52,7 @@ using namespace std;
 using namespace libzerocoin;
 
 #if defined(NDEBUG)
-#error "RUPAYA cannot be compiled without assertions."
+#error "RUPEEEVOLUTION cannot be compiled without assertions."
 #endif
 
 /**
@@ -81,7 +81,7 @@ unsigned int nCoinCacheSize = 5000;
 bool fAlerts = DEFAULT_ALERTS;
 int64_t nReserveBalance = 0;
 
-/** Fees smaller than this (in urupx) are considered zero fee (for relaying and mining)
+/** Fees smaller than this (in urupee) are considered zero fee (for relaying and mining)
  * We are ~100 times smaller then bitcoin now (2015-06-23), set minRelayTxFee only 10 times higher
  * so it's still 10 times lower comparing to bitcoin.
  */
@@ -985,7 +985,7 @@ bool ContextualCheckZerocoinSpend(const CTransaction& tx, const CoinSpend& spend
     //Reject serial's that are already in the blockchain
     int nHeightTx = 0;
     if (IsSerialInBlockchain(spend.getCoinSerialNumber(), nHeightTx))
-        return error("%s : zRUPX spend with serial %s is already in block %d\n", __func__,
+        return error("%s : zRUPEE spend with serial %s is already in block %d\n", __func__,
                      spend.getCoinSerialNumber().GetHex(), nHeightTx);
 
     return true;
@@ -993,16 +993,16 @@ bool ContextualCheckZerocoinSpend(const CTransaction& tx, const CoinSpend& spend
 
 bool ContextualCheckZerocoinSpendNoSerialCheck(const CTransaction& tx, const CoinSpend& spend, CBlockIndex* pindex, const uint256& hashBlock)
 {
-    //Check to see if the zRUPX is properly signed
+    //Check to see if the zRUPEE is properly signed
     if (pindex->nHeight >= Params().Zerocoin_Block_V2_Start()) {
         if (!spend.HasValidSignature())
-            return error("%s: V2 zRUPX spend does not have a valid signature", __func__);
+            return error("%s: V2 zRUPEE spend does not have a valid signature", __func__);
 
         libzerocoin::SpendType expectedType = libzerocoin::SpendType::SPEND;
         if (tx.IsCoinStake())
             expectedType = libzerocoin::SpendType::STAKE;
         if (spend.getSpendType() != expectedType) {
-            return error("%s: trying to spend zRUPX without the correct spend type. txid=%s", __func__,
+            return error("%s: trying to spend zRUPEE without the correct spend type. txid=%s", __func__,
                 tx.GetHash().GetHex());
         }
     }    
@@ -1311,7 +1311,7 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
             //Check that txid is not already in the chain
             int nHeightTx = 0;
             if (IsTransactionInChain(tx.GetHash(), nHeightTx))
-                return state.Invalid(error("AcceptToMemoryPool : zRUPX spend tx %s already in block %d",
+                return state.Invalid(error("AcceptToMemoryPool : zRUPEE spend tx %s already in block %d",
                                          tx.GetHash().GetHex(), nHeightTx),
                     REJECT_DUPLICATE, "bad-txns-inputs-spent");
 
@@ -1323,7 +1323,7 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
                 if (!ContextualCheckZerocoinSpend(tx, spend, chainActive.Tip(), 0))
                     return state.Invalid(error("%s: ContextualCheckZerocoinSpend failed for tx %s", __func__,
                                              tx.GetHash().GetHex()),
-                        REJECT_INVALID, "bad-txns-invalid-zrupx");
+                        REJECT_INVALID, "bad-txns-invalid-zrupee");
             }
         } else {
             LOCK(pool.cs);
@@ -1345,7 +1345,7 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
                 }
             }
 
-            // Check that zRUPX mints are not already known
+            // Check that zRUPEE mints are not already known
             if (tx.IsZerocoinMint()) {
                 for (auto& out : tx.vout) {
                     if (!out.IsZerocoinMint())
@@ -2221,7 +2221,7 @@ bool DisconnectBlock(CBlock& block, CValidationState& state, CBlockIndex* pindex
         const CTransaction& tx = block.vtx[i];
 
         /** UNDO ZEROCOIN DATABASING
-         * note we only undo zerocoin databasing in the following statement, value to and from RUPAYA
+         * note we only undo zerocoin databasing in the following statement, value to and from RUPEEEVOLUTION
          * addresses should still be handled by the typical bitcoin based undo code
          * */
         if (tx.ContainsZerocoins()) {
@@ -2363,11 +2363,11 @@ static CCheckQueue<CScriptCheck> scriptcheckqueue(128);
 
 void ThreadScriptCheck()
 {
-    RenameThread("rupaya-scriptch");
+    RenameThread("rupeeevolution-scriptch");
     scriptcheckqueue.Thread();
 }
 
-void RecalculateZRUPXMinted()
+void RecalculateZRUPEEMinted()
 {
     CBlockIndex* pindex = chainActive.Genesis();
     int nHeightEnd = chainActive.Height();
@@ -2394,14 +2394,14 @@ void RecalculateZRUPXMinted()
     }
 }
 
-void RecalculateZRUPXSpent()
+void RecalculateZRUPEESpent()
 {
     CBlockIndex* pindex = chainActive.Genesis();
     while (true) {
         if (pindex->nHeight % 1000 == 0)
             LogPrintf("%s : block %d...\n", __func__, pindex->nHeight);
 
-        //Rewrite zRUPX supply
+        //Rewrite zRUPEE supply
         CBlock block;
         assert(ReadBlockFromDisk(block, pindex));
 
@@ -2410,13 +2410,13 @@ void RecalculateZRUPXSpent()
         //Reset the supply to previous block
         pindex->mapZerocoinSupply = pindex->pprev->mapZerocoinSupply;
 
-        //Add mints to zRUPX supply
+        //Add mints to zRUPEE supply
         for (auto denom : libzerocoin::zerocoinDenomList) {
             long nDenomAdded = count(pindex->vMintDenominationsInBlock.begin(), pindex->vMintDenominationsInBlock.end(), denom);
             pindex->mapZerocoinSupply.at(denom) += nDenomAdded;
         }
 
-        //Remove spends from zRUPX supply
+        //Remove spends from zRUPEE supply
         for (auto denom : listDenomsSpent)
             pindex->mapZerocoinSupply.at(denom)--;
 
@@ -2430,7 +2430,7 @@ void RecalculateZRUPXSpent()
     }
 }
 
-bool RecalculateRUPAYASupply(int nHeightStart)
+bool RecalculateRUPEEEVOLUTIONSupply(int nHeightStart)
 {
     if (nHeightStart > chainActive.Height())
         return false;
@@ -2490,7 +2490,7 @@ bool RecalculateRUPAYASupply(int nHeightStart)
 
 bool ReindexAccumulators(list<uint256>& listMissingCheckpoints, string& strError)
 {
-    // RUPAYA: recalculate Accumulator Checkpoints that failed to database properly
+    // RUPEEEVOLUTION: recalculate Accumulator Checkpoints that failed to database properly
     if (!listMissingCheckpoints.empty()) {
         uiInterface.ShowProgress(_("Calculating missing accumulators..."), 0);
         LogPrintf("%s : finding missing checkpoints\n", __func__);
@@ -2541,7 +2541,7 @@ bool ReindexAccumulators(list<uint256>& listMissingCheckpoints, string& strError
     return true;
 }
 
-bool UpdateZRUPXSupply(const CBlock& block, CBlockIndex* pindex)
+bool UpdateZRUPEESupply(const CBlock& block, CBlockIndex* pindex)
 {
     std::list<CZerocoinMint> listMints;
     //bool fFilterInvalid = pindex->nHeight >= Params().Zerocoin_Block_RecalculateAccumulators();
@@ -2725,7 +2725,7 @@ bool ConnectBlock(
                     return state.DoS(100, error("%s: failed to add block %s with invalid zerocoinspend", __func__, tx.GetHash().GetHex()), REJECT_INVALID);
             }
 
-            // Check that zRUPX mints are not already known
+            // Check that zRUPEE mints are not already known
             if (tx.IsZerocoinMint()) {
                 for (auto& out : tx.vout) {
                     if (!out.IsZerocoinMint())
@@ -2746,7 +2746,7 @@ bool ConnectBlock(
                 return state.DoS(100, error("ConnectBlock() : inputs missing/spent"),
                     REJECT_INVALID, "bad-txns-inputs-missingorspent");
 
-            // Check that zRUPX mints are not already known
+            // Check that zRUPEE mints are not already known
             if (tx.IsZerocoinMint()) {
                 for (auto& out : tx.vout) {
                     if (!out.IsZerocoinMint())
@@ -2792,9 +2792,9 @@ bool ConnectBlock(
         pos.nTxOffset += ::GetSerializeSize(tx, SER_DISK, CLIENT_VERSION);
     }
 
-    //Track zRUPX money supply in the block index
-    if (!UpdateZRUPXSupply(block, pindex))
-        return state.DoS(100, error("%s: Failed to calculate new zRUPX supply for block=%s height=%d", __func__, block.GetHash().GetHex(), pindex->nHeight), REJECT_INVALID);
+    //Track zRUPEE money supply in the block index
+    if (!UpdateZRUPEESupply(block, pindex))
+        return state.DoS(100, error("%s: Failed to calculate new zRUPEE supply for block=%s height=%d", __func__, block.GetHash().GetHex(), pindex->nHeight), REJECT_INVALID);
 
     // track money supply and mint amount info
     CAmount nMoneySupplyPrev = pindex->pprev ? pindex->pprev->nMoneySupply : 0;
@@ -2856,7 +2856,7 @@ bool ConnectBlock(
         setDirtyBlockIndex.insert(pindex);
     }
 
-    //Record zRUPX serials
+    //Record zRUPEE serials
     set<uint256> setAddedTx;
     for (pair<CoinSpend, uint256> pSpend : vSpends) {
         // Send signal to wallet if this is ours
@@ -2994,7 +2994,7 @@ void static UpdateTip(CBlockIndex* pindexNew)
 {
     chainActive.SetTip(pindexNew);
 
-    // If turned on AutoZeromint will automatically convert RUPAYA to zRUPX
+    // If turned on AutoZeromint will automatically convert RUPEEEVOLUTION to zRUPEE
     if (pwalletMain->isZeromintEnabled())
         pwalletMain->AutoZeromint();
 
@@ -3836,7 +3836,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
                 nHeight = (*mi).second->nHeight + 1;
         }
 
-        // RUPAYA
+        // RUPEEEVOLUTION
         // It is entierly possible that we don't have enough data and this could fail
         // (i.e. the block could indeed be valid). Store the block for later consideration
         // but issue an initial reject message.
@@ -3860,13 +3860,13 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
         if (!CheckTransaction(tx, state))
             return error("CheckBlock() : CheckTransaction failed");
 
-        // double check that there are no double spent zRUPX spends in this block
+        // double check that there are no double spent zRUPEE spends in this block
         if (tx.IsZerocoinSpend()) {
             for (const CTxIn& txIn : tx.vin) {
                 if (txIn.scriptSig.IsZerocoinSpend()) {
                     libzerocoin::CoinSpend spend = TxInToZerocoinSpend(txIn);
                     if (count(vBlockSerials.begin(), vBlockSerials.end(), spend.getCoinSerialNumber()))
-                        return state.DoS(100, error("%s : Double spending of zRUPX serial %s in block\n Block: %s",
+                        return state.DoS(100, error("%s : Double spending of zRUPEE serial %s in block\n Block: %s",
                                                   __func__, spend.getCoinSerialNumber().GetHex(), block.ToString()));
                     vBlockSerials.emplace_back(spend.getCoinSerialNumber());
                 }
@@ -4072,21 +4072,21 @@ bool AcceptBlockHeader(const CBlock& block, CValidationState& state, CBlockIndex
 bool ContextualCheckZerocoinStake(int nHeight, CStakeInput* stake)
 {
     // if (nHeight < Params().Zerocoin_StartHeight())
-    //     return error("%s: zRUPX stake block is less than allowed start height", __func__);
+    //     return error("%s: zRUPEE stake block is less than allowed start height", __func__);
 
-    if (CZRupxStake* zRUPX = dynamic_cast<CZRupxStake*>(stake)) {
-        CBlockIndex* pindexFrom = zRUPX->GetIndexFrom();
+    if (CZRupxStake* zRUPEE = dynamic_cast<CZRupxStake*>(stake)) {
+        CBlockIndex* pindexFrom = zRUPEE->GetIndexFrom();
         if (!pindexFrom)
-            return error("%s: failed to get index associated with zRUPX stake checksum", __func__);
+            return error("%s: failed to get index associated with zRUPEE stake checksum", __func__);
 
         if (chainActive.Height() - pindexFrom->nHeight < Params().Zerocoin_RequiredStakeDepth())
-            return error("%s: zRUPX stake does not have required confirmation depth. Current height %d,  stakeInput height %d.", __func__, chainActive.Height(), pindexFrom->nHeight);
+            return error("%s: zRUPEE stake does not have required confirmation depth. Current height %d,  stakeInput height %d.", __func__, chainActive.Height(), pindexFrom->nHeight);
 
         //The checksum needs to be the exact checksum from 200 blocks ago
         uint256 nCheckpoint200 = chainActive[nHeight - Params().Zerocoin_RequiredStakeDepth()]->nAccumulatorCheckpoint;
-        uint32_t nChecksum200 = ParseChecksum(nCheckpoint200, libzerocoin::AmountToZerocoinDenomination(zRUPX->GetValue()));
-        if (nChecksum200 != zRUPX->GetChecksum())
-            return error("%s: accumulator checksum is different than the block 200 blocks previous. stake=%d block200=%d", __func__, zRUPX->GetChecksum(), nChecksum200);
+        uint32_t nChecksum200 = ParseChecksum(nCheckpoint200, libzerocoin::AmountToZerocoinDenomination(zRUPEE->GetValue()));
+        if (nChecksum200 != zRUPEE->GetChecksum())
+            return error("%s: accumulator checksum is different than the block 200 blocks previous. stake=%d block200=%d", __func__, zRUPEE->GetChecksum(), nChecksum200);
     } else {
         return error("%s: dynamic_cast of stake ptr failed", __func__);
     }
@@ -4138,8 +4138,8 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         if (!stake)
             return error("%s: null stake ptr", __func__);
 
-        if (stake->IsZRUPX() && !ContextualCheckZerocoinStake(pindexPrev->nHeight, stake.get()))
-            return state.DoS(100, error("%s: staked zRUPX fails context checks", __func__));
+        if (stake->IsZRUPEE() && !ContextualCheckZerocoinStake(pindexPrev->nHeight, stake.get()))
+            return state.DoS(100, error("%s: staked zRUPEE fails context checks", __func__));
 
         uint256 hash = block.GetHash();
         if (!mapProofOfStake.count(hash)) // add to mapProofOfStake
@@ -4178,18 +4178,18 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         CTransaction &stakeTxIn = block.vtx[1];
 
         // Inputs
-        std::vector<CTxIn> rupxInputs;
-        std::vector<CTxIn> zRUPXInputs;
+        std::vector<CTxIn> rupeeInputs;
+        std::vector<CTxIn> zRUPEEInputs;
 
         for (const CTxIn& stakeIn : stakeTxIn.vin) {
             if(stakeIn.scriptSig.IsZerocoinSpend()){
-                zRUPXInputs.push_back(stakeIn);
+                zRUPEEInputs.push_back(stakeIn);
             }else{
-                rupxInputs.push_back(stakeIn);
+                rupeeInputs.push_back(stakeIn);
             }
         }
-        const bool hasRUPXInputs = !rupxInputs.empty();
-        const bool hasZRUPXInputs = !zRUPXInputs.empty();
+        const bool hasRUPEEInputs = !rupeeInputs.empty();
+        const bool hasZRUPEEInputs = !zRUPEEInputs.empty();
 
         // ZC started after PoS.
         // Check for serial double spent on the same block, TODO: Move this to the proper method..
@@ -4209,10 +4209,10 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
                     }
                 }
                 if(tx.IsCoinStake()) continue;
-                if(hasRUPXInputs)
+                if(hasRUPEEInputs)
                     // Check if coinstake input is double spent inside the same block
-                    for (const CTxIn& rupxIn : rupxInputs){
-                        if(rupxIn.prevout == in.prevout){
+                    for (const CTxIn& rupeeIn : rupeeInputs){
+                        if(rupeeIn.prevout == in.prevout){
                             // double spent coinstake input inside block
                             return error("%s: double spent coinstake input inside block", __func__);
                         }
@@ -4248,11 +4248,11 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
                 for (const CTransaction& t : bl.vtx) {
                     for (const CTxIn& in: t.vin) {
                         // Loop through every input of the staking tx
-                        for (const CTxIn& stakeIn : rupxInputs) {
+                        for (const CTxIn& stakeIn : rupeeInputs) {
                             // if it's already spent
 
                             // First regular staking check
-                            if(hasRUPXInputs) {
+                            if(hasRUPEEInputs) {
                                 if (stakeIn.prevout == in.prevout) {
                                     return state.DoS(100, error("%s: input already spent on a previous block", __func__));
                                 }
@@ -4273,10 +4273,10 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
             // Split height
             splitHeight = prev->nHeight;
 
-            // Now that this loop if completed. Check if we have zRUPX inputs.
-            if(hasZRUPXInputs){
-                LogPrintf("It has ZRUPX Inputs!!\n");
-                for (CTxIn zRupxInput : zRUPXInputs) {
+            // Now that this loop if completed. Check if we have zRUPEE inputs.
+            if(hasZRUPEEInputs){
+                LogPrintf("It has ZRUPEE Inputs!!\n");
+                for (CTxIn zRupxInput : zRUPEEInputs) {
                     CoinSpend spend = TxInToZerocoinSpend(zRupxInput);
 
                     // First check if the serials were not already spent on the forked blocks.
@@ -4301,7 +4301,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
 
                     if (!ContextualCheckZerocoinSpendNoSerialCheck(stakeTxIn, spend, pindex, 0))
                         return state.DoS(100,error("%s: forked chain ContextualCheckZerocoinSpend failed for tx %s", __func__,
-                                                   stakeTxIn.GetHash().GetHex()), REJECT_INVALID, "bad-txns-invalid-zrupx");
+                                                   stakeTxIn.GetHash().GetHex()), REJECT_INVALID, "bad-txns-invalid-zrupee");
 
                     // Now only the ZKP left..
                     // As the spend maturity is 200, the acc value must be accumulated, otherwise it's not ready to be spent
@@ -4342,11 +4342,11 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
                 }
             }
         } else {
-            for (CTxIn zRupxInput : zRUPXInputs) {
+            for (CTxIn zRupxInput : zRUPEEInputs) {
                     CoinSpend spend = TxInToZerocoinSpend(zRupxInput);
                     if (!ContextualCheckZerocoinSpend(stakeTxIn, spend, pindex, 0))
                         return state.DoS(100,error("%s: ContextualCheckZerocoinSpend failed for tx %s", __func__,
-                                stakeTxIn.GetHash().GetHex()), REJECT_INVALID, "bad-txns-invalid-zrupx");
+                                stakeTxIn.GetHash().GetHex()), REJECT_INVALID, "bad-txns-invalid-zrupee");
             }
         }
 
@@ -4454,7 +4454,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
         }
     }
     if (nMints || nSpends)
-        LogPrintf("%s : block contains %d zRUPX mints and %d zRUPX spends\n", __func__, nMints, nSpends);
+        LogPrintf("%s : block contains %d zRUPEE mints and %d zRUPEE spends\n", __func__, nMints, nSpends);
 
     if (!CheckBlockSignature(*pblock))
         return error("ProcessNewBlock() : bad proof-of-stake block signature");
@@ -5560,7 +5560,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             return false;
         }
 
-        // RUPAYA: We use certain sporks during IBD, so check to see if they are
+        // RUPEEEVOLUTION: We use certain sporks during IBD, so check to see if they are
         // available. If not, ask the first peer connected for them.
         bool fMissingSporks = !pSporkDB->SporkExists(SPORK_14_NEW_PROTOCOL_ENFORCEMENT) &&
                               !pSporkDB->SporkExists(SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2) &&
@@ -6162,7 +6162,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                 CBigNum bnAccValue = 0;
                 //std::cout << "asking for checkpoint value in height: " << height << ", den: " << den << std::endl;
                 if (!GetAccumulatorValue(height, den, bnAccValue)) {
-                    LogPrint("zrupx", "peer misbehaving for request an invalid acc checkpoint \n", __func__);
+                    LogPrint("zrupee", "peer misbehaving for request an invalid acc checkpoint \n", __func__);
                     Misbehaving(pfrom->GetId(), 50);
                 } else {
                     //std::cout << "Sending acc value, with checksum: " << GetChecksum(bnAccValue) << " for "
@@ -6187,7 +6187,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                 gen.setPfrom(pfrom);
                 if (gen.isValid(chainActive.Height())) {
                     if (!lightWorker.addWitWork(gen)) {
-                        LogPrint("zrupx", "%s : add genwit request failed \n", __func__);
+                        LogPrint("zrupee", "%s : add genwit request failed \n", __func__);
                         CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
                         // Invalid request only returns the message without a result.
                         ss << gen.getRequestNum();

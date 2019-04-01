@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RUPAYA_QT_MULTISENDDIALOG_H
-#define RUPAYA_QT_MULTISENDDIALOG_H
+#ifndef RUPEEEVOLUTION_QT_MULTISENDDIALOG_H
+#define RUPEEEVOLUTION_QT_MULTISENDDIALOG_H
 
 #include <QDialog>
 
@@ -38,4 +38,4 @@ private:
     WalletModel* model;
 };
 
-#endif // RUPAYA_QT_MULTISENDDIALOG_H
+#endif // RUPEEEVOLUTION_QT_MULTISENDDIALOG_H

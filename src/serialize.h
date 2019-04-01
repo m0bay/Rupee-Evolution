@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RUPAYA_SERIALIZE_H
-#define RUPAYA_SERIALIZE_H
+#ifndef RUPEEEVOLUTION_SERIALIZE_H
+#define RUPEEEVOLUTION_SERIALIZE_H
 
 #include <algorithm>
 #include <assert.h>
@@ -936,4 +936,4 @@ public:
     }
 };
 
-#endif // RUPAYA_SERIALIZE_H
+#endif // RUPEEEVOLUTION_SERIALIZE_H

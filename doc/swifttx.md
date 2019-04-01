@@ -11,9 +11,9 @@ When a "Transaction Lock" occurs the hash of the related transaction is broadcas
 * `zmqpubrawtxlock`: publishes the raw transaction when locked via SwiftX
 * `zmqpubhashtxlock`: publishes the transaction hash when locked via SwiftX
 
-This mechanism has been integrated into Bitcore-Node-RUPAYA which allows for notification to be broadcast through Insight API in one of two ways:
-* WebSocket: [https://github.com/RUPAYA-Project/insight-api-rupaya#web-socket-api](https://github.com/RUPAYA-Project/insight-api-rupaya#web-socket-api) 
-* API: [https://github.com/RUPAYA-Project/insight-api-rupaya#swifttx-transactions](https://github.com/RUPAYA-Project/insight-api-rupaya#swifttx-transactions) 
+This mechanism has been integrated into Bitcore-Node-RUPEEEVOLUTION which allows for notification to be broadcast through Insight API in one of two ways:
+* WebSocket: [https://github.com/RUPEEEVOLUTION-Project/insight-api-rupeeevolution#web-socket-api](https://github.com/RUPEEEVOLUTION-Project/insight-api-rupeeevolution#web-socket-api) 
+* API: [https://github.com/RUPEEEVOLUTION-Project/insight-api-rupeeevolution#swifttx-transactions](https://github.com/RUPEEEVOLUTION-Project/insight-api-rupeeevolution#swifttx-transactions) 
 
 ####Command line option
 
@@ -27,13 +27,13 @@ When a wallet SwiftX transaction is successfully locked a shell command provided
 
 Details pertaining to an observed "Transaction Lock" can also be retrieved through RPC, it’s important however to understand the underlying mechanism.
 
-By default, the Rupaya Core daemon will launch using the following constant:
+By default, the Rupee Evolution Core daemon will launch using the following constant:
 
 ```
 static const int DEFAULT_SWIFTTX_DEPTH = 5;
 ```
 
-This value can be overridden by passing the following argument to the Rupaya Core daemon:
+This value can be overridden by passing the following argument to the Rupee Evolution Core daemon:
 
 ```
 -swifttxdepth=<n>

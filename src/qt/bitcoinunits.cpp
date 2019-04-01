@@ -19,18 +19,18 @@ BitcoinUnits::BitcoinUnits(QObject* parent) : QAbstractListModel(parent),
 QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
 {
     QList<BitcoinUnits::Unit> unitlist;
-    unitlist.append(RUPX);
-    unitlist.append(mRUPX);
-    unitlist.append(uRUPX);
+    unitlist.append(RUPEE);
+    unitlist.append(mRUPEE);
+    unitlist.append(uRUPEE);
     return unitlist;
 }
 
 bool BitcoinUnits::valid(int unit)
 {
     switch (unit) {
-    case RUPX:
-    case mRUPX:
-    case uRUPX:
+    case RUPEE:
+    case mRUPEE:
+    case uRUPEE:
         return true;
     default:
         return false;
@@ -40,12 +40,12 @@ bool BitcoinUnits::valid(int unit)
 QString BitcoinUnits::id(int unit)
 {
     switch (unit) {
-    case RUPX:
-        return QString("rupaya");
-    case mRUPX:
-        return QString("mrupaya");
-    case uRUPX:
-        return QString::fromUtf8("urupaya");
+    case RUPEE:
+        return QString("rupeeevolution");
+    case mRUPEE:
+        return QString("mrupeeevolution");
+    case uRUPEE:
+        return QString::fromUtf8("urupeeevolution");
     default:
         return QString("???");
     }
@@ -55,23 +55,23 @@ QString BitcoinUnits::name(int unit)
 {
     if (Params().NetworkID() == CBaseChainParams::MAIN) {
         switch (unit) {
-        case RUPX:
-            return QString("RUPX");
-        case mRUPX:
-            return QString("mRUPX");
-        case uRUPX:
-            return QString::fromUtf8("μRUPX");
+        case RUPEE:
+            return QString("RUPEE");
+        case mRUPEE:
+            return QString("mRUPEE");
+        case uRUPEE:
+            return QString::fromUtf8("μRUPEE");
         default:
             return QString("???");
         }
     } else {
         switch (unit) {
-        case RUPX:
-            return QString("tRUPX");
-        case mRUPX:
-            return QString("mtRUPX");
-        case uRUPX:
-            return QString::fromUtf8("μtRUPX");
+        case RUPEE:
+            return QString("tRUPEE");
+        case mRUPEE:
+            return QString("mtRUPEE");
+        case uRUPEE:
+            return QString::fromUtf8("μtRUPEE");
         default:
             return QString("???");
         }
@@ -82,23 +82,23 @@ QString BitcoinUnits::description(int unit)
 {
     if (Params().NetworkID() == CBaseChainParams::MAIN) {
         switch (unit) {
-        case RUPX:
-            return QString("RUPX");
-        case mRUPX:
-            return QString("Milli-RUPX (1 / 1" THIN_SP_UTF8 "000)");
-        case uRUPX:
-            return QString("Micro-RUPX (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+        case RUPEE:
+            return QString("RUPEE");
+        case mRUPEE:
+            return QString("Milli-RUPEE (1 / 1" THIN_SP_UTF8 "000)");
+        case uRUPEE:
+            return QString("Micro-RUPEE (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
         default:
             return QString("???");
         }
     } else {
         switch (unit) {
-        case RUPX:
-            return QString("TestRUPXs");
-        case mRUPX:
-            return QString("Milli-TestRUPX (1 / 1" THIN_SP_UTF8 "000)");
-        case uRUPX:
-            return QString("Micro-TestRUPX (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+        case RUPEE:
+            return QString("TestRUPEEs");
+        case mRUPEE:
+            return QString("Milli-TestRUPEE (1 / 1" THIN_SP_UTF8 "000)");
+        case uRUPEE:
+            return QString("Micro-TestRUPEE (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
         default:
             return QString("???");
         }
@@ -108,11 +108,11 @@ QString BitcoinUnits::description(int unit)
 qint64 BitcoinUnits::factor(int unit)
 {
     switch (unit) {
-    case RUPX:
+    case RUPEE:
         return 100000000;
-    case mRUPX:
+    case mRUPEE:
         return 100000;
-    case uRUPX:
+    case uRUPEE:
         return 100;
     default:
         return 100000000;
@@ -122,11 +122,11 @@ qint64 BitcoinUnits::factor(int unit)
 int BitcoinUnits::decimals(int unit)
 {
     switch (unit) {
-    case RUPX:
+    case RUPEE:
         return 8;
-    case mRUPX:
+    case mRUPEE:
         return 5;
-    case uRUPX:
+    case uRUPEE:
         return 2;
     default:
         return 0;

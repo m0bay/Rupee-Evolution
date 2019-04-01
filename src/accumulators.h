@@ -1,10 +1,10 @@
 // Copyright (c) 2017-2018 The PIVX Developers
-// Copyright (c) 2018 The RUPAYA Developers 
+// Copyright (c) 2018 The RUPEEEVOLUTION Developers 
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RUPAYA_ACCUMULATORS_H
-#define RUPAYA_ACCUMULATORS_H
+#ifndef RUPEEEVOLUTION_ACCUMULATORS_H
+#define RUPEEEVOLUTION_ACCUMULATORS_H
 
 #include "libzerocoin/Accumulator.h"
 #include "libzerocoin/Coin.h"
@@ -89,4 +89,4 @@ public:
     searchMintHeightException(const string &message) : message(message) {}
 };
 
-#endif //RUPAYA_ACCUMULATORS_H
+#endif //RUPEEEVOLUTION_ACCUMULATORS_H

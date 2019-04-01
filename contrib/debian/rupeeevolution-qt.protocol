@@ -1,0 +1,11 @@
+[Protocol]
+exec=rupeeevolution-qt '%u'
+protocol=rupeeevolution
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false

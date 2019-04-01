@@ -1,19 +1,19 @@
-Rupaya Core version 3.0.4 is now available from:
+Rupee Evolution Core version 3.0.4 is now available from:
 
-  <https://github.com/rupaya-project/rupaya/releases>
+  <https://github.com/rupeeevolution-project/rupeeevolution/releases>
 
 This is a new minor-revision version release, including various bug fixes and
 performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/rupaya-project/rupaya/issues>
+  <https://github.com/rupeeevolution-project/rupeeevolution/issues>
 
 
 Mandatory Update
 ==============
 
-Rupaya Core v3.0.4 is a mandatory update for all users. This release contains various updates/fixes pertaining to the zRUPX protocol, supply tracking, block transmission and relaying, as well as usability and quality-of-life updates to the GUI.
+Rupee Evolution Core v3.0.4 is a mandatory update for all users. This release contains various updates/fixes pertaining to the zRUPEE protocol, supply tracking, block transmission and relaying, as well as usability and quality-of-life updates to the GUI.
 
 Users will have a grace period to update their clients before versions prior to this release are no longer allowed to connect to this (and future) version(s).
 
@@ -21,13 +21,13 @@ Users will have a grace period to update their clients before versions prior to 
 How to Upgrade
 ==============
 
-If you are running an older version, shut it down. Wait until it has completely shut down (which might take a few minutes for older versions), then run the installer (on Windows) or just copy over /Applications/RUPAYA-Qt (on Mac) or rupayad/rupaya-qt (on Linux).
+If you are running an older version, shut it down. Wait until it has completely shut down (which might take a few minutes for older versions), then run the installer (on Windows) or just copy over /Applications/RUPEEEVOLUTION-Qt (on Mac) or rupeeevolutiond/rupeeevolution-qt (on Linux).
 
 
 Compatibility
 ==============
 
-Rupaya Core is extensively tested on multiple operating systems using
+Rupee Evolution Core is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.8+, and Windows Vista and later.
 
 Microsoft ended support for Windows XP on [April 8th, 2014](https://www.microsoft.com/en-us/WindowsForBusiness/end-of-xp-support),
@@ -35,7 +35,7 @@ No attempt is made to prevent installing or running the software on Windows XP, 
 can still do so at your own risk but be aware that there are known instabilities and issues.
 Please do not report issues about Windows XP to the issue tracker.
 
-Rupaya Core should also work on most other Unix-like systems but is not
+Rupee Evolution Core should also work on most other Unix-like systems but is not
 frequently tested on them.
 
 ### :exclamation::exclamation::exclamation: MacOS 10.13 High Sierra :exclamation::exclamation::exclamation:
@@ -77,12 +77,12 @@ the code changes and accompanying discussion, both the pull request and
 git merge commit are mentioned.
 
 ### P2P Protocol and Network Code
-- #294 `27c0943` Add additional checks for txid for zrupx spend. (presstab)
+- #294 `27c0943` Add additional checks for txid for zrupee spend. (presstab)
 - #301 `b8392cd` Refactor zRupx tx counting code. Add a final check in ConnectBlock() (presstab)
 - #306 `77dd55c` [Core] Don't send not-validated blocks (Mrs-X)
 - #312 `5d79bea` [Main] Update last checkpoint data (Fuzzbawls)
 - #325 `7d98ebe` Reindex zRupx blocks and correct stats. (presstab)
-- #327 `aa1235a` [Main] Don't limit zRUPX spends from getting into the mempool (Fuzzbawls)
+- #327 `aa1235a` [Main] Don't limit zRUPEE spends from getting into the mempool (Fuzzbawls)
 - #329 `19b38b2` Update checkpoints. (presstab)
 - #331 `b1fb710` [Consensus] Bump protocol. Activate via Spork 15. (rejectedpromise)
 
@@ -91,7 +91,7 @@ git merge commit are mentioned.
 - #316 `ed192cf` [Minting] Better filtering of zRupx serials in miner. (presstab)
 
 ### GUI
-- #309 `f560ffc` [UI] Better error message when too much inputs are used for spending zRUPX (Mrs-X)
+- #309 `f560ffc` [UI] Better error message when too much inputs are used for spending zRUPEE (Mrs-X)
 - #317 `b27cb72` [UI] Wallet repair option to resync from scratch (Mrs-X)
 - #323 `2b648be` [UI] Balance fix + bubble-help + usability improvements (Mrs-X)
 - #324 `8cdbb5d` disable negative confirmation numbers. (Mrs-X)
@@ -103,9 +103,9 @@ git merge commit are mentioned.
 - #298 `3580394` Reorg help to stop travis errors (Jon Spock)
 - #302 `efb648b` [Cleanup] Remove unused variables (rejectedpromise)
 - #307 `dbd801d` Remove hard-coded GIT_ARCHIVE define (Jon Spock)
-- #314 `f1c830a` Fix issue causing crash when rupayad --help was invoked (Jon Spock)
+- #314 `f1c830a` Fix issue causing crash when rupeeevolutiond --help was invoked (Jon Spock)
 - #326 `8b6a13e` Combine 2 LogPrintf statement to reduce debug.log clutter (Jon Spock)
-- #328 `a6c18c8` [Main] RUPAYA not responding on user quitting app (Aaron Langford)
+- #328 `a6c18c8` [Main] RUPEEEVOLUTION not responding on user quitting app (Aaron Langford)
 
 
 Credits
@@ -120,4 +120,4 @@ Thanks to everyone who directly contributed to this release:
 - rejectedpromise
 - aaronlangford31
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/rupaya-project-translations/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/rupeeevolution-project-translations/).

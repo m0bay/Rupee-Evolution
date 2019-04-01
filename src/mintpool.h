@@ -1,10 +1,10 @@
 // Copyright (c) 2017-2018 The PIVX Developers
-// Copyright (c) 2018 The RUPAYA Developers 
+// Copyright (c) 2018 The RUPEEEVOLUTION Developers 
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RUPAYA_MINTPOOL_H
-#define RUPAYA_MINTPOOL_H
+#ifndef RUPEEEVOLUTION_MINTPOOL_H
+#define RUPEEEVOLUTION_MINTPOOL_H
 
 #include <map>
 #include <list>
@@ -51,4 +51,4 @@ public:
 };
 
 
-#endif //RUPAYA_MINTPOOL_H
+#endif //RUPEEEVOLUTION_MINTPOOL_H

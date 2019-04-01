@@ -10,8 +10,8 @@
 #include <vector>
 
 /**
- * CBaseChainParams defines the base parameters (shared between rupaya-cli and rupayad)
- * of a given instance of the Rupaya system.
+ * CBaseChainParams defines the base parameters (shared between rupeeevolution-cli and rupeeevolutiond)
+ * of a given instance of the Rupee Evolution system.
  */
 class CBaseChainParams
 {

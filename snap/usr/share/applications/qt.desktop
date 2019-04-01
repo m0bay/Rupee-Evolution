@@ -4,11 +4,11 @@
 Type=Application
 Version=5.2.00
 Encoding=UTF-8
-Name=Rupaya-Qt
+Name=RupeeEvolution-Qt
 Icon=${SNAP}/qt.png
-MimeType=x-scheme-handler/rupaya;
-Exec=rupaya.qt %u
+MimeType=x-scheme-handler/rupeeevolution;
+Exec=rupeeevolution.qt %u
 Terminal=false
 Categories=Office;Finance;
-Comment=PIVX Core (by RUPAYA-Project)
-Keywords=internet;rupaya;main;qt;crypto;currency;snap;snapcraft;project;zerocoin;zrupx;southasia
+Comment=PIVX Core (by RUPEEEVOLUTION-Project)
+Keywords=internet;rupeeevolution;main;qt;crypto;currency;snap;snapcraft;project;zerocoin;zrupee;southasia

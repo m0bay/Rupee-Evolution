@@ -1,16 +1,16 @@
-# Rupaya
+# RupeeEvolution
 
-[![Build Status](https://travis-ci.org/rupaya-project/rupx.svg?branch=master)](https://travis-ci.org/rupaya-project/rupx)  [![GitHub version](https://badge.fury.io/gh/rupaya-project%2Frupx.svg)](https://badge.fury.io/gh/rupaya-project%2Frupx) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/rupaya-project/rupx/issues) [![HitCount](http://hits.dwyl.io/mo-bay/rupaya-project/rupx.svg)](http://hits.dwyl.io/mo-bay/rupaya-project/rupx)
-[![Snap Status](https://build.snapcraft.io/badge/rupaya-project/rupx.svg)](https://build.snapcraft.io/user/rupaya-project/rupx)
+[![Build Status](https://travis-ci.org/rupeeevolution-project/rupee.svg?branch=master)](https://travis-ci.org/rupeeevolution-project/rupee)  [![GitHub version](https://badge.fury.io/gh/rupeeevolution-project%2Frupee.svg)](https://badge.fury.io/gh/rupeeevolution-project%2Frupee) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/rupeeevolution-project/rupee/issues) [![HitCount](http://hits.dwyl.io/mo-bay/rupeeevolution-project/rupee.svg)](http://hits.dwyl.io/mo-bay/rupeeevolution-project/rupee)
+[![Snap Status](https://build.snapcraft.io/badge/rupeeevolution-project/rupee.svg)](https://build.snapcraft.io/user/rupeeevolution-project/rupee)
 
 
-Rupaya is the digital form of rupees, which is a currency used throughout South Asia. Rupaya is intended to provide a digital currency to a growing number of residents in emerging markets that are unable to access bank accounts and credit cards.
+Rupee Evolution is the digital form of rupees, which is a currency used throughout South Asia. Rupee Evolution is intended to provide a digital currency to a growing number of residents in emerging markets that are unable to access bank accounts and credit cards.
 
 
 # Specifications :
 
   - Proof of Stake with MN & Governance
-  - Zerocoin v2 with staking 
+  - Zerocoin v2 with staking
   - Instant Transactions via SwiftTx
   - DAO Governance
   - 60sec block time
@@ -25,12 +25,12 @@ Testnet Ports :
   - P2P 10500
   - RPC 11000
 
-A total of 39M Rupaya's were premined to swap the community's holding at [Block 1](https://find.rupx.io/block/1)
+A total of 35M Rupee's were premined to swap the community's holding at [Block 1](https://find.rupee.io/block/1)
 
 
 ### Block Rewards
 
-Find out more about our block reward & governance structure and percentages on our [website](https://www.rupx.io) .
+Find out more about our block reward & governance structure and percentages on our [website](https://www.rupee.io) .
 
 License
 ----

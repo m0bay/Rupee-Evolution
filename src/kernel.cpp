@@ -11,7 +11,7 @@
 #include "timedata.h"
 #include "util.h"
 #include "stakeinput.h"
-#include "zrupxchain.h"
+#include "zrupeechain.h"
 
 using namespace std;
 
@@ -366,9 +366,9 @@ bool CheckProofOfStake(const CBlock block, uint256& hashProofOfStake, std::uniqu
         if (!VerifyScript(txin.scriptSig, txPrev.vout[txin.prevout.n].scriptPubKey, STANDARD_SCRIPT_VERIFY_FLAGS, TransactionSignatureChecker(&tx, 0)))
             return error("CheckProofOfStake() : VerifySignature failed on coinstake %s", tx.GetHash().ToString().c_str());
 
-        CRupxStake* rupxInput = new CRupxStake();
-        rupxInput->SetInput(txPrev, txin.prevout.n);
-        stake = std::unique_ptr<CStakeInput>(rupxInput);
+        CRupxStake* rupeeInput = new CRupxStake();
+        rupeeInput->SetInput(txPrev, txin.prevout.n);
+        stake = std::unique_ptr<CStakeInput>(rupeeInput);
     }
 
     CBlockIndex* pindex = stake->GetIndexFrom();

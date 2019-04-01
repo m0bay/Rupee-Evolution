@@ -4,11 +4,11 @@
 Type=Application
 Version=5.2.00
 Encoding=UTF-8
-Name=Rupaya-Qt Testnet
+Name=RupeeEvolution-Qt Testnet
 Icon=${SNAP}/qt-testnet.ico
-MimeType=x-scheme-handler/rupaya;
-Exec=rupaya.qt-testnet --testnet %u
+MimeType=x-scheme-handler/rupeeevolution;
+Exec=rupeeevolution.qt-testnet --testnet %u
 Terminal=false
 Categories=Office;Finance;
-Comment=Rupaya Core Regression Test (by Rupaya-Project)
-Keywords=internet;rupaya;testnet;qt;crypto;currency;snap;snapcraft;RUPAYA-Project;daemon;cli;qt;zerocoin;zrupx
+Comment=Rupee Evolution Core Regression Test (by RupeeEvolution-Project)
+Keywords=internet;rupeeevolution;testnet;qt;crypto;currency;snap;snapcraft;RUPEEEVOLUTION-Project;daemon;cli;qt;zerocoin;zrupee

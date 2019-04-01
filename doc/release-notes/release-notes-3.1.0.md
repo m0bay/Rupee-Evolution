@@ -1,27 +1,27 @@
-Rupaya Core version *3.1.0* is now available from:  <https://github.com/rupaya-project/rupaya/releases>
+Rupee Evolution Core version *3.1.0* is now available from:  <https://github.com/rupeeevolution-project/rupeeevolution/releases>
 
 This is a new major version release, including various bug fixes and performance improvements, as well as updated translations.
 
-Please report bugs using the issue tracker at github: <https://github.com/rupaya-project/rupaya/issues>
+Please report bugs using the issue tracker at github: <https://github.com/rupeeevolution-project/rupeeevolution/issues>
 
 
 Mandatory Update
 ==============
 
-Rupaya Core v3.1.0 is a mandatory update for all users. This release contains new consensus rules and improvements that are not backwards compatible with older versions. Users will have a grace period of one week to update their clients before enforcement of this update is enabled.
+Rupee Evolution Core v3.1.0 is a mandatory update for all users. This release contains new consensus rules and improvements that are not backwards compatible with older versions. Users will have a grace period of one week to update their clients before enforcement of this update is enabled.
 
 Users updating from a previous version after Tuesday, May 8, 2018 12:00:00 AM GMT will require a full resync of their local blockchain from either the P2P network or by way of the bootstrap.
 
 How to Upgrade
 ==============
 
-If you are running an older version, shut it down. Wait until it has completely shut down (which might take a few minutes for older versions), then run the installer (on Windows) or just copy over /Applications/RUPAYA-Qt (on Mac) or rupayad/rupaya-qt (on Linux).
+If you are running an older version, shut it down. Wait until it has completely shut down (which might take a few minutes for older versions), then run the installer (on Windows) or just copy over /Applications/RUPEEEVOLUTION-Qt (on Mac) or rupeeevolutiond/rupeeevolution-qt (on Linux).
 
 
 Compatibility
 ==============
 
-Rupaya Core is extensively tested on multiple operating systems using
+Rupee Evolution Core is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.8+, and Windows Vista and later.
 
 Microsoft ended support for Windows XP on [April 8th, 2014](https://www.microsoft.com/en-us/WindowsForBusiness/end-of-xp-support),
@@ -29,7 +29,7 @@ No attempt is made to prevent installing or running the software on Windows XP, 
 can still do so at your own risk but be aware that there are known instabilities and issues.
 Please do not report issues about Windows XP to the issue tracker.
 
-Rupaya Core should also work on most other Unix-like systems but is not
+Rupee Evolution Core should also work on most other Unix-like systems but is not
 frequently tested on them.
 
 ### :exclamation::exclamation::exclamation: MacOS 10.13 High Sierra :exclamation::exclamation::exclamation:
@@ -40,48 +40,48 @@ frequently tested on them.
 Notable Changes
 ==============
 
-zRUPX Updates
+zRUPEE Updates
 --------------
 
-### zRUPX Staking
+### zRUPEE Staking
 
-zRUPX Staking is here! zRUPX staking will be activated on the morning of the 8th of May 2018. With the release of zRUPX staking, there are effectively 2 versions of zRUPX, zRUPX minted on the 3.0.6 RUPAYA wallet or lower, and zRUPX minted on RUPAYA wallet version or higher. New features in this release will require the use of zRUPX v2, zRUPX minted on this wallet release 3.1.0 or later. If you currently hold zRUPX v1 and wish to take advantage of zRUPX staking and deterministic zRUPX, you will need to spend the zRUPX v1 to yourself and remint zRUPX v2.
-Note: To find your zRUPX version, click the privacy tab, then the zRUPX Control button then expand the arrows next to the desired denomination.
-
-
-### Deterministic zRUPX Seed Keys
-
-zRUPX is now associated with a deterministic seed key. With this seed key, users are able to securely backup their zRUPX outside of the wallet that the zRUPX had been minted on. zRUPX can also be transferred from wallet to wallet without the need of transferring the wallet data file.
+zRUPEE Staking is here! zRUPEE staking will be activated on the morning of the 8th of May 2018. With the release of zRUPEE staking, there are effectively 2 versions of zRUPEE, zRUPEE minted on the 3.0.6 RUPEEEVOLUTION wallet or lower, and zRUPEE minted on RUPEEEVOLUTION wallet version or higher. New features in this release will require the use of zRUPEE v2, zRUPEE minted on this wallet release 3.1.0 or later. If you currently hold zRUPEE v1 and wish to take advantage of zRUPEE staking and deterministic zRUPEE, you will need to spend the zRUPEE v1 to yourself and remint zRUPEE v2.
+Note: To find your zRUPEE version, click the privacy tab, then the zRUPEE Control button then expand the arrows next to the desired denomination.
 
 
-### Updated zRUPX minting
+### Deterministic zRUPEE Seed Keys
 
-zRUPX minting now only requires 1 further mint (down from 2) to mature. zRUPX mints still require 20 confirmations.  Mints also require that the 'second' mint is at least two checkpoints deep in the chain (this was already the case, but the logic was not as precise).
-
-
-### zRUPX Search
-
-Users will now have the ability to search the blockchain for a specific serial # to see if a zRUPX denomination has been spent or not.
+zRUPEE is now associated with a deterministic seed key. With this seed key, users are able to securely backup their zRUPEE outside of the wallet that the zRUPEE had been minted on. zRUPEE can also be transferred from wallet to wallet without the need of transferring the wallet data file.
 
 
+### Updated zRUPEE minting
 
-RUPAYA/zRUPX Staking and Masternode Rewards
+zRUPEE minting now only requires 1 further mint (down from 2) to mature. zRUPEE mints still require 20 confirmations.  Mints also require that the 'second' mint is at least two checkpoints deep in the chain (this was already the case, but the logic was not as precise).
+
+
+### zRUPEE Search
+
+Users will now have the ability to search the blockchain for a specific serial # to see if a zRUPEE denomination has been spent or not.
+
+
+
+RUPEEEVOLUTION/zRUPEE Staking and Masternode Rewards
 --------------
 
-### RUPAYA, zRUPX and Masternode Payment Schedule
+### RUPEEEVOLUTION, zRUPEE and Masternode Payment Schedule
 
-To encourage the use of zRUPX and increase the RUPAYA zerocoin anonymity set, the RUPAYA payment schedule has been changed to the following:
+To encourage the use of zRUPEE and increase the RUPEEEVOLUTION zerocoin anonymity set, the RUPEEEVOLUTION payment schedule has been changed to the following:
 
-If a user staking zRUPX wins the reward for their block, the following zRUPX reward will be: 
-- 3 zRUPX (3 x 1 denominations) rewarded to the staker, 2 RUPAYA rewarded to the masternode owner and 1 RUPAYA available for the budget. This is a total block reward of 6 RUPAYA, up from 5.
+If a user staking zRUPEE wins the reward for their block, the following zRUPEE reward will be: 
+- 3 zRUPEE (3 x 1 denominations) rewarded to the staker, 2 RUPEEEVOLUTION rewarded to the masternode owner and 1 RUPEEEVOLUTION available for the budget. This is a total block reward of 6 RUPEEEVOLUTION, up from 5.
 
-If a user staking RUPAYA wins the reward, the following amounts will be rewarded: 
-- 2 RUPAYA to the RUPAYA staker, 3 RUPAYA to the Masternode owner and 1 RUPAYA available for the budget. This is a total block reward of 6 RUPAYA, up from 5.
+If a user staking RUPEEEVOLUTION wins the reward, the following amounts will be rewarded: 
+- 2 RUPEEEVOLUTION to the RUPEEEVOLUTION staker, 3 RUPEEEVOLUTION to the Masternode owner and 1 RUPEEEVOLUTION available for the budget. This is a total block reward of 6 RUPEEEVOLUTION, up from 5.
 
 
-### Return change to sender when minting zRUPX
+### Return change to sender when minting zRUPEE
 
-Previously, zRUPX minting would send any change to a newly generated "change address". This has caused confusion among some users, and in some cases insufficient backups of the wallet. The wallet will now find the contributing address which contained the most RUPAYA and return the change from a zRUPX mint to that address.
+Previously, zRUPEE minting would send any change to a newly generated "change address". This has caused confusion among some users, and in some cases insufficient backups of the wallet. The wallet will now find the contributing address which contained the most RUPEEEVOLUTION and return the change from a zRUPEE mint to that address.
 
 
 User Experience
@@ -89,7 +89,7 @@ User Experience
 
 ### Graphical User Interface
 
-The visual layout of the RUPAYA Qt wallet has undergone a near-complete overhaul.
+The visual layout of the RUPEEEVOLUTION Qt wallet has undergone a near-complete overhaul.
 A new 'vertical tab' layout is now being used instead of the prior 'horizontal tab' layout, as well as a completely new icon set.
 The overview tab has been simplified greatly to display only balances that are active or relevant, zero-balance line items are hidden by default to avoid clutter.
 
@@ -97,9 +97,9 @@ The overview tab has been simplified greatly to display only balances that are a
 ### Wallet Options
 
 There have been a number of changes to the tasks that you are able to perform from the wallet options. Users will now have the ability to do the following: 
--	Enable and disable the auto zRUPX minting feature. This is enabled by default and the enablezeromint=0 setting in the rupaya.conf file will overwrite the GUI option.
--	The percentage of autominted zRUPX can now be set from 1 to 100, changed from 10 – 100.
--	The stake split threshold can now be set VIA the wallet options. This setting is an advanced feature for those wishing to remain staking regular RUPAYA.
+-	Enable and disable the auto zRUPEE minting feature. This is enabled by default and the enablezeromint=0 setting in the rupeeevolution.conf file will overwrite the GUI option.
+-	The percentage of autominted zRUPEE can now be set from 1 to 100, changed from 10 – 100.
+-	The stake split threshold can now be set VIA the wallet options. This setting is an advanced feature for those wishing to remain staking regular RUPEEEVOLUTION.
 -	“Unlock for staking and anonymization only” is now selected by default when unlocking the wallet from the User Interface
 
 
@@ -113,9 +113,9 @@ Backup to external devices / locations
 
 ### Summary
 
- The RUPAYA wallet can now have user selected directories for automatic backups of the wallet data file (wallet.dat). This can be set by adding the following lines to the rupaya.conf file, found in the RUPAYA data directory.
+ The RUPEEEVOLUTION wallet can now have user selected directories for automatic backups of the wallet data file (wallet.dat). This can be set by adding the following lines to the rupeeevolution.conf file, found in the RUPEEEVOLUTION data directory.
 - backuppath = <directory / full path>
-- zrupxbackuppath = <directory / full path>
+- zrupeebackuppath = <directory / full path>
 - custombackupthreshold = <backup limit>
 Note: System write permissions must be appropriate for the location the wallet is being saved to.
 
@@ -127,7 +127,7 @@ Note: System write permissions must be appropriate for the location the wallet i
 ### Details:
 
 * If path is set to directory, the backup will be named `wallet.dat-<year>-<month>-<day>-<hour>-<minute>-<second>`
-* If zRUPX backup, auto generated name is `wallet-autozrupxbackup.dat-<year>-<month>-<day>-<hour>-<minute>-<second>`
+* If zRUPEE backup, auto generated name is `wallet-autozrupeebackup.dat-<year>-<month>-<day>-<hour>-<minute>-<second>`
 * If path set to file, backup will be named `<filename>.dat`
 * walletbackupthreshold enables the user to select the maximum count of backup files to be written before overwriting existing backups.
 
@@ -164,19 +164,19 @@ Backing up 4 times will result as shown below
             
 
 
-RUPAYA Daemon & Client (RPC Changes)
+RUPEEEVOLUTION Daemon & Client (RPC Changes)
 --------------
 
 ### RPC Ban Management
 
-The RUPAYA client peer bans now have additional RPC commands to manage peers. Peers can be banned and unbanned at will without the need to restart the wallet client. No changes have been made to the conditions resulting in automatic peer bans. New RPC commands: `setban`, `listbanned`, `clearbanned`, and `disconnectnode`
+The RUPEEEVOLUTION client peer bans now have additional RPC commands to manage peers. Peers can be banned and unbanned at will without the need to restart the wallet client. No changes have been made to the conditions resulting in automatic peer bans. New RPC commands: `setban`, `listbanned`, `clearbanned`, and `disconnectnode`
 
 
 ### Random-cookie RPC authentication
 
 When no `-rpcpassword` is specified, the daemon now uses a special 'cookie' file for authentication. This file is generated with random content when the daemon starts, and deleted when it exits. Its contents are used as authentication token. Read access to this file controls who can access through RPC. By default it is stored in the data directory but its location can be overridden with the option `-rpccookiefile`.
 This is similar to Tor's CookieAuthentication: see https://www.torproject.org/docs/tor-manual.html.en 
-This allows running rupayad without having to do any manual configuration.
+This allows running rupeeevolutiond without having to do any manual configuration.
 
 
 ### New RPC command
@@ -188,7 +188,7 @@ This allows for a user (such as a third party integration) to query the blockcha
 ### New RPC command 
 `findserial`
 
-Search the zerocoin database for a zerocoinspend transaction that contains the given serial. This will be a helpful tool for the RUPAYA support group, which often times sees users say "I didn't spend that zRUPX". This RPC call allows for support to grab the serial, and then find the spend tx on the chain.
+Search the zerocoin database for a zerocoinspend transaction that contains the given serial. This will be a helpful tool for the RUPEEEVOLUTION support group, which often times sees users say "I didn't spend that zRUPEE". This RPC call allows for support to grab the serial, and then find the spend tx on the chain.
 
 
 ### New RPC commands 
@@ -206,11 +206,11 @@ Network Layer 2 Changes (Proposals / Budgets / SwiftX)
 
 ### Monthly Budget Increase
 
-As voted on by the RUPAYA masternodes, the monthly budget available to be utilised has been increased to 42,000 RUPAYA / month. This RUPAYA only has the opportunity to be raised once per month (paid to winning proposals) with any unused RUPAYA not created by the blockchain.
+As voted on by the RUPEEEVOLUTION masternodes, the monthly budget available to be utilised has been increased to 42,000 RUPEEEVOLUTION / month. This RUPEEEVOLUTION only has the opportunity to be raised once per month (paid to winning proposals) with any unused RUPEEEVOLUTION not created by the blockchain.
 
 ### Budget Finalization Fee
 
-The RUPAYA finalization fee for successful proposals has now been reduced, this fee is now 5 RUPAYA down from 50 RUPAYA. The total fee outlay for a successful proposal is now a total of 55 RUPAYA.
+The RUPEEEVOLUTION finalization fee for successful proposals has now been reduced, this fee is now 5 RUPEEEVOLUTION down from 50 RUPEEEVOLUTION. The total fee outlay for a successful proposal is now a total of 55 RUPEEEVOLUTION.
 
 
 ### SwiftX Raw Transactions
@@ -248,11 +248,11 @@ When inputting wrong data into the GUI for a SOCKS5 proxy, the wallet would cras
 Minor Enhancements
 --------------
 
--	Enforced v1 zRUPX spends to require a security level of 100
--	Updates to zRUPX spends to avoid segfaults
+-	Enforced v1 zRUPEE spends to require a security level of 100
+-	Updates to zRUPEE spends to avoid segfaults
 -	Updates to configuration will now reflect on the privacy tab
--	Fixed a  bug that would not start masternodes from the RUPAYA-Qt masternodes tab
--	Updated RUPAYA-Qt tooltips
+-	Fixed a  bug that would not start masternodes from the RUPEEEVOLUTION-Qt masternodes tab
+-	Updated RUPEEEVOLUTION-Qt tooltips
 -	Icon added to the wallet GUI to reflect the status of autominting (active / inactive)
 -	Updated errors causing the blockchain to corrupt when experiencing unexpected wallet shutdowns
 -	Updated RPC help outputs & removed the deprecated obfuscation. 
@@ -263,29 +263,29 @@ Minor Enhancements
 Further Reading: Version 2 Zerocoins
 ==============
 
-Several critical security flaws in the zerocoin protocol and RUPAYA's zerocoin implementation have been patched. Enough has changed that new zerocoins are distinct from old zerocoins, and have been labelled as *version 2*. When using the zRUPX Control dialog in the QT wallet, a user is able to see zRUPX marked as version 1 or 2.
+Several critical security flaws in the zerocoin protocol and RUPEEEVOLUTION's zerocoin implementation have been patched. Enough has changed that new zerocoins are distinct from old zerocoins, and have been labelled as *version 2*. When using the zRUPEE Control dialog in the QT wallet, a user is able to see zRUPEE marked as version 1 or 2.
 
-zPoS (zRUPX staking)
+zPoS (zRUPEE staking)
 --------------
 
-Once a zRUPX has over 200 confirmations it becomes available to stake. Staking zRUPX will consume the exact zerocoin that is staked and replace it with a freshly minted zerocoin of the same denomination as well as a reward of three 1 denomination zRUPX. So for example if a 1,000 zRUPX denomination is staked, the protocol replaces that with a fresh 1,000 denomination and three1 denomination zRUPXs.
+Once a zRUPEE has over 200 confirmations it becomes available to stake. Staking zRUPEE will consume the exact zerocoin that is staked and replace it with a freshly minted zerocoin of the same denomination as well as a reward of three 1 denomination zRUPEE. So for example if a 1,000 zRUPEE denomination is staked, the protocol replaces that with a fresh 1,000 denomination and three1 denomination zRUPEEs.
 
 Secure Spending
 --------------
 
-Version 1 zerocoins, as implemented by [Miers et. al](http://zerocoin.org/media/pdf/ZerocoinOakland.pdf), allow for something we describe as *serial trolling*. Spending zerocoins requires that the spender reveal their serial number associated with the zerocoin, and in turn that serial number is used to check for double spending. There is a fringe situation (which is very unlikely to happen within RUPAYA's zerocoin implementation due to delayed coin accumulation) where the spender sends the spending transaction, but the transaction does not immediately make it into the blockchain and remains in the mempool for a long enough duration that a *troll* has enough time to see the spender's serial number, mint a new zerocoin with the same serial number, and spend the new zerocoin before the original spender's transaction becomes confirmed. If the timing of this fringe situation worked, then the original spender's coin would be seen as invalid because the troll was able to have the serial recorded into the blockchain first, thus making the original spender's serial appear as a double spend.
+Version 1 zerocoins, as implemented by [Miers et. al](http://zerocoin.org/media/pdf/ZerocoinOakland.pdf), allow for something we describe as *serial trolling*. Spending zerocoins requires that the spender reveal their serial number associated with the zerocoin, and in turn that serial number is used to check for double spending. There is a fringe situation (which is very unlikely to happen within RUPEEEVOLUTION's zerocoin implementation due to delayed coin accumulation) where the spender sends the spending transaction, but the transaction does not immediately make it into the blockchain and remains in the mempool for a long enough duration that a *troll* has enough time to see the spender's serial number, mint a new zerocoin with the same serial number, and spend the new zerocoin before the original spender's transaction becomes confirmed. If the timing of this fringe situation worked, then the original spender's coin would be seen as invalid because the troll was able to have the serial recorded into the blockchain first, thus making the original spender's serial appear as a double spend.
 
 The serial troll situation is mitigated in version 2 by requiring that the serial number be a hash of a public key. The spend requires an additional signature signed by the private key associated with the public key hash matching the serial number. This work around was conceived by Tim Ruffing, a cryptographer that has studied the zerocoin protocol and done consulting work for the ZCoin project.
 
 Deterministic Zerocoin Generation
 --------------
 
-Zerocoins, or zRUPX, are now deterministically generated using a unique 256 bit seed. Each wallet will generate a new seed on its first run. The deterministic seed is used to generate a string of zRUPX that can be recalculated at any time using the seed. Deterministic zRUPX allows for users to backup all of their future zRUPX by simply recording their seed and keeping it in a safe place (similar to backing up a private key for RUPAYA). The zRUPX seed needs to remain in the wallet in order to spend the zRUPX after it is generated, if the seed is changed then the coins will not be spendable because the wallet will not have the ability to regenerate all of the private zRUPX data from the seed. It is important that users record & backup their seed after their first run of the wallet. If the wallet is locked during the first run, then the seed will be generated the first time the wallet is unlocked.
+Zerocoins, or zRUPEE, are now deterministically generated using a unique 256 bit seed. Each wallet will generate a new seed on its first run. The deterministic seed is used to generate a string of zRUPEE that can be recalculated at any time using the seed. Deterministic zRUPEE allows for users to backup all of their future zRUPEE by simply recording their seed and keeping it in a safe place (similar to backing up a private key for RUPEEEVOLUTION). The zRUPEE seed needs to remain in the wallet in order to spend the zRUPEE after it is generated, if the seed is changed then the coins will not be spendable because the wallet will not have the ability to regenerate all of the private zRUPEE data from the seed. It is important that users record & backup their seed after their first run of the wallet. If the wallet is locked during the first run, then the seed will be generated the first time the wallet is unlocked.
 
 Zerocoin Modulus
 --------------
 
-RUPAYA's zerocoin implementation used the same code from the ZCoin project to import the modulus use for the zerocoin protocol. The chosen modulus is the 2048 bit RSA number created for the RSA factoring challenge. The ZCoin project's implementation (which RUPAYA used) improperly imported the modulus into the code. This flaw was discovered by user GOAT from the [Civitas Project](https://github.com/eastcoastcrypto/Civitas/), and reported to RUPAYA using the bug bounty program. The modulus is now correctly imported and RUPAYA's accumulators have been changed to use the new proper modulus.
+RUPEEEVOLUTION's zerocoin implementation used the same code from the ZCoin project to import the modulus use for the zerocoin protocol. The chosen modulus is the 2048 bit RSA number created for the RSA factoring challenge. The ZCoin project's implementation (which RUPEEEVOLUTION used) improperly imported the modulus into the code. This flaw was discovered by user GOAT from the [Civitas Project](https://github.com/eastcoastcrypto/Civitas/), and reported to RUPEEEVOLUTION using the bug bounty program. The modulus is now correctly imported and RUPEEEVOLUTION's accumulators have been changed to use the new proper modulus.
 
 
 *3.1.0* Change log
@@ -294,7 +294,7 @@ RUPAYA's zerocoin implementation used the same code from the ZCoin project to im
 Detailed release notes follow. This overview includes changes that affect behavior, not code moves, refactors and string updates. For convenience in locating the code changes and accompanying discussion, both the pull request and git merge commit are mentioned.
 
 ### Core Features
- - #582 `cb1632520` [Core] zRUPX v2: zPoS dzRUPX ezRUPX external backup and budget fixes (too many to list)
+ - #582 `cb1632520` [Core] zRUPEE v2: zPoS dzRUPEE ezRUPEE external backup and budget fixes (too many to list)
  - #558 `c7e6f0f7f` [Core] Remove Gitan-OSX warning for High Sierra builds (Mrs-X)
  - #523 `926c073ea` [Core] Give high priority to zerocoinspends to make it into the next block. (presstab)
  - #535 `5e8875feb` [Core] Minor refacturing + unused variable removed (Mrs-X)
@@ -318,7 +318,7 @@ Detailed release notes follow. This overview includes changes that affect behavi
  - #542 `61156def7` [Network] Remove vfReachable and modify IsReachable to only use vfLimited. (Patrick Strateman)
 
 ### GUI
- - #572 `d9b23fe60` [Qt] Refresh zRUPX balance after resetting mints or spends (warrows)
+ - #572 `d9b23fe60` [Qt] Refresh zRUPEE balance after resetting mints or spends (warrows)
  - #571 `1c8e7cb7b` [Qt] Update privacy tab info about zeromint on config change (warrows)
  - #568 `f226de09e` [Qt] Connect automint icon to the UI automint setting change (warrows)
  - #566 `84f43857c` [Qt] Add automint status bar icon (Fuzzbawls)
@@ -329,7 +329,7 @@ Detailed release notes follow. This overview includes changes that affect behavi
  - #521 `fbb105a00` [Qt] Make "For anonymization and staking only" checked by default (Mrs-X)
  - #508 `2cf3be6bb` [Qt] Fix crash when inputting wrong port for network proxy (warrows)
  - #500 `4c01ba65d` [Qt] Remove duplicate code for updating address book labels. (blondfrogs)
- - #506 `ae72bf4e2` [Qt] Autoscroll to end of zRUPX status output (Mrs-X)
+ - #506 `ae72bf4e2` [Qt] Autoscroll to end of zRUPEE status output (Mrs-X)
  - #499 `6305264f2` [Qt] Send popup simplified + SwiftTX -> SwiftX (Mrs-X)
  - #490 `ba777e4ef` [Qt] Update MultiSend GUI to allow address labels (blondfrogs)
  - #483 `5b1070365` [Qt] Fixed Dynamic Screen Elements Issue for Multisig (blondfrogs)
@@ -348,7 +348,7 @@ Detailed release notes follow. This overview includes changes that affect behavi
 ### RPC/REST
  - #562 `772160b1b` [Wallet/RPC] Add argument to mint zerocoin from specific UTXO (warrows)
  - #539 `b6a02e9d6` [RPC] Allow watchonly coins to be shown for listunspent (blondfrogs)
- - #543 `e4522ff07` [RPC] Segfault rupaya-cli getinfo while loading block index (Mrs-X)
+ - #543 `e4522ff07` [RPC] Segfault rupeeevolution-cli getinfo while loading block index (Mrs-X)
  - #524 `2541b5001` [RPC] Add blocksizenotify command (Mrs-X)
  - #495 `4946224c1` [RPC] Show script verification errors in signrawtransaction result (Fuzzbawls)
  - #468 `00b8b8e72` [RPC/REST] Migrate to libevent based httpd server (Fuzzbawls)
@@ -361,15 +361,15 @@ Detailed release notes follow. This overview includes changes that affect behavi
  - #170 `027f16c64` [RPC] Convert source tree from json_spirit to UniValue (Fuzzbawls)
 
 ### Wallet
- - #570 `8c8350b59` [Wallet] Add a check on zRUPX spend to avoid a segfault (warrows)
+ - #570 `8c8350b59` [Wallet] Add a check on zRUPEE spend to avoid a segfault (warrows)
  - #565 `80b803201` [Wallet] Increase valid range for automint percentage (Fuzzbawls)
  - #518 `9f6449a70` [Wallet] Combine fees when possible and fix autocombine insufficient funds (warrows)
  - #497 `f21e4456b` [Wallet] Call AutocombineDust less often (warrows)
  - #498 `bfad2a1df` [Wallet] Change the way transaction list is handled (warrows)
  - #477 `93c5f9ff5` [Wallet] Remove potential memory leak (blondfrogs)
  - #488 `d09cf916a` [Wallet] Fixes an autocombinerewards bug with above max size TXs (warrows)
- - #448 `222ef6e6b` [Wallet] Return change to sender when minting zRUPX. (presstab)
- - #445 `fc570fc1e` [Wallet] Only require 1 mint to be added before spending zRUPX. (presstab)
+ - #448 `222ef6e6b` [Wallet] Return change to sender when minting zRUPEE. (presstab)
+ - #445 `fc570fc1e` [Wallet] Only require 1 mint to be added before spending zRUPEE. (presstab)
  
 ### Miscellaneous
  - #559 `d2b017217` [Bug] Segfault with -enableswifttx=0 / -enableswifttx=false (Mrs-X)
@@ -405,4 +405,4 @@ Thanks to everyone who directly contributed to this release:
 - PeterL73
 - Anthony Posselli
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/rupaya-project-translations/), the QA team during Testing and the Node hosts supporting our Testnet.
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/rupeeevolution-project-translations/), the QA team during Testing and the Node hosts supporting our Testnet.

@@ -6,16 +6,16 @@ define(_CLIENT_VERSION_REVISION, 0)
 define(_CLIENT_VERSION_BUILD, 0)
 define(_CLIENT_VERSION_IS_RELEASE, true)
 define(_COPYRIGHT_YEAR, 2018)
-AC_INIT([Rupaya Core],[_CLIENT_VERSION_MAJOR._CLIENT_VERSION_MINOR._CLIENT_VERSION_REVISION],[www.rupx.io],[rupaya])
+AC_INIT([Rupee Evolution Core],[_CLIENT_VERSION_MAJOR._CLIENT_VERSION_MINOR._CLIENT_VERSION_REVISION],[www.rupee.io],[rupeeevolution])
 AC_CONFIG_SRCDIR([src/main.cpp])
-AC_CONFIG_HEADERS([src/config/rupaya-config.h])
+AC_CONFIG_HEADERS([src/config/rupeeevolution-config.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([build-aux/m4])
 
-BITCOIN_DAEMON_NAME=rupayad
-BITCOIN_GUI_NAME=rupaya-qt
-BITCOIN_CLI_NAME=rupaya-cli
-BITCOIN_TX_NAME=rupaya-tx
+BITCOIN_DAEMON_NAME=rupeeevolutiond
+BITCOIN_GUI_NAME=rupeeevolution-qt
+BITCOIN_CLI_NAME=rupeeevolution-cli
+BITCOIN_TX_NAME=rupeeevolution-tx
 
 dnl Unless the user specified ARFLAGS, force it to be cr
 AC_ARG_VAR(ARFLAGS, [Flags for the archiver, defaults to <cr> if not set])
@@ -25,9 +25,9 @@ fi
 
 AC_CANONICAL_HOST
 
-AH_TOP([#ifndef RUPAYA_CONFIG_H])
-AH_TOP([#define RUPAYA_CONFIG_H])
-AH_BOTTOM([#endif //RUPAYA_CONFIG_H])
+AH_TOP([#ifndef RUPEEEVOLUTION_CONFIG_H])
+AH_TOP([#define RUPEEEVOLUTION_CONFIG_H])
+AH_BOTTOM([#endif //RUPEEEVOLUTION_CONFIG_H])
 
 dnl faketime breaks configure and is only needed for make. Disable it here.
 unset FAKETIME
@@ -400,7 +400,7 @@ CPPFLAGS="$CPPFLAGS -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS"
 
 AC_ARG_WITH([utils],
   [AS_HELP_STRING([--with-utils],
-  [build rupaya-cli rupaya-tx (default=yes)])],
+  [build rupeeevolution-cli rupeeevolution-tx (default=yes)])],
   [build_bitcoin_utils=$withval],
   [build_bitcoin_utils=yes])
 
@@ -412,7 +412,7 @@ AC_ARG_WITH([libs],
 
 AC_ARG_WITH([daemon],
   [AS_HELP_STRING([--with-daemon],
-  [build rupayad daemon (default=yes)])],
+  [build rupeeevolutiond daemon (default=yes)])],
   [build_bitcoind=$withval],
   [build_bitcoind=yes])
 
@@ -626,7 +626,7 @@ AC_C_BIGENDIAN
 dnl Check for pthread compile/link requirements
 AX_PTHREAD
 
-# The following macro will add the necessary defines to rupaya-config.h, but
+# The following macro will add the necessary defines to rupeeevolution-config.h, but
 # they also need to be passed down to any subprojects. Pull the results out of
 # the cache and add them to CPPFLAGS.
 AC_SYS_LARGEFILE
@@ -1155,11 +1155,11 @@ AC_SUBST(UNIVALUE_LIBS)
 
 BITCOIN_QT_PATH_PROGS([PROTOC], [protoc],$protoc_bin_path)
 
-AC_MSG_CHECKING([whether to build rupayad])
+AC_MSG_CHECKING([whether to build rupeeevolutiond])
 AM_CONDITIONAL([BUILD_BITCOIND], [test x$build_bitcoind = xyes])
 AC_MSG_RESULT($build_bitcoind)
 
-AC_MSG_CHECKING([whether to build utils (rupaya-cli rupaya-tx)])
+AC_MSG_CHECKING([whether to build utils (rupeeevolution-cli rupeeevolution-tx)])
 AM_CONDITIONAL([BUILD_BITCOIN_UTILS], [test x$build_bitcoin_utils = xyes])
 AC_MSG_RESULT($build_bitcoin_utils)
 
@@ -1286,7 +1286,7 @@ if test x$bitcoin_enable_qt != xno; then
     AC_MSG_WARN("xgettext is required to update qt translations")
   fi
 
-  AC_MSG_CHECKING([whether to build test_rupaya-qt])
+  AC_MSG_CHECKING([whether to build test_rupeeevolution-qt])
   if test x$use_gui_tests$bitcoin_enable_qt_test = xyesyes; then
     AC_MSG_RESULT([yes])
     BUILD_TEST_QT="yes"
@@ -1310,7 +1310,7 @@ openssl)
   ;;
 esac
 
-AC_MSG_CHECKING([whether to build test_rupaya])
+AC_MSG_CHECKING([whether to build test_rupeeevolution])
 if test x$use_tests = xyes; then
   AC_MSG_RESULT([yes])
   BUILD_TEST="yes"

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RUPAYA_GENWIT_H
-#define RUPAYA_GENWIT_H
+#ifndef RUPEEEVOLUTION_GENWIT_H
+#define RUPEEEVOLUTION_GENWIT_H
 
 
 #include <iostream>
@@ -58,4 +58,4 @@ private:
 };
 
 
-#endif //RUPAYA_GENWIT_H
+#endif //RUPEEEVOLUTION_GENWIT_H

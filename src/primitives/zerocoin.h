@@ -1,10 +1,10 @@
 // Copyright (c) 2017-2018 The PIVX Developers
-// Copyright (c) 2018 The RUPAYA Developers 
+// Copyright (c) 2018 The RUPEEEVOLUTION Developers 
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RUPAYA_ZEROCOIN_H
-#define RUPAYA_ZEROCOIN_H
+#ifndef RUPEEEVOLUTION_ZEROCOIN_H
+#define RUPEEEVOLUTION_ZEROCOIN_H
 
 #include <amount.h>
 #include <limits.h>
@@ -248,4 +248,4 @@ public:
     int GetNeededSpends();
 };
 
-#endif //RUPAYA_ZEROCOIN_H
+#endif //RUPEEEVOLUTION_ZEROCOIN_H
