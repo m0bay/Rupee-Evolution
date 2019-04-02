@@ -154,7 +154,7 @@ public:
         genesis.nAccumulatorCheckpoint = 0;
         genesis.nTime = 1554162042;
         genesis.nBits = 0x1e0fffff;
-        genesis.nNonce = 1;
+        genesis.nNonce = 345250;
 
         hashGenesisBlock = genesis.GetHash();
         if (regenerate) {
@@ -176,8 +176,8 @@ public:
                 std::cout << " merklehash: 0x"  << genesis.hashMerkleRoot.ToString().c_str() <<  "\n";
             }
         } else {
-            assert(hashGenesisBlock == uint256(""));
-            assert(genesis.hashMerkleRoot == uint256(""));
+            assert(hashGenesisBlock == uint256("0x00000392125e6d871b728b9320f6cbd0278f4c33332a720ce0bab609c4134f8"));
+            assert(genesis.hashMerkleRoot == uint256("0x48942d6bd622a7a8aa2552cd7a7312d3de244a0d94bd8e696a0ea372857fe528"));
         }
 
 
@@ -273,7 +273,7 @@ public:
 
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.nTime = 1554162042;
-        genesis.nNonce = 2390925;
+        genesis.nNonce = 345250;
 
         hashGenesisBlock = genesis.GetHash();
         if (regenerate) {
@@ -296,8 +296,8 @@ public:
 
             }
         } else {
-            assert(hashGenesisBlock == uint256("0x000003df45253cc78109cec5f9f11d602bd55d9665b6f4710ebbe8ddf89e1a37"));
-            assert(genesis.hashMerkleRoot == uint256("0x4dca438430ad9ca73a7b6f5403c4e1ba597501828f3ea5700f23b994facc78b7"));
+            assert(hashGenesisBlock == uint256("0x00000392125e6d871b728b9320f6cbd0278f4c33332a720ce0bab609c4134f8"));
+            assert(genesis.hashMerkleRoot == uint256("0x48942d6bd622a7a8aa2552cd7a7312d3de244a0d94bd8e696a0ea372857fe528"));
         }
 
         vSeeds.clear();
@@ -384,7 +384,7 @@ public:
             }
         } else {
             assert(hashGenesisBlock == uint256("0x7dbb050fde7e11bdfbfed6ef3cee609af3c0a33b0f984e76a3b7c0259dd7e285"));
-            assert(genesis.hashMerkleRoot == uint256("0x4dca438430ad9ca73a7b6f5403c4e1ba597501828f3ea5700f23b994facc78b7"));
+            assert(genesis.hashMerkleRoot == uint256("0x48942d6bd622a7a8aa2552cd7a7312d3de244a0d94bd8e696a0ea372857fe528"));
         }
         if (regenerate)
             exit(0);
