@@ -44,7 +44,7 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
         vSeedsOut.push_back(addr);
     }
 }
- static bool regenerate = false;
+ static bool regenerate = true;
 
 //   What makes a good checkpoint block?
 // + Is surrounded by blocks with reasonable timestamps
@@ -153,8 +153,8 @@ public:
         genesis.nVersion = 4;
         genesis.nAccumulatorCheckpoint = 0;
         genesis.nTime = 1554162042;
-        genesis.nBits = 504365040;
-        genesis.nNonce = 0;
+        genesis.nBits = 0x1e0fffff;
+        genesis.nNonce = 1;
 
         hashGenesisBlock = genesis.GetHash();
         if (regenerate) {
@@ -176,8 +176,8 @@ public:
                 std::cout << " merklehash: 0x"  << genesis.hashMerkleRoot.ToString().c_str() <<  "\n";
             }
         } else {
-            assert(hashGenesisBlock == uint256("0x"));
-            assert(genesis.hashMerkleRoot == uint256("0x"));
+            assert(hashGenesisBlock == uint256(""));
+            assert(genesis.hashMerkleRoot == uint256(""));
         }
 
 
