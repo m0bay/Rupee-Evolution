@@ -176,7 +176,7 @@ public:
                 std::cout << " merklehash: 0x"  << genesis.hashMerkleRoot.ToString().c_str() <<  "\n";
             }
         } else {
-            assert(hashGenesisBlock == uint256("0x00000392125e6d871b728b9320f6cbd0278f4c33332a720ce0bab609c4134f8"));
+            assert(hashGenesisBlock == uint256("0x00000392125e6d871b728b9320f6cbd0278f4c33332a720ce0bab609c4134f80"));
             assert(genesis.hashMerkleRoot == uint256("0x48942d6bd622a7a8aa2552cd7a7312d3de244a0d94bd8e696a0ea372857fe528"));
         }
 
@@ -296,7 +296,7 @@ public:
 
             }
         } else {
-            assert(hashGenesisBlock == uint256("0x00000392125e6d871b728b9320f6cbd0278f4c33332a720ce0bab609c4134f8"));
+            assert(hashGenesisBlock == uint256("0x00000392125e6d871b728b9320f6cbd0278f4c33332a720ce0bab609c4134f80"));
             assert(genesis.hashMerkleRoot == uint256("0x48942d6bd622a7a8aa2552cd7a7312d3de244a0d94bd8e696a0ea372857fe528"));
         }
 
