@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2018 The PIVX Developers 
+// Copyright (c) 2015-The PIVX Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -446,8 +446,8 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         //Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated
         uint256 nCheckpoint;
         int heightOfBlockLastAccumulated = nHeight - (nHeight % 10) - 10;
-        uint256 hashBlockLastAccumulated = (heightOfBlockLastAccumulated > 0) 
-            ? chainActive[heightOfBlockLastAccumulated]->GetBlockHash() 
+        uint256 hashBlockLastAccumulated = (heightOfBlockLastAccumulated > 0)
+            ? chainActive[heightOfBlockLastAccumulated]->GetBlockHash()
             : chainActive.Genesis()->GetBlockHash();
 
         //checkpioint cache key = height of next accumulation
@@ -591,10 +591,10 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                 continue;
             }
 
-            while (/*vNodes.empty() || */ 
-                    pwallet->IsLocked() || 
-                    !fMintableCoins || 
-                    (pwallet->GetBalance() > 0 && nReserveBalance >= pwallet->GetBalance()) 
+            while (/*vNodes.empty() || */
+                    pwallet->IsLocked() ||
+                    !fMintableCoins ||
+                    (pwallet->GetBalance() > 0 && nReserveBalance >= pwallet->GetBalance())
                     /*|| !masternodeSync.IsSynced() */) {
                 nLastCoinStakeSearchInterval = 0;
                 // Do a separate 1 minute check here to ensure fMintableCoins is updated

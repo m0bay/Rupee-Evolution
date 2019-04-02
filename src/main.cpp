@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2018 The PIVX Developers 
+// Copyright (c) 2015-The PIVX Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -52,7 +52,7 @@ using namespace std;
 using namespace libzerocoin;
 
 #if defined(NDEBUG)
-#error "RUPEEEVOLUTION cannot be compiled without assertions."
+#error "Rupee Evolution cannot be compiled without assertions."
 #endif
 
 /**
@@ -1005,7 +1005,7 @@ bool ContextualCheckZerocoinSpendNoSerialCheck(const CTransaction& tx, const Coi
             return error("%s: trying to spend zRUPEE without the correct spend type. txid=%s", __func__,
                 tx.GetHash().GetHex());
         }
-    }    
+    }
 
 
     return true;
@@ -1811,36 +1811,42 @@ int64_t GetBlockValue(int nHeight)
 {
     int64_t nSubsidy = 0;
     int64_t nMoneySupply = chainActive.Tip()->nMoneySupply;
-    
+
     if (nMoneySupply >= Params().MaxMoneyOut())
         return 0 * COIN;
-    
-    if (nHeight == 0) {
-        nSubsidy = 39000000 * COIN;
-    } else if (nHeight < 20000 && nHeight >= 0) {
-        nSubsidy = 5 * COIN;
-    } else if (nHeight < 100000 && nHeight >= 20000) {
-        nSubsidy = 56 * COIN;
-    } else if (nHeight < 200000 && nHeight >= 100000) {
-        nSubsidy = 48 * COIN;
-    } else if (nHeight < 400000 && nHeight >= 200000) {
-        nSubsidy = 40 * COIN;
-    } else if (nHeight < 500000 && nHeight >= 400000) {
-        nSubsidy = 52 * COIN;
-    } else if (nHeight < 600000 && nHeight >= 500000) {
-        nSubsidy = 60 * COIN;
-    } else if (nHeight < 700000 && nHeight >= 600000) {
-        nSubsidy = 56 * COIN;
-    } else if (nHeight < 800000 && nHeight >= 700000) {
-        nSubsidy = 40 * COIN;
-    } else if (nHeight < 900000 && nHeight >= 800000) {
-        nSubsidy = 32 * COIN;
-    } else if (nHeight < 1000000 && nHeight >= 900000) {
-        nSubsidy = 24 * COIN;
-    } else if (nHeight < 1100000 && nHeight >= 1000000) {
-        nSubsidy = 16 * COIN;
+
+    if (nHeight == 1) {
+        nSubsidy = 35000000 * COIN;
+    } else if (nHeight < 525600 && nHeight >= 1) {
+        nSubsidy = 10 * COIN;
+    } else if (nHeight < 1051200 && nHeight >= 525600) {
+        nSubsidy = 9 * COIN;
+    } else if (nHeight < 1576800 && nHeight >= 1051200) {
+        nSubsidy = 8.1 * COIN;
+    } else if (nHeight < 2102400 && nHeight >= 1576800) {
+        nSubsidy = 7.29 * COIN;
+    } else if (nHeight < 2628000 && nHeight >= 2102400) {
+        nSubsidy = 6.561 * COIN;
+    } else if (nHeight < 3153600 && nHeight >= 2628000) {
+        nSubsidy = 5.9049 * COIN;
+    } else if (nHeight < 3679200 && nHeight >= 3153600) {
+        nSubsidy = 5.31441 * COIN;
+    } else if (nHeight < 4204800 && nHeight >= 3679200) {
+        nSubsidy = 4.782969 * COIN;
+    } else if (nHeight < 4730400 && nHeight >= 4204800) {
+        nSubsidy = 4.3046721 * COIN;
+    } else if (nHeight < 5256000 && nHeight >= 4730400) {
+        nSubsidy = 3.87420489 * COIN;
+    } else if (nHeight < 5781600 && nHeight >= 5256000) {
+        nSubsidy = 3.486784401 * COIN;
+    } else if (nHeight < 6307200 && nHeight >= 5781600) {
+      nSubsidy = 3.1381059609 * COIN;
+    } else if (nHeight < 6832800 && nHeight >= 6307200) {
+      nSubsidy = 2.82429536481 * COIN;
+    } else if (nHeight < 7358400 && nHeight >= 6832800) {
+      nSubsidy = 2.541865828329 * COIN;
     } else {
-        nSubsidy = 8 * COIN;
+        nSubsidy = 2.541865828329 * COIN;
     }
     return nSubsidy;
 }
@@ -1848,13 +1854,13 @@ int64_t GetBlockValue(int nHeight)
 int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCount, bool isZRupxStake)
 {
     if(!isZRupxStake){
-        return blockValue * 0.75; 
+        return blockValue * 0.80;
     } else {
-        int64_t nPayment = blockValue * 0.65;
+        int64_t nPayment = blockValue * 0.80;
         nPayment += (COIN / 2);
         nPayment -= (nPayment % COIN);
         return nPayment;
-    } 
+    }
 }
 
 bool IsInitialBlockDownload()
@@ -2502,8 +2508,8 @@ bool ReindexAccumulators(list<uint256>& listMissingCheckpoints, string& strError
         CBlockIndex* pindex = chainActive.Genesis();
         while (pindex) {
             uiInterface.ShowProgress(
-                _("Calculating missing accumulators..."), 
-                std::max(1, 
+                _("Calculating missing accumulators..."),
+                std::max(1,
                     std::min(99, (int)((double)pindex->nHeight / (double)chainActive.Height() * 100))));
 
             if (ShutdownRequested())
@@ -2610,7 +2616,7 @@ static int64_t nTimeCallbacks = 0;
 static int64_t nTimeTotal = 0;
 
 bool ConnectBlock(
-    const CBlock& block, CValidationState& state, CBlockIndex* pindex, 
+    const CBlock& block, CValidationState& state, CBlockIndex* pindex,
     CCoinsViewCache& view, bool fJustCheck, bool fAlreadyChecked)
 {
     AssertLockHeld(cs_main);

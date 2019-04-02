@@ -119,7 +119,7 @@ bool AppInit(int argc, char* argv[])
 #ifndef WIN32
         fDaemon = GetBoolArg("-daemon", false);
         if (fDaemon) {
-            fprintf(stdout, "RUPEEEVOLUTION server starting\n");
+            fprintf(stdout, "Rupee Evolution server starting\n");
 
             // Daemonize
             pid_t pid = fork();

@@ -4091,7 +4091,7 @@ rpcpassword=%s
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s "RUPEEEVOLUTION Alert" admin@foo.com
+for example: alertnotify=echo %%s | mail -s "Rupee Evolution Alert" admin@foo.com
 </source>
         <translation>To use rupeeevolutiond, or the -server option to rupeeevolution-qt, you must set an rpcpassword in the configuration file:
 %s
@@ -4102,7 +4102,7 @@ rpcpassword=%s
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s "RUPEEEVOLUTION Alert" admin@foo.com
+for example: alertnotify=echo %%s | mail -s "Rupee Evolution Alert" admin@foo.com
 </translation>
     </message>
     <message>
