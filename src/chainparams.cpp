@@ -44,7 +44,7 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
         vSeedsOut.push_back(addr);
     }
 }
- static bool regenerate = true;
+ static bool regenerate = false;
 
 //   What makes a good checkpoint block?
 // + Is surrounded by blocks with reasonable timestamps
