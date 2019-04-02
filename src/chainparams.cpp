@@ -383,7 +383,7 @@ public:
 
             }
         } else {
-            assert(hashGenesisBlock == uint256("0x7dbb050fde7e11bdfbfed6ef3cee609af3c0a33b0f984e76a3b7c0259dd7e285"));
+            assert(hashGenesisBlock == uint256("0x41bacac4a7f34215cd420230d746f2c4eb39069116f1192e982aac8cb2e2acb2"));
             assert(genesis.hashMerkleRoot == uint256("0x48942d6bd622a7a8aa2552cd7a7312d3de244a0d94bd8e696a0ea372857fe528"));
         }
         if (regenerate)
