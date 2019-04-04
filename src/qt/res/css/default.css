@@ -4,9 +4,9 @@
 /* transparent-purple: #e9e7ef (for inactive backgrounds)                               */
 /*                                                                                      */
 /* light-purple1:      #51b5ca (main purple for white backgrounds)                      */
-/* light-purple2:      #6148D3 (sligtly darker for gradients)                           */
+/* light-purple2:      #51b5ca (sligtly darker for gradients)                           */
 /*                                                                                      */
-/* medium-purple1:     #6148D3 (on hover)                                               */
+/* medium-purple1:     #51b5ca (on hover)                                               */
 /* medium-purple1:     #369cb2 (main purple for dark backgrounds)                       */
 /* medium-purple2:     #369cb2 (sligtly darker for gradients)                           */
 /*                                                                                      */
@@ -51,7 +51,8 @@ color:#333;
 }
 
 QMenuBar::item:selected {
-background-color:#f8f6f6;
+background-color:#369cb2;
+color:#fff;
 }
 
 QMenu {
@@ -63,13 +64,13 @@ color:#333;
 }
 
 QMenu::item:selected {
-background-color:#f2f0f0;
-color:#333;
+background-color:#369cb2;
+color:#fff;
 }
 
 QToolBar {
 background-color: qlineargradient(y1:0, y2: 1, stop: 0 #369cb2, stop: 0.75 #369cb2, stop: 0.99 #ffffff, stop: 1 #ffffff);
-border:0px solid #333;
+border:0px solid #fff;
 padding:1;
 margin:0;
 width: 70px;
@@ -86,7 +87,7 @@ border-top: 0px;
 min-height:2.5em;
 padding: 0em 0em;
 font-size: 11px;
-color:#aaa;
+color:#fff;
 width: 80px;
 height: 60px;
 }
@@ -244,7 +245,7 @@ margin: 2px;
 }
 
 QPushButton:hover {
-background-color: qlineargradient(y1:0, y2: 1, stop: 0 #ffffff, stop: 0.1 #ffffff, stop: 0.101 #6148D3, stop: 0.9 #6148D3, stop: 0.901 #ffffff, stop: 1 #ffffff);
+background-color: qlineargradient(y1:0, y2: 1, stop: 0 #ffffff, stop: 0.1 #ffffff, stop: 0.101 #51b5ca, stop: 0.9 #51b5ca, stop: 0.901 #ffffff, stop: 1 #ffffff);
 }
 
 QPushButton:focus {
@@ -255,7 +256,7 @@ QPushButton:focus {
 QPushButton:pressed {
 background-color: #369cb2;
 border:1px solid #000000;
-background-color: qlineargradient(y1:0, y2: 1, stop: 0 #00ff00, stop: 0.1 #00ff00, stop: 0.101 #6148D3, stop: 0.9 #6148D3, stop: 0.901 #00ff00, stop: 1 #00ff00);
+background-color: qlineargradient(y1:0, y2: 1, stop: 0 #00ff00, stop: 0.1 #00ff00, stop: 0.101 #51b5ca, stop: 0.9 #51b5ca, stop: 0.901 #00ff00, stop: 1 #00ff00);
 }
 
 /* Special handling for statusbar-icons (which are partly QPushButtons) */
@@ -495,7 +496,7 @@ min-height:10px;
 }
 
 QScrollBar::handle:vertical:pressed { /* Scroll Bar Slider - vertical */
-background:#6148D3;
+background:#51b5ca;
 min-height:10px;
 }
 
@@ -505,7 +506,7 @@ min-width:10px;
 }
 
 QScrollBar::handle:horizontal:pressed { /* Scroll Bar Slider - horizontal */
-background:#6148D3;
+background:#51b5ca;
 min-width:10px;
 }
 
@@ -574,14 +575,14 @@ border-radius: 4px;
 
 QSlider::sub-page:horizontal {
 /* background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #369cb2, stop: 1 #7b67a9); */
-background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #6148D3, stop: 1 #51b5ca);
+background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #51b5ca, stop: 1 #51b5ca);
 border: 1px solid #333;
 height: 10px;
 border-radius: 4px;
 }
 
 QSlider::add-page:horizontal {
-background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #369cb2, stop: 1 #6148D3);
+background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #369cb2, stop: 1 #51b5ca);
 border: 1px solid #333;
 height: 10px;
 border-radius: 4px;
