@@ -114,7 +114,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
 
     CBlockIndex* pindexPrev = chainActive.Tip();
     const int nHeight = pindexPrev->nHeight + 1;
-    pblock->nVersion = 3; // Supports CLTV activation
+    pblock->nVersion = 5; // Supports CLTV activation
 
     // Create coinbase tx
     CMutableTransaction txNew;
