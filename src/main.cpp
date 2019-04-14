@@ -2642,9 +2642,9 @@ bool ConnectBlock(
         return state.DoS(100, error("ConnectBlock() : PoS period not active"),
             REJECT_INVALID, "PoS-early");
 
-    if (pindex->nHeight -1 > Params().Last_PoW_Block() && block.IsProofOfWork())
-        return state.DoS(100, error("ConnectBlock() : PoW period ended"),
-            REJECT_INVALID, "PoW-ended");
+  //  if (pindex->nHeight -1 > Params().Last_PoW_Block() && block.IsProofOfWork())
+  //      return state.DoS(100, error("ConnectBlock() : PoW period ended"),
+  //          REJECT_INVALID, "PoW-ended");
 
     bool fScriptChecks = pindex->nHeight >= Checkpoints::GetTotalBlocksEstimate();
 
