@@ -2,6 +2,7 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-The PIVX Developers
+
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -2637,7 +2638,7 @@ bool ConnectBlock(
         return true;
     }
 
-    if (pindex->nHeight <= Params().Last_PoW_Block() && block.IsProofOfStake())
+    if (pindex->nHeight < Params().Last_PoW_Block() && block.IsProofOfStake())
         return state.DoS(100, error("ConnectBlock() : PoS period not active"),
             REJECT_INVALID, "PoS-early");
 
