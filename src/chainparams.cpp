@@ -183,6 +183,9 @@ public:
 
         vSeeds.push_back(CDNSSeedData("140.82.36.171", "140.82.36.171"));
         vSeeds.push_back(CDNSSeedData("45.76.21.144", "45.76.21.144"));
+        vSeeds.push_back(CDNSSeedData("45.77.22.11", "45.77.22.11"));
+        vSeeds.push_back(CDNSSeedData("140.82.49.169", "140.82.49.169"));
+        vSeeds.push_back(CDNSSeedData("149.28.206.179", "149.28.206.179"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 60); // RupeeEvolution's wallet address starts with a R
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 15); // 7
