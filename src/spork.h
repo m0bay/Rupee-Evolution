@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2016 The Dash developers
-// Copyright (c) 2016-The PIVX Developers 
+// Copyright (c) 2016-The PIVX Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -53,7 +53,7 @@ using namespace boost;
 #define SPORK_13_ENABLE_SUPERBLOCKS_DEFAULT 4070908800            //OFF
 #define SPORK_14_NEW_PROTOCOL_ENFORCEMENT_DEFAULT 4070908800      //OFF
 #define SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2_DEFAULT 4070908800    //OFF
-#define SPORK_16_ZEROCOIN_MAINTENANCE_MODE_DEFAULT 4070908800     //OFF
+#define SPORK_16_ZEROCOIN_MAINTENANCE_MODE_DEFAULT 1555217583     //ON
 
 class CSporkMessage;
 class CSporkManager;
