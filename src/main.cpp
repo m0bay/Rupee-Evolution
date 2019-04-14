@@ -2138,7 +2138,7 @@ bool CheckInputs(const CTransaction& tx, CValidationState& state, const CCoinsVi
             if (!MoneyRange(coins->vout[prevout.n].nValue) || !MoneyRange(nValueIn))
                 return state.DoS(100, error("CheckInputs() : txin values out of range"),
                     REJECT_INVALID, "bad-txns-inputvalues-outofrange");
-        }
+
 
       //  if (!tx.IsCoinStake()) {
       //      if (nValueIn < tx.GetValueOut())
@@ -2154,7 +2154,7 @@ bool CheckInputs(const CTransaction& tx, CValidationState& state, const CCoinsVi
             if (!MoneyRange(nFees))
                 return state.DoS(100, error("CheckInputs() : nFees out of range"),
                     REJECT_INVALID, "bad-txns-fee-outofrange");
-        }
+      }
         // The first loop above does all the inexpensive checks.
         // Only if ALL inputs pass do we perform expensive ECDSA signature checks.
         // Helps prevent CPU exhaustion attacks.
