@@ -2124,8 +2124,8 @@ bool CheckInputs(const CTransaction& tx, CValidationState& state, const CCoinsVi
             const COutPoint& prevout = tx.vin[i].prevout;
             const CCoins* coins = inputs.AccessCoins(prevout.hash);
             assert(coins);
-          }
-          /*  // If prev is coinbase, check that it's matured
+
+            // If prev is coinbase, check that it's matured
             if (coins->IsCoinBase() || coins->IsCoinStake()) {
                 if (nSpendHeight - coins->nHeight < Params().COINBASE_MATURITY())
                     return state.Invalid(
@@ -2154,7 +2154,7 @@ bool CheckInputs(const CTransaction& tx, CValidationState& state, const CCoinsVi
             if (!MoneyRange(nFees))
                 return state.DoS(100, error("CheckInputs() : nFees out of range"),
                     REJECT_INVALID, "bad-txns-fee-outofrange");
-        } */
+        }
         // The first loop above does all the inexpensive checks.
         // Only if ALL inputs pass do we perform expensive ECDSA signature checks.
         // Helps prevent CPU exhaustion attacks.
@@ -2638,13 +2638,13 @@ bool ConnectBlock(
         return true;
     }
 
-    if (pindex->nHeight < Params().Last_PoW_Block() && block.IsProofOfStake())
+    if (pindex->nHeight <= Params().Last_PoW_Block() && block.IsProofOfStake())
         return state.DoS(100, error("ConnectBlock() : PoS period not active"),
             REJECT_INVALID, "PoS-early");
 
-  //  if (pindex->nHeight -1 > Params().Last_PoW_Block() && block.IsProofOfWork())
-  //      return state.DoS(100, error("ConnectBlock() : PoW period ended"),
-  //          REJECT_INVALID, "PoW-ended");
+    if (pindex->nHeight -1 > Params().Last_PoW_Block() && block.IsProofOfWork())
+        return state.DoS(100, error("ConnectBlock() : PoW period ended"),
+            REJECT_INVALID, "PoW-ended");
 
     bool fScriptChecks = pindex->nHeight >= Checkpoints::GetTotalBlocksEstimate();
 
